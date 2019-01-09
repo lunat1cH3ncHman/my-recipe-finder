@@ -1,0 +1,13 @@
+{
+  "development": {
+    "database": "my_recipe_finder_dev",
+    "host": "localhost"
+  },
+  "test": {
+    "database": "my_recipe_finder_dev",
+    "host": "localhost"
+  },
+  "production": {
+    "use_env_variable": "MONGO_ROUTE"
+  },
+}
