@@ -1,5 +1,5 @@
 
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
@@ -13,11 +13,32 @@ const router = express.Router();
 
 const dbRouteTest = process.env.MONGO_ROUTE;
 
+//-----------------------------------------
+//Mongoose Settings
+//-----------------------------------------
+const {User} = require("./models");
+const mongoose = require("mongoose");
+
+console.log("mongoose stuff intialized");
+
+app.use((req, res, next) => {
+  console.log("use for mongoose callback");
+  if (mongoose.connection.readyState) {
+    console.log("if (mongoose.connection.readyState)");
+    next();
+  } else {
+    console.log("else (mongoose.connection.readyState)");
+    require("./mongo")().then(() => next());
+    console.log("else (mongoose.connection.readyState)");
+  }
+});
+
+// Use new mongo.js setup
 // connects our back end code with the database
-mongoose.connect(
-  dbRoute,
-  { useNewUrlParser: true }
-);
+// mongoose.connect(
+//  dbRoute,
+//  { useNewUrlParser: true }
+//);
 
 let db = mongoose.connection;
 
@@ -82,8 +103,24 @@ router.post("/putData", (req, res) => {
   });
 });
 
+// Setup server
+const port = process.env.PORT || process.argv[2] || API_PORT;
+const host = "localhost";
+
+let args;
+process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
+
+args.push(() => {
+  console.log(`Listening: http://${host}:${port}\n`);
+});
+
+if (require.main === module) {
+  app.listen.apply(app, args);
+}
+
+
 // append /api for our http requests
 app.use("/api", router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+//app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
