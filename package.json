@@ -15,8 +15,7 @@
   "keywords": [],
   "dependencies": {
     "concurrently": "^4.1.0",
-    "dotenv": "^6.2.0",
-    "keytar": "^4.3.0"
+    "dotenv": "^6.2.0"
   },
   "devDependencies": {}
 }
