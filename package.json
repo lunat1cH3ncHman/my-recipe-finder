@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "concurrently \"node server.js\" \"cd client && npm start\"",
+      "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "10.15.0"
