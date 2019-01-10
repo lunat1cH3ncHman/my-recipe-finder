@@ -1,0 +1,13 @@
+{
+  "development": {
+    "database": "my_recipe_finder_dev",
+    "host": "localhost"
+  },
+  "test": {
+    "database": "my_recipe_finder_test",
+    "host": "localhost"
+  },
+  "production": {
+    "use_env_variable": "MONGODB_URI"
+  }
+}
