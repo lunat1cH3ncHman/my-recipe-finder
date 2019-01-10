@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
   },
+  "engines": {
+    "node": "10.15.0"
+  },
   "author": "",
   "license": "ISC",
   "keywords": [],
