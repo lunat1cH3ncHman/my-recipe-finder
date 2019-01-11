@@ -22,7 +22,7 @@ const mongoose = require("mongoose");
 console.log("mongoose intialised");
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use((req, res, next) => {
   console.log("use for mongoose callback");
