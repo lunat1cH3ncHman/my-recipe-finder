@@ -109,7 +109,7 @@ class App extends Component {
       <div>
         <ul>
           {data.length <= 0
-            ? "NO DB ENTRIES YET"
+            ? "Store your recipes"
             : data.map(dat => (
                 <li style={{ padding: "10px" }} key={data.message}>
                   <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
@@ -122,7 +122,7 @@ class App extends Component {
           <input
             type="text"
             onChange={e => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
+            placeholder="Add a recipe"
             style={{ width: "200px" }}
           />
           <button onClick={() => this.putDataToDB(this.state.message)}>
@@ -134,7 +134,7 @@ class App extends Component {
             type="text"
             style={{ width: "200px" }}
             onChange={e => this.setState({ idToDelete: e.target.value })}
-            placeholder="put id of item to delete here"
+            placeholder="Enter id of recipe to delete"
           />
           <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
             DELETE
@@ -145,13 +145,13 @@ class App extends Component {
             type="text"
             style={{ width: "200px" }}
             onChange={e => this.setState({ idToUpdate: e.target.value })}
-            placeholder="id of item to update here"
+            placeholder="Enter ID recipe to update"
           />
           <input
             type="text"
             style={{ width: "200px" }}
             onChange={e => this.setState({ updateToApply: e.target.value })}
-            placeholder="put new value of the item here"
+            placeholder="Put updated recipe here"
           />
           <button
             onClick={() =>
