@@ -1,10 +1,10 @@
 
-//const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
-
+require('./models/User');
 require('dotenv').config();
 
 const API_PORT = 3001;
@@ -12,17 +12,12 @@ const app = express();
 const router = express.Router();
 const path = require('path');
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 //-----------------------------------------
 //Mongoose Settings
 //-----------------------------------------
-
-const mongoose = require("mongoose");
-
-console.log("mongoose intialised");
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use((req, res, next) => {
   console.log("use for mongoose callback");

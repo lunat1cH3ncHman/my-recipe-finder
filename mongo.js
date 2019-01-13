@@ -7,6 +7,20 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('./config/mongo')[env];
 console.log(config);
 
+// A Schema
+// Is an object that defines the structure of any documents that will be stored in your
+// MongoDB collection; it enables you to define types and validators for all of your data items.
+//
+// A Connection
+// Is a fairly standard wrapper around a database connection.
+//
+// A Model
+// Is an object that gives you easy access to a named collection,
+// allowing you to query the collection and use the Schema to validate any documents you save to that collection.
+// It is created by combining a Schema, a Connection, and a collection name.
+//
+// A Document
+// Is an instantiation of a Model that is tied to a specific document in your collection.
 
 module.exports = () => {
 
