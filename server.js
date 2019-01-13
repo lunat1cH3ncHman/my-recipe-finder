@@ -4,8 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
-require('./models/User');
 require('dotenv').config();
+require('./models/User');
+require('./config/passport');
+var jwt = require('express-jwt');
+var secret = require(./config).secret;
 
 const API_PORT = 3001;
 const app = express();
@@ -14,6 +17,31 @@ const path = require('path');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+//-----------------------------------------
+//Handle decoding JWT's
+//-----------------------------------------
+
+function getTokenFromHeaders(req){
+  if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token'){
+    return req.headers.authorization.split(' ')[1];
+  }
+  return null;
+}
+
+var auth = {
+  required: jwt({
+    secret: secret,
+    userProperty: 'payload',
+    getToken: getTokenFromHeader
+  }),
+  optional: jwt({
+    secret: secret,
+    userProperty: 'payload',
+    credentialsRequired: false,
+    getToken: getTokenFromHeader
+  })
+};
 
 //-----------------------------------------
 //Mongoose Settings
