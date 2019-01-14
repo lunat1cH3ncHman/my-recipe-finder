@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const Data = require("./data");
+const Data = require("./models/data");
 require('dotenv').config();
 require('./models/User');
 require('./config/passport');
 var jwt = require('express-jwt');
-var secret = require(./config).secret;
+// var secret = require('./config').secret;
+var secret = 'test';
 
 const API_PORT = 3001;
 const app = express();
@@ -33,13 +34,13 @@ var auth = {
   required: jwt({
     secret: secret,
     userProperty: 'payload',
-    getToken: getTokenFromHeader
+    getToken: getTokenFromHeaders
   }),
   optional: jwt({
     secret: secret,
     userProperty: 'payload',
     credentialsRequired: false,
-    getToken: getTokenFromHeader
+    getToken: getTokenFromHeaders
   })
 };
 

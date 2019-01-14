@@ -2,13 +2,12 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator')
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var secret = require('../config').secret;
 
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
 var UserSchema = new mongoose.Schema({
   username: {type: String, lowercase: true, unique: true, required: [true,"can't be blank"], match:[/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
-  email: String {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@+\.\S+/, 'isinvalid'], index: true},
+  email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@+\.\S+/, 'isinvalid'], index: true},
   bio: String,
   image: String,
   has: String,
@@ -23,13 +22,13 @@ UserSchema.methods.setPassword = function(password){
 };
 
 UserSchema.methods.validPassword = function(password){
-  var hash = .pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+  var hash = pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
   return this.hash === hash;
 };
 
 UserSchema.methods.generateJWT = function(){
   var today = new Date();
-  ver exp = new Date(today);
+  var exp = new Date(today);
   exp.setDate(today.getDate() + 60);
 
   return jwt.sign({
