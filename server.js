@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./models/data");
 require('dotenv').config();
-require('./models/User');
+require('./models/user');
 require('./config/passport');
 var jwt = require('express-jwt');
 // var secret = require('./config').secret;
