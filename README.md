@@ -10,20 +10,20 @@ MONGO_ROUTE=mongodb://
 
 PASSPORT_SECRET=
 
-- Launch backend and front end locally:
+Launch backend and front end locally:
 
-npm start dev
+- npm start dev
 
-- Deploy to Heroku:
+Deploy to Heroku:
 
-git push heroku master
+- git push heroku master
 
-- Lauch backend only:
+Lauch backend only:
 
-npm start
+- npm start
 
-- Launch frontend only:
+Launch frontend only:
 
-cd client
-npm start
+- cd client
+- npm start
 
