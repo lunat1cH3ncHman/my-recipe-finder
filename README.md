@@ -4,24 +4,25 @@ MERN stack - Mongo, Express, React, Node
 
 Passport and JWT for auth
 
-Need to create a local .env file with:
+Create a local .env file with:
 
 MONGO_ROUTE=mongodb://
+
 PASSPORT_SECRET=
 
-Launch backend and front end locally:
+- Launch backend and front end locally:
 
 npm start dev
 
-Deploy to Heroku:
+- Deploy to Heroku:
 
 git push heroku master
 
-Lauch backend only:
+- Lauch backend only:
 
 npm start
 
-Launch frontend only:
+- Launch frontend only:
 
 cd client
 npm start
