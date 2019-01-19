@@ -127,6 +127,8 @@ router.post("/putData", (req, res) => {
 const port = process.env.PORT || process.argv[2] || API_PORT;
 const host = "localhost";
 
+console.log(`Port: ${port}\n`);
+
 let args;
 process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
 
