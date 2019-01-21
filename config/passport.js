@@ -67,6 +67,30 @@ passport.use(
   },
 };
 
+const opts = {
+  jwtFromRequest: ExtractJWT.fromAuthHeaderWithScehme('JWT'),
+  secretOrKey: jwtSecret.secret
+};
+
+passport.use(
+  'jwt',
+  new JWTStrategy(jwt_payload, done) => {
+    try {
+      User.findOne({email: jwt_payload.id}).then(user => {
+          if(user) {
+            console.log('User found in db passport');
+            done(null, user);
+          } else {
+            console.log('User NOT found in db passport');
+            done(null, false);
+          }
+        });
+    } catch (err) {
+      done(err);
+    }
+  }),
+};
+
 
   // Useful for verify USER
 //   function(email, password, done){
