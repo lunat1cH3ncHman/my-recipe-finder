@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require ('jsonwebtoken');
 const passport = require("passport");
+var secret = process.env.PASSPORT_SECRET;
 
 // this is our user loginmethod
 // passport authentication, don't save user in session, use minimum info
@@ -9,7 +10,7 @@ router.post('/login', function(req, res, next){
   passport.authentication('local', {session: flase}, (err, user, info) =>{
     if(err || !user){
       return res.status(400).json({
-        message: 'Seomthing is not right',
+        message: 'Something is not right',
         user: user
       });
     }

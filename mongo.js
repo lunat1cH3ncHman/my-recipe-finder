@@ -5,6 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 
 // Get the environment settings from config
 const config = require('./config/mongo')[env];
+console.log(config);
 
 // A Schema
 // Is an object that defines the structure of any documents that will be stored in your
@@ -32,6 +33,8 @@ module.exports = () => {
 
   // Set the connection url
   const mongoUrl = envUrl ? envUrl : localUrl
+
+  console.log(mongoUrl);
 
   return mongoose.connect(
     mongoUrl,

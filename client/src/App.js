@@ -44,7 +44,7 @@ class App extends Component {
   getDataFromDb = () => {
 
     console.log("inside handleGetJson");
-    fetch("/api/getData")
+    fetch("getRecipes")
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }));
   };
@@ -58,7 +58,7 @@ class App extends Component {
       ++idToBeAdded;
     }
 
-    axios.post("/api/putData", {
+    axios.post("addRecipe", {
       id: idToBeAdded,
       message: message
     });
@@ -75,13 +75,12 @@ class App extends Component {
       }
     });
 
-    axios.delete("/api/deleteData", {
+    axios.delete("deleteRecipe", {
       data: {
         id: objIdToDelete
       }
     });
   };
-
 
   // our update method that uses our backend api
   // to overwrite existing data base information
@@ -93,7 +92,7 @@ class App extends Component {
       }
     });
 
-    axios.post("/api/updateData", {
+    axios.post("updateRecipe", {
       id: objIdToUpdate,
       update: { message: updateToApply }
     });

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator')
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var secret = process.env.PASSPORT_SECRET;
 
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
