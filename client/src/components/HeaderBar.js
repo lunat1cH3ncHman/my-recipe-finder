@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const headerStyle = {
-  background: 'blue',
+  background: 'orange',
   color: 'white',
 };
 

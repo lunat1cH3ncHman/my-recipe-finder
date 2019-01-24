@@ -7,7 +7,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store',
+  pageTitle: 'Home Screen',
 };
 
 class Home extends Component {

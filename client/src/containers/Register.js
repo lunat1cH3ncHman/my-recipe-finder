@@ -6,13 +6,14 @@ import {
   LinkButtons,
   SubmitButtons,
   registerButton,
+  homeButton,
   loginButton,
   inputStyle,
   HeaderBar,
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store - Register',
+  pageTitle: 'Register Screen',
 };
 
 class Register extends Component {
@@ -20,6 +21,8 @@ class Register extends Component {
     super(props);
 
     this.state = {
+      first_name: '',
+      last_name: '',
       email: '',
       username: '',
       password: '',
@@ -51,6 +54,8 @@ class Register extends Component {
     } else {
       axios
         .post('/registerUser', {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
           email: this.state.email,
           username: this.state.username,
           password: this.state.password,
@@ -80,6 +85,8 @@ class Register extends Component {
 
   render() {
     const {
+      first_name,
+      last_name,
       email,
       username,
       password,
@@ -94,39 +101,51 @@ class Register extends Component {
         <div>
           <HeaderBar title={title} />
           <form className="profile-form" onSubmit={this.registerUser}>
-            <div>
-              <TextField
-                style={inputStyle}
-                id="username"
-                label="username"
-                value={username}
-                onChange={this.handleChange('username')}
-                placeholder="Username"
-              />
-              <TextField
-                style={inputStyle}
-                id="email"
-                label="email"
-                value={email}
-                onChange={this.handleChange('email')}
-                placeholder="Email"
-              />
-              <TextField
-                style={inputStyle}
-                id="password"
-                label="password"
-                value={password}
-                onChange={this.handleChange('password')}
-                placeholder="Password"
-                type="password"
-              />
-            </div>
-            <div>
-              <SubmitButtons
-                buttonStyle={registerButton}
-                buttonText={'Register'}
-              />
-            </div>
+            <TextField
+              style={inputStyle}
+              id="first_name"
+              label="first_name"
+              value={first_name}
+              onChange={this.handleChange('first_name')}
+              placeholder="First Name"
+            />
+            <TextField
+              style={inputStyle}
+              id="last_name"
+              label="last_name"
+              value={last_name}
+              onChange={this.handleChange('last_name')}
+              placeholder="Last Name"
+            />
+            <TextField
+              style={inputStyle}
+              id="email"
+              label="email"
+              value={email}
+              onChange={this.handleChange('email')}
+              placeholder="Email"
+            />
+            <TextField
+              style={inputStyle}
+              id="username"
+              label="username"
+              value={username}
+              onChange={this.handleChange('username')}
+              placeholder="Username"
+            />
+            <TextField
+              style={inputStyle}
+              id="password"
+              label="password"
+              value={password}
+              onChange={this.handleChange('password')}
+              placeholder="Password"
+              type="password"
+            />
+            <SubmitButtons
+              buttonStyle={registerButton}
+              buttonText={'Register'}
+            />
           </form>
           {showError === true && registerError === true && (
             <div>
@@ -139,12 +158,17 @@ class Register extends Component {
                 That username or email is already taken. Please choose another
                 or login.
               </p>
+              <LinkButtons
+                buttonText={`Login`}
+                buttonStyle={loginButton}
+                link={'/login'}
+              />
             </div>
           )}
           <LinkButtons
-            buttonText={`Login`}
-            buttonStyle={loginButton}
-            link={'/login'}
+            buttonText={`Go Home`}
+            buttonStyle={homeButton}
+            link={'/'}
           />
         </div>
       );
