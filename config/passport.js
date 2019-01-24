@@ -2,11 +2,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-require('bcrypt');
+const bcrypt = require('bcrypt');
 JWTstrategy = require('passport-jwt').Strategy;
 ExtractJWT = require('passport-jwt').ExtractJwt;
 var secret = process.env.PASSPORT_SECRET;
-
 
 // https://itnext.io/implementing-json-web-tokens-passport-js-in-a-javascript-application-with-react-b86b1f313436
 
@@ -16,25 +15,40 @@ passport.use(
   'register',
   new LocalStrategy(
     {
-      usernameField: 'user[username]',
-      passwordField: 'user[password]',
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true,
       session: false
     },
-    (username, password, done)=>{
+    (req, username, password, done)=>{
+      console.log('Passport register');
+      console.log(`Username ${username} Password ${password} email ${req.body.email}`);
+
       try {
         User.findOne({username: username}).then(user => {
-          if(user === null) {
+          if(user != null) {
             console.log('Username already registered');
             return done(null, false, {message: 'Username already registered'});
           } else{
             bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-              // Create user here
-              console.log('User created');
-              return done(null, user);
+
+              let user = new User();
+              user.username = username;
+              user.pasword = hashedPassword;
+              user.email = req.body.email,
+              user.save(err => {
+                if (err){
+                  console.log(`User creation error ${err}`);
+                  return done(null, false, {message: 'User creation failed'});
+                }
+                console.log('User created');
+                return done(null, user);
+              });
             });
           }
         });
       } catch (err) {
+        console.log(`Registration failed ${err}`);
         done(err);
       }
     },
@@ -45,13 +59,13 @@ passport.use(
   'login',
   new LocalStrategy(
     {
-      usernameField: 'user[username]',
-      passwordField: 'user[password]',
+      usernameField: 'username',
+      passwordField: 'password',
       session: false
     },
     (username, password, done) => {
       try{
-        User.findOne({email: email}).then(user =>{
+        User.findOne({username: username}).then(user =>{
           if(user === null){
             console.log('Username does not exist');
             return done(null, false, {message: 'Username does not exist'});

@@ -1,8 +1,8 @@
-// /client/App.js
+// /client/App.
 import React, { Component } from "react";
 import axios from "axios";
 
-class App extends Component {
+class App_old_recipe extends Component {
   // initialize our state
   state = {
     data: [],

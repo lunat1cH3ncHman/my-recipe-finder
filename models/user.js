@@ -8,7 +8,10 @@ var secret = process.env.PASSPORT_SECRET;
 
 var UserSchema = new mongoose.Schema({
   username: {type: String, lowercase: true, unique: true, required: [true,"can't be blank"], match:[/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
-  email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@+\.\S+/, 'isinvalid'], index: true},
+  // TODO: can work this so it's compulsory in passport required: [true,"can't be blank"] and unique:true
+  // email: {type: String, lowercase: true, unique: true, index: true, required: [true, "can't be blank"], match: [/\S+@+\.\S+/, 'isinvalid'], index: true},
+  email: {type: String, lowercase: true, match: [/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/, 'isinvalid']},
+  password: String,
   bio: String,
   image: String,
   has: String,
@@ -49,4 +52,4 @@ UserSchema.methods.toAuthJSON = function(){
   };
 };
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

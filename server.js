@@ -6,6 +6,7 @@ const logger = require("morgan");
 const Data = require("./models/data");
 require('dotenv').config();
 require('./models/user');
+const passport = require('passport');
 require('./config/passport');
 var jwt = require('express-jwt');
 var secret = process.env.PASSPORT_SECRET;
@@ -17,6 +18,9 @@ const path = require('path');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //-----------------------------------------
 //Handle decoding JWT's
