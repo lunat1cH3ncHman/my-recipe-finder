@@ -76,6 +76,7 @@ class ForgotPassword extends Component {
       <div>
         <HeaderBar title={title} />
         <form className="profile-form" onSubmit={this.sendEmail}>
+          <p></p>
           <TextField
             style={inputStyle}
             id="email"
@@ -86,7 +87,7 @@ class ForgotPassword extends Component {
           />
           <SubmitButtons
             buttonStyle={forgotButton}
-            buttonText={'Send Password Reset Email'}
+            buttonText={'Reset Password'}
           />
         </form>
         {showNullError && (
@@ -109,14 +110,9 @@ class ForgotPassword extends Component {
         )}
         {messageFromServer === 'recovery email sent' && (
           <div>
-            <h3>Password Reset Email Successfully Sent!</h3>
+            <h3>Email Sent!</h3>
           </div>
         )}
-        <LinkButtons
-          buttonText={`Go Home`}
-          buttonStyle={homeButton}
-          link={'/'}
-        />
       </div>
     );
   }

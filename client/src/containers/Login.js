@@ -89,6 +89,7 @@ class Login extends Component {
         <div>
           <HeaderBar title={title} />
           <form className="profile-form" onSubmit={this.loginUser}>
+            <p></p>
             <TextField
               style={inputStyle}
               id="username"
@@ -106,36 +107,31 @@ class Login extends Component {
               placeholder="Password"
               type="password"
             />
-            <SubmitButtons buttonStyle={loginButton} buttonText={'Login'} />
           </form>
           {showNullError && (
             <div>
               <p>The username or password cannot be null.</p>
             </div>
           )}
+          <SubmitButtons
+            buttonStyle={loginButton}
+            buttonText={'Login'} />
+          <LinkButtons
+            buttonStyle={forgotButton}
+            buttonText={'Forgot Password?'}
+            link={'/forgotPassword'}/>
           {showError && (
             <div>
               <p>
                 That username or password isn't recognized. Please try again or
                 register now.
               </p>
-              <LinkButtons
-                buttonText={`Register`}
+              <p><SubmitButtons
                 buttonStyle={registerButton}
-                link={'/register'}
-              />
+                buttonText={'Register'}
+              /></p>
             </div>
           )}
-          <LinkButtons
-            buttonText={`Go Home`}
-            buttonStyle={homeButton}
-            link={'/'}
-          />
-          <LinkButtons
-            buttonStyle={forgotButton}
-            buttonText={'Forgot Password?'}
-            link={'/forgotPassword'}
-          />
         </div>
       );
     } else {

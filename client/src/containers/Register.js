@@ -21,8 +21,6 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      first_name: '',
-      last_name: '',
       email: '',
       username: '',
       password: '',
@@ -54,8 +52,6 @@ class Register extends Component {
     } else {
       axios
         .post('/registerUser', {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
           email: this.state.email,
           username: this.state.username,
           password: this.state.password,
@@ -85,8 +81,6 @@ class Register extends Component {
 
   render() {
     const {
-      first_name,
-      last_name,
       email,
       username,
       password,
@@ -101,22 +95,7 @@ class Register extends Component {
         <div>
           <HeaderBar title={title} />
           <form className="profile-form" onSubmit={this.registerUser}>
-            <TextField
-              style={inputStyle}
-              id="first_name"
-              label="first_name"
-              value={first_name}
-              onChange={this.handleChange('first_name')}
-              placeholder="First Name"
-            />
-            <TextField
-              style={inputStyle}
-              id="last_name"
-              label="last_name"
-              value={last_name}
-              onChange={this.handleChange('last_name')}
-              placeholder="Last Name"
-            />
+            <p></p>
             <TextField
               style={inputStyle}
               id="email"
@@ -142,10 +121,10 @@ class Register extends Component {
               placeholder="Password"
               type="password"
             />
-            <SubmitButtons
+            <p><SubmitButtons
               buttonStyle={registerButton}
               buttonText={'Register'}
-            />
+            /></p>
           </form>
           {showError === true && registerError === true && (
             <div>
@@ -158,17 +137,13 @@ class Register extends Component {
                 That username or email is already taken. Please choose another
                 or login.
               </p>
-              <LinkButtons
-                buttonText={`Login`}
-                buttonStyle={loginButton}
-                link={'/login'}
-              />
             </div>
           )}
+          <p>Aleady registered?</p>
           <LinkButtons
-            buttonText={`Go Home`}
-            buttonStyle={homeButton}
-            link={'/'}
+            buttonText={`Login`}
+            buttonStyle={loginButton}
+            link={'/login'}
           />
         </div>
       );

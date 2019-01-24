@@ -154,11 +154,6 @@ class UpdatePassword extends Component {
             />
           </form>
           <LinkButtons
-            buttonStyle={homeButton}
-            buttonText={'Go Home'}
-            link={'/'}
-          />
-          <LinkButtons
             buttonStyle={cancelButton}
             buttonText={'Cancel Changes'}
             link={`/userProfile/${username}`}

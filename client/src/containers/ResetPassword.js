@@ -158,11 +158,6 @@ export default class ResetPassword extends Component {
               />
             </div>
           )}
-          <LinkButtons
-            buttonText={`Go Home`}
-            buttonStyle={homeButton}
-            link={'/'}
-          />
         </div>
       );
     }
