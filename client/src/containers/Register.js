@@ -13,7 +13,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'Register Screen',
+  pageTitle: 'My Recipe Store   // Register',
 };
 
 class Register extends Component {

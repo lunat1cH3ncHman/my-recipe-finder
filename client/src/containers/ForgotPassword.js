@@ -13,7 +13,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'Forgot Password Screen',
+  pageTitle: 'My Recipe Store   // Forgot Password',
 };
 
 class ForgotPassword extends Component {

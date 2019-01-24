@@ -24,7 +24,7 @@ const loading = {
 };
 
 const title = {
-  pageTitle: 'User Profile Screen',
+  pageTitle: 'My Recipe Store   // My Profile',
 };
 
 class Profile extends Component {

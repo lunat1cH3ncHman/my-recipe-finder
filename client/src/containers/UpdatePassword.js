@@ -20,7 +20,7 @@ const loading = {
 };
 
 const title = {
-  pageTitle: 'Update Password Screen',
+  pageTitle: 'My Recipe Store   // Password Update Password Screen',
 };
 
 class UpdatePassword extends Component {

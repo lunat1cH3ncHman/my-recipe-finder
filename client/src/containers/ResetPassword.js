@@ -19,7 +19,7 @@ const loading = {
 };
 
 const title = {
-  pageTitle: 'Password Reset Screen',
+  pageTitle: 'My Recipe Store   // Reset Password',
 };
 
 export default class ResetPassword extends Component {
