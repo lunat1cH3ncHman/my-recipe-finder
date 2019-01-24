@@ -5,13 +5,13 @@ export const deleteButton = {
 };
 
 export const updateButton = {
-  background: 'orange',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
 
 export const loginButton = {
-  background: 'royalblue',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
@@ -27,31 +27,31 @@ export const linkStyle = {
 };
 
 export const registerButton = {
-  background: 'green',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
 
 export const homeButton = {
-  background: 'mediumpurple',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
 
 export const saveButton = {
-  background: 'green',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
 
 export const cancelButton = {
-  background: 'magenta',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
 
 export const forgotButton = {
-  background: 'purple',
+  background: 'blue',
   padding: '1em',
   margin: '1em',
 };
