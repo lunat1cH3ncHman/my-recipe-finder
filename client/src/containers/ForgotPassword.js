@@ -6,7 +6,6 @@ import {
   LinkButtons,
   SubmitButtons,
   registerButton,
-  homeButton,
   forgotButton,
   inputStyle,
   HeaderBar,

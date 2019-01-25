@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import {
   LinkButtons,
   updateButton,
-  homeButton,
   loginButton,
   HeaderBar,
   forgotButton,
@@ -106,11 +105,6 @@ export default class ResetPassword extends Component {
           <HeaderBar title={title} />
           <div style={loading}>
             <h4>Problem resetting password. Please send another reset link.</h4>
-            <LinkButtons
-              buttonText={`Go Home`}
-              buttonStyle={homeButton}
-              link={'/'}
-            />
             <LinkButtons
               buttonStyle={forgotButton}
               buttonText={'Forgot Password?'}

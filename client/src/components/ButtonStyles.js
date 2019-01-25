@@ -51,7 +51,13 @@ export const cancelButton = {
 };
 
 export const forgotButton = {
-  background: 'orange',
+  background: 'primary',
+  padding: '1em',
+  margin: '1em',
+};
+
+export const secondOptionButton = {
+  background: 'primary',
   padding: '1em',
   margin: '1em',
 };

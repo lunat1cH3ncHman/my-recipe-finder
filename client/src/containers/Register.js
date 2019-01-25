@@ -6,8 +6,8 @@ import {
   LinkButtons,
   SubmitButtons,
   registerButton,
-  homeButton,
   loginButton,
+  secondOptionButton,
   inputStyle,
   HeaderBar,
 } from '../components';
@@ -142,7 +142,7 @@ class Register extends Component {
           <p>Aleady registered?</p>
           <LinkButtons
             buttonText={`Login`}
-            buttonStyle={loginButton}
+            buttonStyle={secondOptionButton}
             link={'/login'}
           />
         </div>

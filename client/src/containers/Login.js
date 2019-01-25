@@ -6,10 +6,9 @@ import axios from 'axios';
 import {
   LinkButtons,
   SubmitButtons,
-  registerButton,
-  homeButton,
   loginButton,
   forgotButton,
+  secondOptionButton,
   inputStyle,
   HeaderBar,
 } from '../components';
@@ -38,6 +37,8 @@ class Login extends Component {
   };
 
   loginUser = e => {
+    console.log(this.state.username);
+    console.log(this.state.password);
     e.preventDefault();
     if (this.state.username === '' || this.state.password === '') {
       this.setState({
@@ -52,16 +53,17 @@ class Login extends Component {
           password: this.state.password,
         })
         .then(response => {
-          // console.log(response.data);
+          console.log(response.data);
           if (
-            response.data === 'bad username' ||
-            response.data === 'passwords do not match'
+            response.data === 'Passwords do not match' ||
+            response.data === 'Username does not exist'
           ) {
             this.setState({
               showError: true,
               showNullError: false,
             });
           } else {
+            console.log(`Store access string ${response.data.token}`)
             localStorage.setItem('JWT', response.data.token);
             this.setState({
               loggedIn: true,
@@ -107,27 +109,27 @@ class Login extends Component {
               placeholder="Password"
               type="password"
             />
+            <p></p><SubmitButtons
+              buttonStyle={loginButton}
+              buttonText={'Login'} />
           </form>
           {showNullError && (
             <div>
               <p>The username or password cannot be null.</p>
             </div>
           )}
-          <SubmitButtons
-            buttonStyle={loginButton}
-            buttonText={'Login'} />
-          <LinkButtons
-            buttonStyle={forgotButton}
-            buttonText={'Forgot Password?'}
-            link={'/forgotPassword'}/>
           {showError && (
             <div>
               <p>
                 That username or password isn't recognized. Please try again or
                 register now.
               </p>
+              <LinkButtons
+                buttonStyle={forgotButton}
+                buttonText={'Forgot Password?'}
+                link={'/forgotPassword'}/>
               <p><SubmitButtons
-                buttonStyle={registerButton}
+                buttonStyle={secondOptionButton}
                 buttonText={'Register'}
               /></p>
             </div>

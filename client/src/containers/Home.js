@@ -15,6 +15,7 @@ class Home extends Component {
     return (
       <div className="home-page">
         <HeaderBar title={title} />
+        <p></p>
         <LinkButtons
           buttonText={`Register`}
           buttonStyle={registerButton}

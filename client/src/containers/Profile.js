@@ -15,7 +15,6 @@ import {
   logoutButton,
   HeaderBar,
   linkStyle,
-  forgotButton,
 } from '../components';
 
 const loading = {
@@ -32,8 +31,6 @@ class Profile extends Component {
     super();
 
     this.state = {
-      first_name: '',
-      last_name: '',
       email: '',
       username: '',
       password: '',
@@ -45,7 +42,7 @@ class Profile extends Component {
 
   async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
-    console.log(accessString);
+    console.log(`Profile access string = ${accessString}`);
     if (accessString == null) {
       this.setState({
         isLoading: false,
@@ -61,8 +58,6 @@ class Profile extends Component {
         })
         .then(response => {
           this.setState({
-            first_name: response.data.first_name,
-            last_name: response.data.last_name,
             email: response.data.email,
             username: response.data.username,
             password: response.data.password,
@@ -112,8 +107,6 @@ class Profile extends Component {
 
   render() {
     const {
-      first_name,
-      last_name,
       email,
       username,
       password,
@@ -152,14 +145,6 @@ class Profile extends Component {
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>First Name</TableCell>
-                <TableCell>{first_name}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Last Name</TableCell>
-                <TableCell>{last_name}</TableCell>
-              </TableRow>
-              <TableRow>
                 <TableCell>Email</TableCell>
                 <TableCell>{email}</TableCell>
               </TableRow>
@@ -189,7 +174,7 @@ class Profile extends Component {
             link={`/updateUser/${username}`}
           />
           <LinkButtons
-            buttonStyle={forgotButton}
+            buttonStyle={updateButton}
             buttonText={'Update Password'}
             link={`/updatePassword/${username}`}
           />
