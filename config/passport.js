@@ -21,9 +21,6 @@ passport.use(
       session: false
     },
     (req, username, password, done)=>{
-      console.log('Passport register');
-      console.log(`Username ${username} Password ${password} email ${req.body.email}`);
-
       try {
         User.findOne({username: username}).then(user => {
           if(user != null) {
@@ -34,7 +31,7 @@ passport.use(
 
               let user = new User();
               user.username = username;
-              user.pasword = hashedPassword;
+              user.password = hashedPassword;
               user.email = req.body.email,
               user.save(err => {
                 if (err){
@@ -48,7 +45,6 @@ passport.use(
           }
         });
       } catch (err) {
-        console.log(`Registration failed ${err}`);
         done(err);
       }
     },
