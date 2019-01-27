@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "server-debug": "node --inspect server.js",
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-debug": "concurrently \"npm run server-debug\" \"npm run client\"",
     "Start": "node server.js",
     "client": "cd client && npm start",
     "heroku-postbuild": "cd client && npm install && npm run build"
