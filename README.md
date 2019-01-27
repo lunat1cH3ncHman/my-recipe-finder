@@ -27,3 +27,6 @@ Launch frontend only:
 - cd client
 - npm start
 
+Launch with node debugging:
+
+- npm run dev-debug
