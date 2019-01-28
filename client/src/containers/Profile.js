@@ -33,7 +33,6 @@ class Profile extends Component {
     this.state = {
       email: '',
       username: '',
-      password: '',
       isLoading: true,
       deleted: false,
       error: false,
@@ -60,7 +59,6 @@ class Profile extends Component {
           this.setState({
             email: response.data.email,
             username: response.data.username,
-            password: response.data.password,
             isLoading: false,
             error: false,
           });
@@ -109,7 +107,6 @@ class Profile extends Component {
     const {
       email,
       username,
-      password,
       error,
       isLoading,
       deleted,
@@ -151,12 +148,6 @@ class Profile extends Component {
               <TableRow>
                 <TableCell>User Name</TableCell>
                 <TableCell>{username}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Password</TableCell>
-                <TableCell style={{ WebkitTextSecurity: 'disc' }}>
-                  {password}
-                </TableCell>
               </TableRow>
             </TableBody>
           </Table>

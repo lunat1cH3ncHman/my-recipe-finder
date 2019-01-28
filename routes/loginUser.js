@@ -1,6 +1,8 @@
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const User = require("../models/user");
 const Data = require("../models/data");
+const jstSecret = process.env.PASSPORT_SECRET;
 
 // https://itnext.io/implementing-json-web-tokens-passport-js-in-a-javascript-application-with-react-b86b1f313436
 
@@ -16,8 +18,8 @@ module.exports = app => {
         res.send(info.message);
       } else {
         req.logIn(user, err => {
-          User.findOne({username: user.username}).then(user => {
-            const token = jwt.sign({ id: user.username }, jstSecret.secret);
+          User.findOne({username: user.username}).then (user => {
+            const token = jwt.sign({ id: user.username }, jstSecret);
             res.status(200).send({
               auth: true,
               token: token,

@@ -66,8 +66,8 @@ passport.use(
             console.log('Username does not exist');
             return done(null, false, {message: 'Username does not exist'});
           } else {
-            bcrypt.compare(password, user.password).then(response => {
-              if(reponse != true){
+            bcrypt.compare(password, user.password, (err, response) => {
+              if(response != true){
                 console.log('Passwords do not match');
                 return done(null, false, {message: 'Passwords do not match'});
               }
@@ -91,17 +91,20 @@ const opts = {
 passport.use(
   'jwt',
   new JWTstrategy(opts, (jwt_payload, done) => {
+    console.log('jwt');
     try {
       User.findOne({username: jwt_payload.id}).then(user => {
-          if(user) {
-            console.log('User found in db');
-            done(null, user);
-          } else {
-            console.log('User NOT found in db');
-            done(null, false);
-          }
+        console.log(`jwt ${jwt_payload.id}`);
+        if(user) {
+          console.log('User found in db');
+          done(null, user);
+        } else {
+          console.log('User NOT found in db');
+          done(null, false);
+        }
       });
     } catch (err) {
+      console.log(`err ${jwt}`);
       done(err);
     }
   }),

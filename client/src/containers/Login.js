@@ -63,7 +63,6 @@ class Login extends Component {
               showNullError: false,
             });
           } else {
-            console.log(`Store access string ${response.data.token}`)
             localStorage.setItem('JWT', response.data.token);
             this.setState({
               loggedIn: true,

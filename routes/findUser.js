@@ -6,7 +6,7 @@ module.exports = app => {
   app.get('/finduser', (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
       if(err) {
-        console.log(err);
+        console.log(`finduser ${err}`);
       }
       if (info != undefined){
         console.log(info.message);
