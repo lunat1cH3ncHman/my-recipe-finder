@@ -151,14 +151,6 @@ class Profile extends Component {
               </TableRow>
             </TableBody>
           </Table>
-          <Button
-            style={deleteButton}
-            variant="contained"
-            color="primary"
-            onClick={this.deleteUser}
-          >
-            Delete User
-          </Button>
           <LinkButtons
             buttonStyle={updateButton}
             buttonText={'Update User'}
@@ -178,6 +170,14 @@ class Profile extends Component {
             <Link style={linkStyle} to={'/'}>
               Logout
             </Link>
+          </Button>
+          <Button
+            style={deleteButton}
+            variant="primary"
+            color="red"
+            onClick={this.deleteUser}
+          >
+            Delete User
           </Button>
         </div>
       );
