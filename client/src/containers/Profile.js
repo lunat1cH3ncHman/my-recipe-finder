@@ -41,7 +41,6 @@ class Profile extends Component {
 
   async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
-    console.log(`Profile access string = ${accessString}`);
     if (accessString == null) {
       this.setState({
         isLoading: false,
