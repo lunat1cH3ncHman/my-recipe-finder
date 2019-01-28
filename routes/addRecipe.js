@@ -1,8 +1,8 @@
-const Data = require("../models/data");
+const Recipe = require("../models/recipe");
 
 module.exports = app => {
   app.post("/addRecipe", (req, res) => {
-    let data = new Data();
+    let recipe = new Recipe();
 
     const { id, message } = req.body;
 
@@ -12,9 +12,9 @@ module.exports = app => {
         error: "INVALID INPUTS"
       });
     }
-    data.message = message;
-    data.id = id;
-    data.save(err => {
+    recipe.message = message;
+    recipe.id = id;
+    recipe.save(err => {
       if (err) return res.json({ success: false, error: err });
       return res.json({ success: true });
     });

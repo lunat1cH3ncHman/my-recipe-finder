@@ -1,4 +1,4 @@
-const Data = require("../models/data");
+const Recipe = require("../models/recipe");
 const passport = require('passport');
 
 module.exports = app => {
@@ -12,12 +12,12 @@ module.exports = app => {
         res.send(info.message);
       } else {
         console.log('Get reciepes user authenticated');
-        Data.find((err, data) => {
+        Recipe.find((err, recipe) => {
           if (err){
             return res.json({ success: false, error: err });
           } else {
             res.status(200).send({
-              recipes: data
+              recipes: recipe
             });
           }
         });

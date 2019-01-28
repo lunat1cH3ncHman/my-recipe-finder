@@ -71,6 +71,10 @@ class MyRecipes extends Component {
     localStorage.removeItem('JWT');
   };
 
+  _handleListItemClick(event){
+   console.log('handle clicked');
+  }
+
   render() {
     const {
       recipes,
@@ -115,9 +119,13 @@ class MyRecipes extends Component {
           />
           <div>
             <List>
-              {recipes.map(({ id, message }) =>
-                <ListItem key={id}>
-                  <ListItemText primary={message} />
+              { recipes.map(({ id, message }) =>
+                <ListItem
+                  key={id}
+                  onTouchTap={(event) => this._handleListItemClick(event)}>
+                    <ListItemText
+                      primary={message}
+                    />
                 </ListItem>
               )}
             </List>

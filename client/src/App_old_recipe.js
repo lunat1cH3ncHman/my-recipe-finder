@@ -18,9 +18,9 @@ class App_old_recipe extends Component {
   // then we incorporate a polling logic so that we can easily see if our db has
   // changed and implement those changes into our UI
   componentDidMount() {
-    this.getDataFromDb();
+    this.getRecipesFromDb();
     if (!this.state.intervalIsSet) {
-       let interval = setInterval(this.getDataFromDb, 1000);
+       let interval = setInterval(this.getRecipesFromDb, 1000);
        this.setState({ intervalIsSet: interval });
     }
   }
@@ -41,7 +41,7 @@ class App_old_recipe extends Component {
 
   // our first get method that uses our backend api to
   // fetch data from our data base
-  getDataFromDb = () => {
+  getRecipesFromDb = () => {
 
     console.log("inside handleGetJson");
     fetch("getRecipes")
@@ -51,7 +51,7 @@ class App_old_recipe extends Component {
 
   // our put method that uses our backend api
   // to create new query into our data base
-  putDataToDB = message => {
+  putRecipeToDB = message => {
     let currentIds = this.state.data.map(data => data.id);
     let idToBeAdded = 0;
     while (currentIds.includes(idToBeAdded)) {
@@ -124,7 +124,7 @@ class App_old_recipe extends Component {
             placeholder="Add a recipe"
             style={{ width: "200px" }}
           />
-          <button onClick={() => this.putDataToDB(this.state.message)}>
+          <button onClick={() => this.putRecipeToDB(this.state.message)}>
             ADD
           </button>
         </div>
