@@ -136,7 +136,7 @@ class Login extends Component {
         </div>
       );
     } else {
-      return <Redirect to={`/userProfile/${username}`} />;
+      return <Redirect to={`/myRecipes/${username}`} />;
     }
   }
 }

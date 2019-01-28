@@ -104,7 +104,7 @@ passport.use(
         }
       });
     } catch (err) {
-      console.log(`err ${jwt}`);
+      console.log(`jwt ${err}`);
       done(err);
     }
   }),
