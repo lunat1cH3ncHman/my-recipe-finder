@@ -186,6 +186,8 @@ class AddRecipe extends Component {
             style={inputStyle}
             id="ingredients"
             label="Ingredients"
+            multiline
+            rows="5"
             value={ingredients}
             onChange={this.handleChange('ingredients')}
             placeholder="Ingredients"
@@ -195,6 +197,8 @@ class AddRecipe extends Component {
             style={inputStyle}
             id="instructions"
             label="Instructions"
+            multiline
+            rows="5"
             value={instructions}
             onChange={this.handleChange('instructions')}
             placeholder="Instructions"
