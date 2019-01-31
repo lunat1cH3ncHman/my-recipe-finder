@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 import {
   SubmitButtons,
   HeaderBar,
   loginButton,
-  homeButton,
   LinkButtons,
   updateButton,
   cancelButton,
   saveButton,
   inputStyle,
 } from '../components';
-
-const mongoose = require('mongoose');
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const title = {
   pageTitle: 'My Recipe Store   // Add a Recipe',
@@ -34,6 +27,7 @@ class AddRecipe extends Component {
       recipeTitle: '',
       image: '',
       ingredients: '',
+      instructions: '',
       sourceurl: '',
       addingRecipe: false,
       updated: false,
@@ -57,12 +51,13 @@ class AddRecipe extends Component {
     });
   };
 
-  resetAddRecipe = e => {
+  reset() {
     this.setState({
       username: '',
       recipeTitle: '',
       image: '',
       ingredients: '',
+      instructions: '',
       sourceurl: '',
       addingRecipe: false,
       updated: false,
@@ -72,61 +67,63 @@ class AddRecipe extends Component {
   }
 
   addRecipe = e => {
+    e.preventDefault();
     let accessString = localStorage.getItem('JWT');
+
     if (accessString === null) {
       this.setState({
         addingRecipe: false,
         error: true,
       });
-    }
-
-    if(this.state.recipeTitle === ''){
+    } else if(this.state.recipeTitle === '') {
       console.log('empty recipeTitle');
       this.setState({
         emptyTitleError: true
       });
-      return;
-    }
-
-    e.preventDefault();
-    axios
-      .post(
-        '/addRecipe',
-        {
-          username: this.props.match.params.username,
-          recipeTitle: this.state.recipeTitle,
-          image: this.state.image,
-          ingredients: this.state.ingredients,
-          instructions: this.state.instructions,
-          sourceurl: this.state.sourceurl,
-        },
-        {
-          headers: { Authorization: `JWT ${accessString}` },
-        },
-      )
-      .then(response => {
-        console.log("response");
-        if (response.status === 200){
-          this.setState({
-            updated: true,
-            error: false,
-          });
-        }else{
-          this.setState({
-            error: true,
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error.data);
+    } else {
+      this.setState({
+        addingRecipe: true
       });
+
+      axios
+        .post(
+          '/addRecipe',
+          {
+            username: this.props.match.params.username,
+            recipeTitle: this.state.recipeTitle,
+            image: this.state.image,
+            ingredients: this.state.ingredients,
+            instructions: this.state.instructions,
+            sourceurl: this.state.sourceurl,
+          },
+          {
+            headers: { Authorization: `JWT ${accessString}` },
+          },
+        )
+        .then(response => {
+          console.log("response");
+          if (response.status === 200){
+            this.setState({
+              addingRecipe: false,
+              updated: true,
+              error: false,
+            });
+          }else{
+            this.setState({
+              addingRecipe: false,
+              error: true,
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error.data);
+        });
+      }
   };
 
   render() {
     const {
-      username,
       recipeTitle,
-      image,
       ingredients,
       instructions,
       sourceurl,
@@ -141,7 +138,7 @@ class AddRecipe extends Component {
         <div>
           <HeaderBar title={title} />
           <p>
-            Sorry there was a problem. Please go login again.
+            Sorry there was a problem. Please login again.
           </p>
           <LinkButtons
             style={loginButton}
@@ -150,35 +147,28 @@ class AddRecipe extends Component {
           />
         </div>
       );
-    } else if (addingRecipe !== false) {
+    } else if (addingRecipe) {
       return (
         <div>
           <HeaderBar title={title} />
           <p>Adding your recipe...</p>
         </div>
       );
-    } else if (addingRecipe === false && updated === true) {
+    } else if (updated) {
       return (
         <div>
           <HeaderBar title={title} />
-          <p>
-            Hoorah! ${title} added, what do you want to do now?
-          </p>
-          <LinkButtons
-            style={homeButton}
-            buttonText={'Home'}
-            link={`/myRecipes/`}
-          />
-          <LinkButtons
-            buttonStyle={updateButton}
-            buttonText={'Add another'}
-            link={`/addRecipe`}
-          />
+          <p>Hoorah! Your recipe has been added, do you want to add another one?</p>
+          <Button
+            style={updateButton}
+            variant="contained"
+            color="primary"
+            onClick={() => { this.reset(); }}
+          >Add another</Button>
         </div>
       );
-    }
-    else {
-     return (
+    } else {
+      return (
        <div>
         <HeaderBar title={title} />
         <form className="profile-form" onSubmit={this.addRecipe}>
@@ -218,6 +208,11 @@ class AddRecipe extends Component {
             onChange={this.handleChange('sourceurl')}
             placeholder="Website link"
           />
+          {emptyTitleError && (
+            <div>
+              <p>Recipes need names, they will get upset otherwise</p>
+            </div>
+          )}
           <p></p><SubmitButtons
             buttonStyle={saveButton}
             buttonText={'Save Recipe'}
@@ -228,8 +223,9 @@ class AddRecipe extends Component {
           buttonText={'Cancel'}
           link={`/myRecipes`}
         />
-       </div>);
-     }
+      </div>
+    );
+    }
   }
 }
 

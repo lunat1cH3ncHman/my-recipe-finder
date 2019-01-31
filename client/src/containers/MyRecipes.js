@@ -71,7 +71,6 @@ class MyRecipes extends Component {
   render() {
     const {
       recipes,
-      username,
       error,
       isLoading,
       deleted,
@@ -112,12 +111,10 @@ class MyRecipes extends Component {
           />
           <div>
             <List>
-              { recipes.map(({ id, message }) =>
-                <ListItem
-                  key={id}
-                  onTouchTap={(event) => this._handleListItemClick(event)}>
+              { recipes.map(({ _id, title}) =>
+                <ListItem key={_id}>
                     <ListItemText
-                      primary={message}
+                      primary={title}
                     />
                 </ListItem>
               )}
