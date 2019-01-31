@@ -9,6 +9,7 @@ import UpdateProfile from './containers/UpdateProfile';
 import ForgotPassword from './containers/ForgotPassword';
 import ResetPassword from './containers/ResetPassword';
 import UpdatePassword from './containers/UpdatePassword';
+import AddRecipe from './containers/AddRecipe';
 
 class Routes extends Component {
   render() {
@@ -21,6 +22,7 @@ class Routes extends Component {
           <Route exact path="/reset/:token" component={ResetPassword} />
           <Route exact path="/forgotPassword" component={ForgotPassword} />
           <Route exact path="/myRecipes/:username" component={MyRecipes} />
+          <Route exact path="/addRecipe/:username" component={AddRecipe} />
           <Route exact path="/userProfile/:username" component={Profile} />
           <Route exact path="/updateUser/:username" component={UpdateProfile} />
           <Route exact path="/updatePassword/:username" component={UpdatePassword}/>
