@@ -47,11 +47,18 @@ class MyRecipes extends Component {
         headers: { Authorization: `JWT ${accessString}` },
       })
       .then(response => {
-        this.setState({
-          recipes: response.data.recipes,
-          isLoading: false,
-          error: false,
-        });
+        if (response.status === 200){
+          this.setState({
+            recipes: response.data.recipes,
+            isLoading: false,
+            error: false,
+          });
+        }else{
+          this.setState({
+            isLoading: false,
+            error: true,
+          });
+        }
       })
       .catch(error => {
         console.log(error.data);
@@ -64,9 +71,9 @@ class MyRecipes extends Component {
     localStorage.removeItem('JWT');
   };
 
-  _handleListItemClick(event){
-   console.log('handle clicked');
-  }
+  handleClick = (e) => {
+    console.log(e);
+  };
 
   render() {
     const {
@@ -81,7 +88,7 @@ class MyRecipes extends Component {
         <div>
           <HeaderBar title={title} />
           <div style={loading}>
-            Problem fetching your recipes. Please login again.
+            Problem fetching your recipes. Please try logging in again.
           </div>
           <LinkButtons
             buttonText={`Login`}
@@ -115,6 +122,7 @@ class MyRecipes extends Component {
                 <ListItem key={_id}>
                     <ListItemText
                       primary={title}
+                      onClick={this.handleClick.bind(this, _id)}
                     />
                 </ListItem>
               )}

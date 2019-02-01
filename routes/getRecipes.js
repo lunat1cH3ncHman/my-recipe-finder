@@ -6,15 +6,17 @@ module.exports = app => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
       if(err) {
         console.log(`finduser ${err}`);
+        res.status(400).send(err);
       }
       if (info != undefined){
         console.log(info.message);
-        res.send(info.message);
+        res.status(400).send(info.message);
       } else {
-        console.log('Get reciepes user authenticated');
-        Recipe.find((err, recipe) => {
-          if (err){
-            return res.json({ success: false, error: err });
+        console.log('User authenticated Get recipes');
+       
+        Recipe.find({username: user.username}, (err, recipe) => {
+          if (err) {
+            res.status(400).send(err);
           } else {
             res.status(200).send({
               recipes: recipe
