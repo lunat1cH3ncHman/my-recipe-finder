@@ -17,6 +17,8 @@ const title = {
   pageTitle: 'My Recipe Store   // Login',
 };
 
+const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
+
 class Login extends Component {
   constructor() {
     super();
@@ -24,6 +26,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      errorMessage: '',
       loggedIn: false,
       showError: false,
       showNullError: false,
@@ -38,7 +41,6 @@ class Login extends Component {
 
   loginUser = e => {
     console.log(this.state.username);
-    console.log(this.state.password);
     e.preventDefault();
     if (this.state.username === '' || this.state.password === '') {
       this.setState({
@@ -47,32 +49,46 @@ class Login extends Component {
         loggedIn: false,
       });
     } else {
+      this.setState({
+        showError: false,
+        showNullError: false,
+        loggedIn: false,
+      });
+
       axios
         .post('/loginUser', {
           username: this.state.username,
           password: this.state.password,
         })
         .then(response => {
-          console.log(response.data);
-          if (
-            response.data === 'Passwords do not match' ||
-            response.data === 'Username does not exist'
-          ) {
-            this.setState({
-              showError: true,
-              showNullError: false,
-            });
-          } else {
+          if (response.status === 200) {
             localStorage.setItem('JWT', response.data.token);
+              this.setState({
+                loggedIn: true,
+                showError: false,
+                showNullError: false,
+              });
+          } else {
             this.setState({
-              loggedIn: true,
-              showError: false,
-              showNullError: false,
+              errorMessage: response.data.message,
+              showError: true,
             });
           }
         })
         .catch(error => {
-          console.log(error.data);
+          if (typeof(error.response) == 'undefined' ||
+              typeof(error.response.data) == 'undefined') {
+            this.setState({
+              errorMessage: genericErrorMessage
+            });
+          } else {
+            this.setState({
+              errorMessage: error.response.data,
+            });
+          }
+          this.setState({
+            showError: true,
+          });
         });
     }
   };
@@ -82,6 +98,7 @@ class Login extends Component {
       username,
       password,
       showError,
+      errorMessage,
       loggedIn,
       showNullError,
     } = this.state;
@@ -99,6 +116,7 @@ class Login extends Component {
               onChange={this.handleChange('username')}
               placeholder="Username"
             />
+            <p></p>
             <TextField
               style={inputStyle}
               id="password"
@@ -108,29 +126,30 @@ class Login extends Component {
               placeholder="Password"
               type="password"
             />
+            {showNullError && (
+              <div>
+                <p>Username and password cannot be empty</p>
+              </div>
+            )}
+            {showError && (
+              <div>
+                <p>{errorMessage}</p>
+              </div>
+            )}
             <p></p><SubmitButtons
               buttonStyle={loginButton}
               buttonText={'Login'} />
           </form>
-          {showNullError && (
-            <div>
-              <p>The username or password cannot be null.</p>
-            </div>
-          )}
           {showError && (
             <div>
-              <p>
-                That username or password isn't recognized. Please try again or
-                register now.
-              </p>
+              <p><LinkButtons
+                buttonStyle={secondOptionButton}
+                buttonText={'Register'}
+                link={'/register'}/>
               <LinkButtons
                 buttonStyle={forgotButton}
                 buttonText={'Forgot Password?'}
-                link={'/forgotPassword'}/>
-              <p><SubmitButtons
-                buttonStyle={secondOptionButton}
-                buttonText={'Register'}
-              /></p>
+                link={'/forgotPassword'}/></p>
             </div>
           )}
         </div>
