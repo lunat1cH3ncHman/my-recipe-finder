@@ -165,6 +165,10 @@ class AddRecipe extends Component {
             color="primary"
             onClick={() => { this.reset(); }}
           >Add another</Button>
+          <LinkButtons
+            buttonStyle={updateButton}
+            buttonText={'Back Recipes'}
+            link={`/myRecipes/${this.props.match.params.username}`}/>
         </div>
       );
     } else {
