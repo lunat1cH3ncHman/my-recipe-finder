@@ -15,7 +15,7 @@ module.exports = app => {
         console.log('User authenticated Get recipes');
 
         Recipe.find({username: user.username})
-        .sort({timestamps: 1})
+        .sort([['_id',-1]])
         .exec((err, recipe) => {
           if (err) {
             res.status(400).send(err);
