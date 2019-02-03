@@ -182,6 +182,7 @@ class AddRecipe extends Component {
             id="recipeTitle"
             label="Recipe name"
             value={recipeTitle}
+            style ={{width: '70%'}}
             onChange={this.handleChange('recipeTitle')}
             placeholder="Recipe name"
           />
@@ -190,6 +191,7 @@ class AddRecipe extends Component {
             style={inputStyle}
             id="ingredients"
             label="Ingredients"
+            style ={{width: '70%'}}
             multiline
             rows="5"
             value={ingredients}
@@ -201,6 +203,7 @@ class AddRecipe extends Component {
             style={inputStyle}
             id="instructions"
             label="Instructions"
+            style ={{width: '70%'}}
             multiline
             rows="5"
             value={instructions}
@@ -212,6 +215,7 @@ class AddRecipe extends Component {
             style={inputStyle}
             id="sourceurl"
             label="Website link"
+            style ={{width: '70%'}}
             value={sourceurl}
             onChange={this.handleChange('sourceurl')}
             placeholder="Website link"
@@ -225,12 +229,13 @@ class AddRecipe extends Component {
             buttonStyle={saveButton}
             buttonText={'Save Recipe'}
           />
+          <LinkButtons
+            buttonStyle={cancelButton}
+            buttonText={'Cancel'}
+            link={`/myRecipes/${this.props.match.params.username}`}
+          />
         </form>
-        <LinkButtons
-          buttonStyle={cancelButton}
-          buttonText={'Cancel'}
-          link={`/myRecipes`}
-        />
+
       </div>
     );
     }
