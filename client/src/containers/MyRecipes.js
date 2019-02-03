@@ -15,6 +15,12 @@ const loading = {
   fontSize: '24px',
 };
 
+const list = {
+  marginLeft: '20%',
+  marginRight: '20%',
+  fontSize: '18px',
+};
+
 const title = {
   pageTitle: 'My Recipe Store   // My Recipes',
 };
@@ -121,7 +127,9 @@ class MyRecipes extends Component {
               { recipes.map(({ _id, title}) =>
                 <ListItem key={_id}>
                     <ListItemText
+                      style={list}
                       primary={title}
+                      button
                       onClick={this.handleClick.bind(this, _id)}
                     />
                 </ListItem>
