@@ -13,8 +13,10 @@ module.exports = app => {
         res.status(400).send(info.message);
       } else {
         console.log('User authenticated Get recipes');
-       
-        Recipe.find({username: user.username}, (err, recipe) => {
+
+        Recipe.find({username: user.username})
+        .sort({timestamps: 1})
+        .exec((err, recipe) => {
           if (err) {
             res.status(400).send(err);
           } else {

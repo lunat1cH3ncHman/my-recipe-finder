@@ -10,11 +10,6 @@ const title = {
   pageTitle: 'My Recipe Store',
 };
 
-const paragraphStyle = {
-  background: 'orange',
-  color: 'white',
-};
-
 class Home extends Component {
   render() {
     return (
@@ -23,7 +18,7 @@ class Home extends Component {
         <p></p>
         <div>
           <p>Welcome to My Recipe Store</p>
-          <p>The best place to store all your recipes from your favourite websites, recipe books or handwritten!</p>
+          <p>The best place to store all your recipes from your favourite websites, recipe books or notebooks!</p>
         </div>
         <LinkButtons
           buttonText={`Register`}

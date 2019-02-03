@@ -26,23 +26,29 @@ passport.use(
           if(user != null) {
             console.log('Username already registered');
             return done(null, false, {message: 'Username already registered'});
-          } else{
-            bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-
-              let user = new User();
-              user.username = username;
-              user.password = hashedPassword;
-              user.email = req.body.email,
-              user.save(err => {
-                if (err){
-                  console.log(`User creation error ${err}`);
-                  return done(null, false, {message: 'User creation failed'});
-                }
-                console.log('User created');
-                return done(null, user);
-              });
-            });
           }
+          User.findOne({email: req.body.email}).then(user => {
+            if(user != null) {
+              console.log('Email already registered');
+              return done(null, false, {message: 'Email already registered'});
+            } else {
+              bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+
+                let user = new User();
+                user.username = username;
+                user.password = hashedPassword;
+                user.email = req.body.email,
+                user.save(err => {
+                  if (err){
+                    console.log(`User creation error ${err}`);
+                    return done(null, false, {message: 'User creation failed'});
+                  }
+                  console.log('User created');
+                  return done(null, user);
+                });
+              });
+            }
+          });
         });
       } catch (err) {
         done(err);
@@ -110,6 +116,13 @@ passport.use(
   }),
 );
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
   // Useful for verify USER
 //   function(email, password, done){

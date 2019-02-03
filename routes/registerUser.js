@@ -5,37 +5,23 @@ var User = require("../models/user");
 
 module.exports = app => {
   app.post('/registerUser', (req, res, next) => {
-
     console.log('Register User');
-
     passport.authenticate('register', (err, user, info) => {
       if (err) {
-        console.log('err');
         console.log(err);
-      }
-      if (info != undefined) {
-        console.log('Info undefined');
+        res.status(400).send(err);
+      } else if (info != undefined) {
         console.log(info.message);
-        res.send(info.message);
+        res.status(400).send(info.message);
       } else {
-        console.log('req login');
         req.logIn(user, err => {
-          // const data = {
-          //   email: req.body.email,
-          //   username: user.username,
-          // };
-          User.findOne({username: user.username}).then(user => {
-            console.log('User created in db');
-            res.status(200).send({message: 'User created'});
-            //   res.status(200).send({message: 'User created'});
-            // user.update({
-            //   email: data.email,
-            // })
-            // .then(() => {
-            //   console.log('User created in db');
-            //   res.status(200).send({message: 'User created'});
-            // });
-          });
+          if (err) {
+            console.log('Could not create user');
+            return res.status(400).send('Sorry something went wrong please try again');
+          } else {
+            console.log('User created');
+            return res.status(200).send('User created');
+          }
         });
       }
     })(req, res, next);

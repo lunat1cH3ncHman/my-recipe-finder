@@ -16,6 +16,8 @@ const title = {
   pageTitle: 'My Recipe Store   // Register',
 };
 
+const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +26,9 @@ class Register extends Component {
       email: '',
       username: '',
       password: '',
-      messageFromServer: '',
+      errorMessage: '',
       showError: false,
+      registered: false,
       registerError: false,
       loginError: false,
     };
@@ -57,24 +60,38 @@ class Register extends Component {
           password: this.state.password,
         })
         .then(response => {
-          console.log(response.data);
-          if (response.data === 'username or email already taken') {
+          if (response.status === 200) {
             this.setState({
-              showError: true,
-              loginError: true,
+              registered: true,
+              showError: false,
+              loginError: false,
               registerError: false,
             });
           } else {
             this.setState({
-              messageFromServer: response.data.message,
-              showError: false,
-              loginError: false,
+              errorMessage: response.data.message,
+              showError: true,
+              loginError: true,
               registerError: false,
             });
           }
         })
         .catch(error => {
-          console.log(error.data);
+          if (typeof(error.response) == 'undefined' ||
+              typeof(error.response.data) == 'undefined') {
+            this.setState({
+              errorMessage: genericErrorMessage
+            });
+          } else {
+            this.setState({
+              errorMessage: error.response.data,
+            });
+          }
+          this.setState({
+            showError: true,
+            loginError: true,
+            registerError: false,
+          });
         });
     }
   };
@@ -84,13 +101,14 @@ class Register extends Component {
       email,
       username,
       password,
-      messageFromServer,
+      errorMessage,
       showError,
       loginError,
+      registered,
       registerError,
     } = this.state;
 
-    if (messageFromServer === '') {
+    if (!registered) {
       return (
         <div>
           <HeaderBar title={title} />
@@ -104,6 +122,7 @@ class Register extends Component {
               onChange={this.handleChange('email')}
               placeholder="Email"
             />
+            <p></p>
             <TextField
               style={inputStyle}
               id="username"
@@ -112,6 +131,7 @@ class Register extends Component {
               onChange={this.handleChange('username')}
               placeholder="Username"
             />
+            <p></p>
             <TextField
               style={inputStyle}
               id="password"
@@ -121,24 +141,21 @@ class Register extends Component {
               placeholder="Password"
               type="password"
             />
+            <div>
+            <font colour="#FF0000">
+              {showError === true && registerError === true && (
+                <p>Username, password and email are required fields.</p>
+              )}
+              {showError === true && loginError === true && (
+                <p>{errorMessage}</p>
+              )}
+            </font>
+            </div>
             <p><SubmitButtons
               buttonStyle={registerButton}
               buttonText={'Register'}
             /></p>
           </form>
-          {showError === true && registerError === true && (
-            <div>
-              <p>Username, password and email are required fields.</p>
-            </div>
-          )}
-          {showError === true && loginError === true && (
-            <div>
-              <p>
-                That username or email is already taken. Please choose another
-                or login.
-              </p>
-            </div>
-          )}
           <p>Aleady registered?</p>
           <LinkButtons
             buttonText={`Login`}
@@ -147,7 +164,7 @@ class Register extends Component {
           />
         </div>
       );
-    } else if (messageFromServer === 'User created') {
+    } else {
       return (
         <div>
           <HeaderBar title={title} />
