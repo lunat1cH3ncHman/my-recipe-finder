@@ -11,7 +11,7 @@ import {
   updateButton,
   cancelButton,
   saveButton,
-  inputStyle,
+  recipeInputStyle,
 } from '../components';
 
 const title = {
@@ -178,20 +178,18 @@ class AddRecipe extends Component {
         <form className="profile-form" onSubmit={this.addRecipe}>
           <p></p>
           <TextField
-            style={inputStyle}
+            style={recipeInputStyle}
             id="recipeTitle"
             label="Recipe name"
             value={recipeTitle}
-            style ={{width: '70%'}}
             onChange={this.handleChange('recipeTitle')}
             placeholder="Recipe name"
           />
           <p></p>
           <TextField
-            style={inputStyle}
+            style={recipeInputStyle}
             id="ingredients"
             label="Ingredients"
-            style ={{width: '70%'}}
             multiline
             rows="5"
             value={ingredients}
@@ -200,10 +198,9 @@ class AddRecipe extends Component {
           />
           <p></p>
           <TextField
-            style={inputStyle}
+            style={recipeInputStyle}
             id="instructions"
             label="Instructions"
-            style ={{width: '70%'}}
             multiline
             rows="5"
             value={instructions}
@@ -212,10 +209,9 @@ class AddRecipe extends Component {
           />
           <p></p>
           <TextField
-            style={inputStyle}
+            style={recipeInputStyle}
             id="sourceurl"
             label="Website link"
-            style ={{width: '70%'}}
             value={sourceurl}
             onChange={this.handleChange('sourceurl')}
             placeholder="Website link"

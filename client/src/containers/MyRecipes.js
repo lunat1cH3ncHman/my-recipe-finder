@@ -79,6 +79,7 @@ class MyRecipes extends Component {
 
   handleClick = (e) => {
     console.log(e);
+    this.props.history.push(`/DisplayRecipe/${this.props.match.params.username}/${e}`);
   };
 
   render() {
