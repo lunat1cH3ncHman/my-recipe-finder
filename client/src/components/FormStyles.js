@@ -9,6 +9,12 @@ export const loadingStyle = {
   fontSize: '18px',
 };
 
+export const siteHeaderStyle = {
+  margin: '1em',
+  fontSize: '20px',
+  colour: 'orange',
+};
+
 export default {
   recipeInputStyle,
 };

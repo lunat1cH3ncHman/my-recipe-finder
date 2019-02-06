@@ -11,6 +11,7 @@ import ResetPassword from './containers/ResetPassword';
 import UpdatePassword from './containers/UpdatePassword';
 import AddRecipe from './containers/AddRecipe';
 import DisplayRecipe from './containers/DisplayRecipe';
+import Terms from './containers/Terms';
 
 class Routes extends Component {
   render() {
@@ -18,6 +19,7 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/terms" component={Terms} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/reset/:token" component={ResetPassword} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import {
   LinkButtons,
@@ -155,13 +156,16 @@ class Register extends Component {
               buttonStyle={registerButton}
               buttonText={'Register'}
             /></p>
+            By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
           </form>
-          <p>Aleady registered?</p>
-          <LinkButtons
-            buttonText={`Login`}
-            buttonStyle={secondOptionButton}
-            link={'/login'}
-          />
+          <div>
+            <p>Aleady registered?</p>
+            <LinkButtons
+              buttonText={`Login`}
+              buttonStyle={secondOptionButton}
+              link={'/login'}
+            />
+          </div>
         </div>
       );
     } else {
