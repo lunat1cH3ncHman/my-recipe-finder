@@ -15,6 +15,11 @@ const welcome = {
   fontSize: '24px',
 };
 
+const intro = {
+  margin: '1em',
+  fontSize: '18px',
+};
+
 class Home extends Component {
   render() {
     return (
@@ -23,7 +28,7 @@ class Home extends Component {
         <p></p>
         <div style={welcome}>
           <p>Welcome to My Recipe Store</p>
-          <p>The best place to store all your recipes from your favourite websites, recipe books or notebooks!</p>
+          <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books or notebooks!</p>
         </div>
         <LinkButtons
           buttonText={`Register`}
