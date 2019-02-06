@@ -8,12 +8,8 @@ import {
   updateButton,
   loginButton,
   HeaderBar,
+  loadingStyle,
 } from '../components';
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const list = {
   marginLeft: '20%',
@@ -94,7 +90,7 @@ class MyRecipes extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>
+          <div style={loadingStyle}>
             Problem fetching your recipes. Please try logging in again.
           </div>
           <LinkButtons
@@ -108,7 +104,7 @@ class MyRecipes extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>Loading Recipes...</div>
+          <div style={loadingStyle}>Loading Recipes...</div>
         </div>
       );
     } else if (deleted) {

@@ -10,12 +10,8 @@ import {
   forgotButton,
   inputStyle,
   SubmitButtons,
+  loadingStyle,
 } from '../components';
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const title = {
   pageTitle: 'My Recipe Store   // Reset Password',
@@ -103,7 +99,7 @@ export default class ResetPassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>
+          <div style={loadingStyle}>
             <h4>Problem resetting password. Please send another reset link.</h4>
             <LinkButtons
               buttonStyle={forgotButton}
@@ -117,7 +113,7 @@ export default class ResetPassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>Loading User Data...</div>
+          <div style={loadingStyle}>Loading User Data...</div>
         </div>
       );
     } else {

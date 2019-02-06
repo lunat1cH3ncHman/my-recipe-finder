@@ -15,12 +15,8 @@ import {
   logoutButton,
   HeaderBar,
   linkStyle,
+  loadingStyle,
 } from '../components';
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const title = {
   pageTitle: 'My Recipe Store   // My Profile',
@@ -115,7 +111,7 @@ class Profile extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>
+          <div style={loadingStyle}>
             Problem fetching user data. Please login again.
           </div>
           <LinkButtons
@@ -129,7 +125,7 @@ class Profile extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loading}>Loading User Data...</div>
+          <div style={loadingStyle}>Loading User Data...</div>
         </div>
       );
     } else if (deleted) {

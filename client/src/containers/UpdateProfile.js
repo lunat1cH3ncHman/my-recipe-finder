@@ -11,12 +11,8 @@ import {
   saveButton,
   loginButton,
   inputStyle,
+  loadingStyle,
 } from '../components';
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const title = {
   pageTitle: 'Update User Profile Screen',
@@ -130,7 +126,7 @@ class UpdateProfile extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <p style={loading}>
+          <p style={loadingStyle}>
             There was a problem accessing your data. Please go login again.
           </p>
           <LinkButtons
@@ -144,7 +140,7 @@ class UpdateProfile extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <p style={loading}>Loading user data...</p>
+          <p style={loadingStyle}>Loading user data...</p>
         </div>
       );
     } else if (loadingUser === false && updated === true) {

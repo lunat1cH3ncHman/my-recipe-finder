@@ -11,12 +11,8 @@ import {
   saveButton,
   loginButton,
   inputStyle,
+  loadingStyle,
 } from '../components';
-
-const loading = {
-  margin: '1em',
-  fontSize: '24px',
-};
 
 const title = {
   pageTitle: 'My Recipe Store   // Password Update Password Screen',
@@ -115,7 +111,7 @@ class UpdatePassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <p style={loading}>
+          <p style={loadingStyle}>
             There was a problem accessing your data. Please go login again.
           </p>
           <LinkButtons
@@ -129,7 +125,7 @@ class UpdatePassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <p style={loading}>Loading user data...</p>
+          <p style={loadingStyle}>Loading user data...</p>
         </div>
       );
     } else if (loadingUser === false && updated === true) {
