@@ -20,6 +20,7 @@ class Recipe extends Component {
   constructor() {
     super();
     this.state = {
+      width: window.innerWidth,
       recipetitle: String,
       image: String,
       ingredients: String,
@@ -86,8 +87,21 @@ class Recipe extends Component {
       }
   }
 
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
   render() {
     const {
+      width,
       recipetitle,
       ingredients,
       instructions,
@@ -96,6 +110,8 @@ class Recipe extends Component {
       isLoading,
       errormessage,
     } = this.state;
+
+    const isMobile = width <= 500;
 
     if (loadingError) {
       return (
@@ -114,27 +130,51 @@ class Recipe extends Component {
         </div>
       );
     } else {
-      return (
-        <div>
-          <HeaderBar title={title} />
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell>{recipetitle}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>{ingredients}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>{instructions}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>{sourceurl}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      );
+      if (isMobile) {
+        return (
+          <div>
+            <HeaderBar title={title} />
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{recipetitle}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{ingredients}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{instructions}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{sourceurl}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <HeaderBar title={title} />
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{recipetitle}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{ingredients}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{instructions}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{sourceurl}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        );
+      }
     }
   }
 }
