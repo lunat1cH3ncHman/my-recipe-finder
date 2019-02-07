@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -159,7 +160,10 @@ class Register extends Component {
             By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
           </form>
           <div>
-            <p>Aleady registered?</p>
+            <p><Divider variant="middle"/></p>
+          </div>
+          <div>
+            Aleady registered?
             <LinkButtons
               buttonText={`Login`}
               buttonStyle={secondOptionButton}
