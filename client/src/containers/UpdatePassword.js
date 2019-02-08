@@ -15,7 +15,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Password Update Password Screen',
+  pageTitle: 'SatsumaSpoon',
 };
 
 class UpdatePassword extends Component {

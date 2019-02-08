@@ -5,8 +5,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import RecipeLayout from './RecipeLayout.js'
-import Button from '@material-ui/core/Button';
-
 
 import {
   HeaderBar,
@@ -14,7 +12,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Recipe',
+  pageTitle: 'SatsumaSpoon',
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';

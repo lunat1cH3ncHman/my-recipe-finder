@@ -7,7 +7,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store',
+  pageTitle: 'SatsumaSpoon',
 };
 
 const welcome = {
@@ -27,7 +27,7 @@ class Home extends Component {
         <HeaderBar title={title} />
         <p></p>
         <div style={welcome}>
-          <p>Welcome to My Recipe Store</p>
+          <p>Welcome to SatsumaSpoon</p>
           <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books or notebooks!</p>
         </div>
         <LinkButtons

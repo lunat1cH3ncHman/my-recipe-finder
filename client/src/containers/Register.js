@@ -15,7 +15,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Register',
+  pageTitle: 'SatsumaSpoon',
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
@@ -176,7 +176,7 @@ class Register extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <h3>Welcome to My Recipe Store!</h3>
+          <h3>Welcome to SatsumaSpoon!</h3>
           <p>The place to keep all your most loved recipes safe</p>
           <p></p>
           <LinkButtons

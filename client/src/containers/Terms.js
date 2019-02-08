@@ -4,7 +4,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store // Terms of Use and Privacy Policy',
+  pageTitle: 'SatsumaSpoon',
 };
 
 export const siteHeaderStyle = {

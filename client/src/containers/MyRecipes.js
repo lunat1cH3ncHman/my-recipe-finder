@@ -18,7 +18,7 @@ const list = {
 };
 
 const title = {
-  pageTitle: 'My Recipe Store   // My Recipes',
+  pageTitle: 'SatsumaSpoon',
 };
 
 class MyRecipes extends Component {

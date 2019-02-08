@@ -14,7 +14,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Reset Password',
+  pageTitle: 'SatsumaSpoon',
 };
 
 export default class ResetPassword extends Component {

@@ -14,7 +14,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Login',
+  pageTitle: 'SatsumaSpoon',
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';

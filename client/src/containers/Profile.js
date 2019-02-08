@@ -19,7 +19,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // My Profile',
+  pageTitle: 'SatsumaSpoon',
 };
 
 class Profile extends Component {

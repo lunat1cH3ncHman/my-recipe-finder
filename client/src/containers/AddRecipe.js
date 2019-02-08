@@ -15,7 +15,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Add a Recipe',
+  pageTitle: 'SatsumaSpoon',
 };
 
 class AddRecipe extends Component {

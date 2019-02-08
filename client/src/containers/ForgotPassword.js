@@ -12,7 +12,7 @@ import {
 } from '../components';
 
 const title = {
-  pageTitle: 'My Recipe Store   // Forgot Password',
+  pageTitle: 'SatsumaSpoon',
 };
 
 class ForgotPassword extends Component {

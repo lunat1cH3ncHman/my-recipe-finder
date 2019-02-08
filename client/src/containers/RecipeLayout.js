@@ -141,7 +141,7 @@ function RecipeLayout(props) {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography colour="orange" variant="h6" align="center" gutterBottom>
-          Love My Recipe Store? Please help us keep the service Advert Free
+          Love SatsumaSpoon? Please help us keep the service Advert Free
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           We've never passed your data to third parties and we never want to
