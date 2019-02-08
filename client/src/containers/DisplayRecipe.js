@@ -4,6 +4,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import RecipeLayout from './RecipeLayout.js'
+import Button from '@material-ui/core/Button';
+
 
 import {
   HeaderBar,
@@ -20,7 +23,6 @@ class Recipe extends Component {
   constructor() {
     super();
     this.state = {
-      width: window.innerWidth,
       recipetitle: String,
       image: String,
       ingredients: String,
@@ -87,21 +89,8 @@ class Recipe extends Component {
       }
   }
 
-  componentWillMount() {
-    window.addEventListener('resize', this.handleWindowSizeChange);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
-  }
-
-  handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
-  };
-
   render() {
     const {
-      width,
       recipetitle,
       ingredients,
       instructions,
@@ -111,7 +100,13 @@ class Recipe extends Component {
       errormessage,
     } = this.state;
 
-    const isMobile = width <= 500;
+    const props = {
+      headertitle: title,
+      recipetitle: recipetitle,
+      ingredients: ingredients,
+      instructions: instructions,
+      sourceurl: sourceurl,
+    };
 
     if (loadingError) {
       return (
@@ -130,51 +125,12 @@ class Recipe extends Component {
         </div>
       );
     } else {
-      if (isMobile) {
-        return (
-          <div>
-            <HeaderBar title={title} />
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell>{recipetitle}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{ingredients}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{instructions}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{sourceurl}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            <HeaderBar title={title} />
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell>{recipetitle}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{ingredients}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{instructions}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>{sourceurl}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-        );
-      }
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <RecipeLayout {...props}/>
+        </div>
+      );
     }
   }
 }
