@@ -2,7 +2,7 @@
 
 MERN stack - Mongo, Express, React, Node
 
-Passport and JWT for auth
+Passport, Bcrypt and JWT for auth
 
 Create a local .env file with:
 
