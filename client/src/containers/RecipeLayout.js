@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,6 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import orange from '@material-ui/core/colors/orange';
 
 // https://material-ui.com/getting-started/page-layout-examples/
 
@@ -52,23 +53,32 @@ const styles = theme => ({
       paddingRight: 0,
     },
   },
-  mainGrid: {
+  cardGrid: {
+    alignContent: 'center',
     marginTop: theme.spacing.unit * 3,
   },
   card: {
+    maxWidth: 1000,
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     marginTop: theme.spacing.unit * 3,
     display: 'flex',
   },
   cardDetails: {
+    primary: 'orange',
     flex: 1,
   },
   cardMedia: {
-    width: 160,
+    marginTop: theme.spacing.unit * 1,
+    marginRight: theme.spacing.unit * 1,
+    width: theme.spacing.unit * 16,
+    height: theme.spacing.unit * 16,
   },
   markdown: {
     padding: `${theme.spacing.unit * 3}px 0`,
+  },
+  contentSpace: {
+    padding: theme.spacing.unit * 3,
   },
   sidebarAboutBox: {
     padding: theme.spacing.unit * 2,
@@ -83,6 +93,7 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 4}px 0`,
   },
 });
+
 
 // {posts.map(post => (
 //   <Markdown className={classes.markdown} key={post.substring(0, 40)}>
@@ -101,22 +112,39 @@ function RecipeLayout(props) {
       <div className={classes.layout}>
         <main>
           {/* Sub featured posts */}
-          <Grid container spacing={40} className={classes.cardGrid}>
+          <Grid align="center" className={classes.cardGrid}>
             <Grid item key={props.recipetitle} >
               <Card className={classes.card} >
                 <div className={classes.cardDetails} >
                   <CardContent>
-                    <Typography component="h1" variant="h3" colour="orange">
-                      {props.recipetitle}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {props.date}
-                    </Typography>
+                    <div>
+                      <Typography component="h1" variant="h3" color='orange'>
+                        {props.recipetitle}
+                      </Typography>
+                      
+                  {/*      <Hidden xsDown>
+                          <CardMedia
+                            align="right"
+                            className={classes.cardMedia}
+                            image="https://www.sciencedaily.com/images/2018/07/180712100504_1_540x360.jpg" // eslint-disable-line max-len
+                            title="Image title"
+                          />
+                        </Hidden>
+                    */}  
+                    </div>
+                    <div className={classes.contentSpace}>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {props.date}
+                      </Typography>
+                    </div>
                     <Typography component="h2" variant="h5" align="left" paragraph >
                       Ingredients
                     </Typography>
                     <Typography variant="subtitle1" align="left" paragraph >
                       {props.ingredients}
+                    </Typography>
+                    <Typography component="h2" variant="h5" align="left" paragraph >
+                      Instructions
                     </Typography>
                     <Typography variant="subtitle1" align="left" paragraph>
                       {props.instructions}
@@ -126,21 +154,14 @@ function RecipeLayout(props) {
                     </Typography>
                   </CardContent>
                 </div>
-                <Hidden xsDown>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://www.sciencedaily.com/images/2018/07/180712100504_1_540x360.jpg" // eslint-disable-line max-len
-                    title="Image title"
-                  />
-                </Hidden>
               </Card>
             </Grid>
           </Grid>
         </main>
       </div>
       {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography colour="orange" variant="h6" align="center" gutterBottom>
+      <footer className={classes.footer} >
+        <Typography colour="orange" variant="h6" gutterBottom>
           Love SatsumaSpoon? Please help us keep the service Advert Free
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
