@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Icon from '@material-ui/core/Icon';
+import { List, ListItem, ListItemText } from '@material-ui/core'
 
 import {
   SubmitButtons,
@@ -12,6 +15,8 @@ import {
   cancelButton,
   saveButton,
   recipeInputStyle,
+  AddIngredient,
+  EditableList,
 } from '../components';
 
 const title = {
@@ -26,9 +31,10 @@ class AddRecipe extends Component {
       username: '',
       recipeTitle: '',
       image: '',
-      ingredients: '',
-      instructions: '',
+      ingredients: [],
+      instructions: [],
       sourceurl: '',
+      pendingItem: '',
       addingRecipe: false,
       updated: false,
       error: false,
@@ -61,10 +67,77 @@ class AddRecipe extends Component {
       sourceurl: '',
       addingRecipe: false,
       updated: false,
+      pendingItem: '',
       error: false,
       emptyTitleError: false,
     });
   }
+
+  lastItemId = 0;
+
+  newItemId = () => {
+    const id = this.lastItemId;
+    this.lastItemId += 1;
+    return id;
+  };
+
+  handleItemInput = e => {
+    this.setState({
+      pendingItem: e.target.value
+    });
+  }
+
+  newIngredientSubmitHandler = e => {
+    e.preventDefault();
+    const id = this.newItemId();
+    if (this.state.pendingItem != ""){
+      this.setState({
+        ingredients: [
+          ...this.state.ingredients,
+          {
+            name: this.state.pendingItem,
+            isEditing: false,
+            id
+          },
+        ],
+        pendingItem: ""
+      });
+    }
+  };
+
+  handleRemoveIngredient = id => {
+    this.setState({
+      ingredients: this.state.ingredients.filter(item => id !== item.id)
+    });
+  };
+
+  setNameAt = (name, id) => {
+    this.setState({
+      ingredients: this.state.ingredients.map(item => {
+        if (id === item.id) {
+          return {
+            ...item,
+            name
+          };
+        }
+        return item;
+      })
+    });
+  };
+
+  toggleIsEditingAt = id => {
+    this.setState({
+      ingredients: this.state.ingredients.map(item => {
+        if (id === item.id) {
+          return {
+            ...item,
+            isEditing: !item["isEditing"]
+          };
+        }
+        return item;
+      })
+    });
+  };
 
   addRecipe = e => {
     e.preventDefault();
@@ -186,16 +259,23 @@ class AddRecipe extends Component {
             placeholder="Recipe name"
           />
           <p></p>
-          <TextField
-            style={recipeInputStyle}
-            id="ingredients"
-            label="Ingredients"
-            multiline
-            rows="5"
-            value={ingredients}
-            onChange={this.handleChange('ingredients')}
-            placeholder="Ingredients"
-          />
+          <div className="wrapper">
+            <EditableList
+              list={this.state.ingredients}
+              handleRemove={this.handleRemoveIngredient}
+              toggleIsEditingAt={this.toggleIsEditingAt}
+              setNameAt={this.setNameAt}
+            />
+            <AddIngredient
+              className="input"
+              type="text"
+              handleItemInput={this.handleItemInput}
+              newIngredientSubmitHandler={this.newIngredientSubmitHandler}
+              value={this.state.pendingItem}
+              placeholder="Add an item"
+              pendingItem={this.state.pendingItem}
+            />
+          </div>
           <p></p>
           <TextField
             style={recipeInputStyle}
@@ -231,7 +311,6 @@ class AddRecipe extends Component {
             link={`/myRecipes/${this.props.match.params.username}`}
           />
         </form>
-
       </div>
     );
     }
