@@ -15,7 +15,7 @@ import {
   cancelButton,
   saveButton,
   recipeInputStyle,
-  AddIngredient,
+  AddItem,
   EditableList,
 } from '../components';
 
@@ -34,7 +34,7 @@ class AddRecipe extends Component {
       ingredients: [],
       instructions: [],
       sourceurl: '',
-      pendingItem: '',
+      pendingIngredient: '',
       addingRecipe: false,
       updated: false,
       error: false,
@@ -67,7 +67,8 @@ class AddRecipe extends Component {
       sourceurl: '',
       addingRecipe: false,
       updated: false,
-      pendingItem: '',
+      pendingIngredient: '',
+      pendingInstruction: '',
       error: false,
       emptyTitleError: false,
     });
@@ -81,26 +82,50 @@ class AddRecipe extends Component {
     return id;
   };
 
-  handleItemInput = e => {
+  handleIngredientInput = e => {
     this.setState({
-      pendingItem: e.target.value
+      pendingIngredient: e.target.value
+    });
+  }
+
+  handleInstructionInput = e => {
+    this.setState({
+      pendingInstruction: e.target.value
     });
   }
 
   newIngredientSubmitHandler = e => {
     e.preventDefault();
     const id = this.newItemId();
-    if (this.state.pendingItem != ""){
+    if (this.state.pendingIngredient != ""){
       this.setState({
         ingredients: [
           ...this.state.ingredients,
           {
-            name: this.state.pendingItem,
+            name: this.state.pendingIngredient,
             isEditing: false,
             id
           },
         ],
-        pendingItem: ""
+        pendingIngredient: ""
+      });
+    }
+  };
+
+  newInstructionSubmitHandler = e => {
+    e.preventDefault();
+    const id = this.newItemId();
+    if (this.state.pendingInstruction != ""){
+      this.setState({
+        instructions: [
+          ...this.state.instructions,
+          {
+            name: this.state.pendingInstruction,
+            isEditing: false,
+            id
+          },
+        ],
+        pendingInstruction: ""
       });
     }
   };
@@ -111,7 +136,13 @@ class AddRecipe extends Component {
     });
   };
 
-  setNameAt = (name, id) => {
+  handleRemoveInstructions = id => {
+    this.setState({
+      instructions: this.state.instructions.filter(item => id !== item.id)
+    });
+  };
+
+  setIngredientAt = (name, id) => {
     this.setState({
       ingredients: this.state.ingredients.map(item => {
         if (id === item.id) {
@@ -125,9 +156,37 @@ class AddRecipe extends Component {
     });
   };
 
-  toggleIsEditingAt = id => {
+  setInstructionAt = (name, id) => {
+    this.setState({
+      instructions: this.state.instructions.map(item => {
+        if (id === item.id) {
+          return {
+            ...item,
+            name
+          };
+        }
+        return item;
+      })
+    });
+  };
+
+  toggleIsEditingIngredientAt = id => {
     this.setState({
       ingredients: this.state.ingredients.map(item => {
+        if (id === item.id) {
+          return {
+            ...item,
+            isEditing: !item["isEditing"]
+          };
+        }
+        return item;
+      })
+    });
+  };
+
+  toggleIsEditingInstructionAt = id => {
+    this.setState({
+      instructions: this.state.instructions.map(item => {
         if (id === item.id) {
           return {
             ...item,
@@ -250,44 +309,54 @@ class AddRecipe extends Component {
         <HeaderBar title={title} />
         <form className="profile-form" onSubmit={this.addRecipe}>
           <p></p>
+          <h3>Recipe Name</h3>
           <TextField
             style={recipeInputStyle}
             id="recipeTitle"
-            label="Recipe name"
+            label="Add name"
             value={recipeTitle}
             onChange={this.handleChange('recipeTitle')}
-            placeholder="Recipe name"
+            placeholder="Add name"
           />
           <p></p>
           <div className="wrapper">
+          <h3>Ingredients</h3>
             <EditableList
               list={this.state.ingredients}
               handleRemove={this.handleRemoveIngredient}
-              toggleIsEditingAt={this.toggleIsEditingAt}
-              setNameAt={this.setNameAt}
+              toggleIsEditingAt={this.toggleIsEditingIngredientAt}
+              setNameAt={this.setIngredientAt}
             />
-            <AddIngredient
+            <AddItem
               className="input"
               type="text"
-              handleItemInput={this.handleItemInput}
-              newIngredientSubmitHandler={this.newIngredientSubmitHandler}
-              value={this.state.pendingItem}
-              placeholder="Add an item"
-              pendingItem={this.state.pendingItem}
+              handleItemInput={this.handleIngredientInput}
+              newItemSubmitHandler={this.newIngredientSubmitHandler}
+              value={this.state.pendingIngredient}
+              placeHolder="Add an item"
+              pendingIngredient={this.state.pendingIngredient}
+            />
+          </div>
+          <div>
+          <h3>Instructions</h3>
+            <EditableList
+              list={this.state.instructions}
+              handleRemove={this.handleRemoveInstructions}
+              toggleIsEditingAt={this.toggleIsEditingInstructionAt}
+              setNameAt={this.setInstructionAt}
+            />
+            <AddItem
+              className="input"
+              type="text"
+              handleItemInput={this.handleInstructionInput}
+              newItemSubmitHandler={this.newInstructionSubmitHandler}
+              value={this.state.pendingInstruction}
+              placeHolder="Add a step"
+              pendingIngredient={this.state.pendingInstruction}
             />
           </div>
           <p></p>
-          <TextField
-            style={recipeInputStyle}
-            id="instructions"
-            label="Instructions"
-            multiline
-            rows="5"
-            value={instructions}
-            onChange={this.handleChange('instructions')}
-            placeholder="Instructions"
-          />
-          <p></p>
+          <h3>Website Link</h3>
           <TextField
             style={recipeInputStyle}
             id="sourceurl"
