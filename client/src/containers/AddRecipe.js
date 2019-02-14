@@ -309,79 +309,77 @@ class AddRecipe extends Component {
       return (
        <div>
         <HeaderBar title={title} />
-        <form className="profile-form" onSubmit={this.addRecipe}>
-          <p></p>
-          <h3>Recipe Name</h3>
-          <TextField
-            style={recipeInputStyle}
-            id="recipeTitle"
-            label="Add name"
-            value={recipeTitle}
-            onChange={this.handleChange('recipeTitle')}
-            placeholder="Add name"
+        <p></p>
+        <h3>Recipe Name</h3>
+        <TextField
+          style={recipeInputStyle}
+          id="recipeTitle"
+          label="Add name"
+          value={recipeTitle}
+          onChange={this.handleChange('recipeTitle')}
+          placeholder="Add name"
+        />
+        <p></p>
+        <div className="wrapper">
+        <h3>Ingredients</h3>
+          <EditableList
+            list={this.state.ingredients}
+            handleRemove={this.handleRemoveIngredient}
+            toggleIsEditingAt={this.toggleIsEditingIngredientAt}
+            setNameAt={this.setIngredientAt}
           />
-          <p></p>
-          <div className="wrapper">
-          <h3>Ingredients</h3>
-            <EditableList
-              list={this.state.ingredients}
-              handleRemove={this.handleRemoveIngredient}
-              toggleIsEditingAt={this.toggleIsEditingIngredientAt}
-              setNameAt={this.setIngredientAt}
-            />
-            <AddItem
-              className="input"
-              type="text"
-              handleItemInput={this.handleIngredientInput}
-              newItemSubmitHandler={this.newIngredientSubmitHandler}
-              value={this.state.pendingIngredient}
-              placeHolder="Add an item"
-              pendingItem={this.state.pendingIngredient}
-            />
-          </div>
+          <AddItem
+            className="input"
+            type="text"
+            handleItemInput={this.handleIngredientInput}
+            newItemSubmitHandler={this.newIngredientSubmitHandler}
+            value={this.state.pendingIngredient}
+            placeHolder="Add an item"
+            pendingItem={this.state.pendingIngredient}
+          />
+        </div>
+        <div>
+        <h3>Instructions</h3>
+          <EditableList
+            list={this.state.instructions}
+            handleRemove={this.handleRemoveInstructions}
+            toggleIsEditingAt={this.toggleIsEditingInstructionAt}
+            setNameAt={this.setInstructionAt}
+          />
+          <AddItem
+            className="input"
+            type="text"
+            handleItemInput={this.handleInstructionInput}
+            newItemSubmitHandler={this.newInstructionSubmitHandler}
+            value={this.state.pendingInstruction}
+            placeHolder="Add a step"
+            pendingItem={this.state.pendingInstruction}
+          />
+        </div>
+        <p></p>
+        <h3>Website Link</h3>
+        <TextField
+          style={recipeInputStyle}
+          id="sourceurl"
+          label="Website link"
+          value={sourceurl}
+          onChange={this.handleChange('sourceurl')}
+          placeholder="Website link"
+        />
+        {emptyTitleError && (
           <div>
-          <h3>Instructions</h3>
-            <EditableList
-              list={this.state.instructions}
-              handleRemove={this.handleRemoveInstructions}
-              toggleIsEditingAt={this.toggleIsEditingInstructionAt}
-              setNameAt={this.setInstructionAt}
-            />
-            <AddItem
-              className="input"
-              type="text"
-              handleItemInput={this.handleInstructionInput}
-              newItemSubmitHandler={this.newInstructionSubmitHandler}
-              value={this.state.pendingInstruction}
-              placeHolder="Add a step"
-              pendingItem={this.state.pendingInstruction}
-            />
+            <p>Recipes need names, they will get upset otherwise</p>
           </div>
-          <p></p>
-          <h3>Website Link</h3>
-          <TextField
-            style={recipeInputStyle}
-            id="sourceurl"
-            label="Website link"
-            value={sourceurl}
-            onChange={this.handleChange('sourceurl')}
-            placeholder="Website link"
-          />
-          {emptyTitleError && (
-            <div>
-              <p>Recipes need names, they will get upset otherwise</p>
-            </div>
-          )}
-          <p></p><SubmitButtons
-            buttonStyle={saveButton}
-            buttonText={'Save Recipe'}
-          />
-          <LinkButtons
-            buttonStyle={cancelButton}
-            buttonText={'Cancel'}
-            link={`/myRecipes/${this.props.match.params.username}`}
-          />
-        </form>
+        )}
+        <p></p><SubmitButtons
+          buttonStyle={saveButton}
+          buttonText={'Save Recipe'}
+        />
+        <LinkButtons
+          buttonStyle={cancelButton}
+          buttonText={'Cancel'}
+          link={`/myRecipes/${this.props.match.params.username}`}
+        />
       </div>
     );
     }
