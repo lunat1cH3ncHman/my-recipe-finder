@@ -10,7 +10,7 @@ const EditableList = props => {
           key={index}
           item={item.name}
           isEditing={item.isEditing}
-          handleRemove={() => props.removeItemAt(item.id)}
+          handleRemove={() => props.handleRemove(item.id)}
           toggleIsEditingAt={() => props.toggleIsEditingAt(item.id)}
           setName={text => props.setNameAt(text, item.id)}
         />
@@ -21,7 +21,7 @@ const EditableList = props => {
 
 EditableList.propTypes = {
   list: PropTypes.array.isRequired,
-  removeItemAt: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
   toggleIsEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired
 };
