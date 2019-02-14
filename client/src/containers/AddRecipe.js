@@ -263,6 +263,8 @@ class AddRecipe extends Component {
       error,
       addingRecipe,
       emptyTitleError,
+      pendingIngredient,
+      pendingInstruction,
     } = this.state;
 
     if (error) {
@@ -334,7 +336,7 @@ class AddRecipe extends Component {
               newItemSubmitHandler={this.newIngredientSubmitHandler}
               value={this.state.pendingIngredient}
               placeHolder="Add an item"
-              pendingIngredient={this.state.pendingIngredient}
+              pendingItem={this.state.pendingIngredient}
             />
           </div>
           <div>
@@ -352,7 +354,7 @@ class AddRecipe extends Component {
               newItemSubmitHandler={this.newInstructionSubmitHandler}
               value={this.state.pendingInstruction}
               placeHolder="Add a step"
-              pendingIngredient={this.state.pendingInstruction}
+              pendingItem={this.state.pendingInstruction}
             />
           </div>
           <p></p>
