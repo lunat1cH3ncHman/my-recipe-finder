@@ -1,26 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import orange from '@material-ui/core/colors/orange';
 
 // https://material-ui.com/getting-started/page-layout-examples/
-
-import {
-  HeaderBar,
-} from '../components';
 
 const styles = theme => ({
   layout: {
@@ -94,15 +81,6 @@ const styles = theme => ({
   },
 });
 
-
-// {posts.map(post => (
-//   <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-//     {post}
-//   </Markdown>
-// ))}
-
-const social = ['GitHub', 'Twitter', 'Facebook'];
-
 function RecipeLayout(props) {
   const { classes } = props;
 
@@ -121,16 +99,6 @@ function RecipeLayout(props) {
                       <Typography component="h1" variant="h3" color='orange'>
                         {props.recipetitle}
                       </Typography>
-                      
-                  {/*      <Hidden xsDown>
-                          <CardMedia
-                            align="right"
-                            className={classes.cardMedia}
-                            image="https://www.sciencedaily.com/images/2018/07/180712100504_1_540x360.jpg" // eslint-disable-line max-len
-                            title="Image title"
-                          />
-                        </Hidden>
-                    */}  
                     </div>
                     <div className={classes.contentSpace}>
                       <Typography variant="subtitle1" color="textSecondary">
