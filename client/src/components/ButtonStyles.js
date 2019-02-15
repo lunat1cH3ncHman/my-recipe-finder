@@ -38,6 +38,13 @@ export const homeButton = {
   margin: '1em',
 };
 
+export const actionButton = {
+  background: 'orange',
+  color: 'white',
+  padding: '1em',
+  margin: '1em',
+};
+
 export const saveButton = {
   background: 'orange',
   padding: '1em',
@@ -78,4 +85,5 @@ export default {
   inputStyle,
   saveButton,
   cancelButton,
+  actionButton,
 };
