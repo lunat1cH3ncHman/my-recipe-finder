@@ -89,7 +89,6 @@ function RecipeLayout(props) {
       <CssBaseline />
       <div className={classes.layout}>
         <main>
-          {/* Sub featured posts */}
           <Grid align="center" className={classes.cardGrid}>
             <Grid item key={props.recipetitle} >
               <Card className={classes.card} >
