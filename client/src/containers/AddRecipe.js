@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import Icon from '@material-ui/core/Icon';
-import { List, ListItem, ListItemText } from '@material-ui/core'
+import "./AddRecipe.css";
 
 import {
-  SubmitButtons,
   HeaderBar,
-  loginButton,
   LinkButtons,
   updateButton,
   cancelButton,
-  saveButton,
+  actionButton,
   recipeInputStyle,
   AddItem,
   EditableList,
@@ -22,6 +18,8 @@ import {
 const title = {
   pageTitle: 'SatsumaSpoon',
 };
+
+const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 
 class AddRecipe extends Component {
   constructor() {
@@ -34,6 +32,7 @@ class AddRecipe extends Component {
       ingredients: [],
       instructions: [],
       sourceurl: '',
+      errorMessage: '',
       pendingIngredient: '',
       addingRecipe: false,
       updated: false,
@@ -67,6 +66,7 @@ class AddRecipe extends Component {
       sourceurl: '',
       addingRecipe: false,
       updated: false,
+      errorMessage: '',
       pendingIngredient: '',
       pendingInstruction: '',
       error: false,
@@ -97,7 +97,7 @@ class AddRecipe extends Component {
   newIngredientSubmitHandler = e => {
     e.preventDefault();
     const id = this.newItemId();
-    if (this.state.pendingIngredient != ""){
+    if (this.state.pendingIngredient !== ""){
       this.setState({
         ingredients: [
           ...this.state.ingredients,
@@ -115,7 +115,7 @@ class AddRecipe extends Component {
   newInstructionSubmitHandler = e => {
     e.preventDefault();
     const id = this.newItemId();
-    if (this.state.pendingInstruction != ""){
+    if (this.state.pendingInstruction !== ""){
       this.setState({
         instructions: [
           ...this.state.instructions,
@@ -217,71 +217,65 @@ class AddRecipe extends Component {
         addingRecipe: true
       });
 
-      axios
-        .post(
-          '/addRecipe',
-          {
-            username: this.props.match.params.username,
-            recipeTitle: this.state.recipeTitle,
-            image: this.state.image,
-            ingredients: this.state.ingredients,
-            instructions: this.state.instructions,
-            sourceurl: this.state.sourceurl,
-          },
-          {
-            headers: { Authorization: `JWT ${accessString}` },
-          },
-        )
-        .then(response => {
-          console.log("response");
-          if (response.status === 200){
-            this.setState({
-              addingRecipe: false,
-              updated: true,
-              error: false,
-            });
-          }else{
-            this.setState({
-              addingRecipe: false,
-              error: true,
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error.data);
+      axios.post('/addRecipe',
+      {
+        username: this.props.match.params.username,
+        recipeTitle: this.state.recipeTitle,
+        image: this.state.image,
+        ingredients: this.state.ingredients,
+        instructions: this.state.instructions,
+        sourceurl: this.state.sourceurl,},
+      {
+        headers: { Authorization: `JWT ${accessString}` },
+      })
+      .then(response => {
+        if (response.status === 200) {
+          this.setState({
+            addingRecipe: false,
+            updated: true,
+            error: false,
+          });
+        } else {
+          this.setState({
+            errorMessage: response.data.message,
+            addingRecipe: false,
+            error: true,
+          });
+        }
+      })
+      .catch(error => {
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        }
+        this.setState({
+          addingRecipe: false,
+          error: true,
         });
-      }
+      });
+    }
   };
 
   render() {
     const {
       recipeTitle,
-      ingredients,
-      instructions,
       sourceurl,
       updated,
       error,
+      errorMessage,
       addingRecipe,
       emptyTitleError,
       pendingIngredient,
       pendingInstruction,
     } = this.state;
 
-    if (error) {
-      return (
-        <div>
-          <HeaderBar title={title} />
-          <p>
-            Sorry there was a problem. Please login again.
-          </p>
-          <LinkButtons
-            style={loginButton}
-            buttonText={'Go Login'}
-            link="/login"
-          />
-        </div>
-      );
-    } else if (addingRecipe) {
+    if (addingRecipe) {
       return (
         <div>
           <HeaderBar title={title} />
@@ -296,7 +290,6 @@ class AddRecipe extends Component {
           <Button
             style={updateButton}
             variant="contained"
-            color="primary"
             onClick={() => { this.reset(); }}
           >Add another</Button>
           <LinkButtons
@@ -307,21 +300,17 @@ class AddRecipe extends Component {
       );
     } else {
       return (
-       <div>
+       <div className="background">
         <HeaderBar title={title} />
-        <p></p>
-        <h3>Recipe Name</h3>
-        <TextField
-          style={recipeInputStyle}
-          id="recipeTitle"
-          label="Add name"
-          value={recipeTitle}
-          onChange={this.handleChange('recipeTitle')}
-          placeholder="Add name"
-        />
-        <p></p>
         <div className="wrapper">
-        <h3>Ingredients</h3>
+          <h3 className="title">Recipe Name</h3>
+          <TextField
+            id="recipeTitle"
+            value={recipeTitle}
+            onChange={this.handleChange('recipeTitle')}
+            placeholder="Title"
+          />
+          <h3 className="title">Ingredients</h3>
           <EditableList
             list={this.state.ingredients}
             handleRemove={this.handleRemoveIngredient}
@@ -334,12 +323,10 @@ class AddRecipe extends Component {
             handleItemInput={this.handleIngredientInput}
             newItemSubmitHandler={this.newIngredientSubmitHandler}
             value={this.state.pendingIngredient}
-            placeHolder="Add an item"
+            placeHolder="Add an ingredient"
             pendingItem={this.state.pendingIngredient}
           />
-        </div>
-        <div>
-        <h3>Instructions</h3>
+          <h3 className="title">Instructions</h3>
           <EditableList
             list={this.state.instructions}
             handleRemove={this.handleRemoveInstructions}
@@ -355,31 +342,35 @@ class AddRecipe extends Component {
             placeHolder="Add a step"
             pendingItem={this.state.pendingInstruction}
           />
+          <h3 className="title">Website Link</h3>
+          <TextField
+            style={recipeInputStyle}
+            id="sourceurl"
+            label="Website link"
+            value={sourceurl}
+            onChange={this.handleChange('sourceurl')}
+            placeholder="Website link"
+          />
+          {emptyTitleError && (
+            <div>
+              <p colour="#FF0000">Recipes need names, they will get upset otherwise</p>
+            </div>
+          )}
+          {error === true && (
+            <p>{errorMessage}</p>
+          )}
+          <Button
+            style={actionButton}
+            size="medium"
+            onClick={this.addRecipe}>
+            Save Recipe
+          </Button>
+          <LinkButtons
+            buttonStyle={cancelButton}
+            buttonText={'Cancel'}
+            link={`/myRecipes/${this.props.match.params.username}`}
+          />
         </div>
-        <p></p>
-        <h3>Website Link</h3>
-        <TextField
-          style={recipeInputStyle}
-          id="sourceurl"
-          label="Website link"
-          value={sourceurl}
-          onChange={this.handleChange('sourceurl')}
-          placeholder="Website link"
-        />
-        {emptyTitleError && (
-          <div>
-            <p>Recipes need names, they will get upset otherwise</p>
-          </div>
-        )}
-        <p></p><SubmitButtons
-          buttonStyle={saveButton}
-          buttonText={'Save Recipe'}
-        />
-        <LinkButtons
-          buttonStyle={cancelButton}
-          buttonText={'Cancel'}
-          link={`/myRecipes/${this.props.match.params.username}`}
-        />
       </div>
     );
     }
