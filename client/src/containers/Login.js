@@ -55,41 +55,40 @@ class Login extends Component {
         loggedIn: false,
       });
 
-      axios
-        .post('/loginUser', {
-          username: this.state.username,
-          password: this.state.password,
-        })
-        .then(response => {
-          if (response.status === 200) {
-            localStorage.setItem('JWT', response.data.token);
-              this.setState({
-                loggedIn: true,
-                showError: false,
-                showNullError: false,
-              });
-          } else {
+      axios.post('/loginUser', {
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then(response => {
+        if (response.status === 200) {
+          localStorage.setItem('JWT', response.data.token);
             this.setState({
-              errorMessage: response.data.message,
-              showError: true,
+              loggedIn: true,
+              showError: false,
+              showNullError: false,
             });
-          }
-        })
-        .catch(error => {
-          if (typeof(error.response) == 'undefined' ||
-              typeof(error.response.data) == 'undefined') {
-            this.setState({
-              errorMessage: genericErrorMessage
-            });
-          } else {
-            this.setState({
-              errorMessage: error.response.data,
-            });
-          }
+        } else {
           this.setState({
+            errorMessage: response.data.message,
             showError: true,
           });
+        }
+      })
+      .catch(error => {
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        }
+        this.setState({
+          showError: true,
         });
+      });
     }
   };
 
