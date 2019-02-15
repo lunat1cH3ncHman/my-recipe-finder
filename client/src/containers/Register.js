@@ -55,46 +55,45 @@ class Register extends Component {
         registerError: true,
       });
     } else {
-      axios
-        .post('/registerUser', {
-          email: this.state.email,
-          username: this.state.username,
-          password: this.state.password,
-        })
-        .then(response => {
-          if (response.status === 200) {
-            this.setState({
-              registered: true,
-              showError: false,
-              loginError: false,
-              registerError: false,
-            });
-          } else {
-            this.setState({
-              errorMessage: response.data.message,
-              showError: true,
-              loginError: true,
-              registerError: false,
-            });
-          }
-        })
-        .catch(error => {
-          if (typeof(error.response) == 'undefined' ||
-              typeof(error.response.data) == 'undefined') {
-            this.setState({
-              errorMessage: genericErrorMessage
-            });
-          } else {
-            this.setState({
-              errorMessage: error.response.data,
-            });
-          }
+      axios.post('/registerUser', {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then(response => {
+        if (response.status === 200) {
           this.setState({
+            registered: true,
+            showError: false,
+            loginError: false,
+            registerError: false,
+          });
+        } else {
+          this.setState({
+            errorMessage: response.data.message,
             showError: true,
             loginError: true,
             registerError: false,
           });
+        }
+      })
+      .catch(error => {
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        }
+        this.setState({
+          showError: true,
+          loginError: true,
+          registerError: false,
         });
+      });
     }
   };
 
