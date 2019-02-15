@@ -271,8 +271,6 @@ class AddRecipe extends Component {
       errorMessage,
       addingRecipe,
       emptyTitleError,
-      pendingIngredient,
-      pendingInstruction,
     } = this.state;
 
     if (addingRecipe) {

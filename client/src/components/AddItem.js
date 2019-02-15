@@ -1,19 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { loginButton } from './ButtonStyles';
+
 const AddItem = props => {
   return (
     <form className="ingredientInput" onSubmit={props.newItemSubmitHandler}>
-      <input
-        className="input"
-        type="text"
-        onChange={props.handleItemInput}
-        value={props.pendingItem}
-        placeholder={props.placeHolder}
-      />
-      <button type="submit" name="submit" value="submit">
-        add
-      </button>
+      <div>
+        <input
+          className="input"
+          type="text"
+          onChange={props.handleItemInput}
+          value={props.pendingItem}
+          placeholder={props.placeHolder}
+        />
+        <button style={loginButton} type="submit" name="submit" value="submit">
+          Add
+        </button>
+      </div>
     </form>
   );
 };
