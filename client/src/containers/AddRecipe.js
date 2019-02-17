@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import "./AddRecipe.css";
 
 import {
@@ -20,6 +21,8 @@ const title = {
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
+const accessMessage = 'Sorry, something went wrong please try logging in again';
+const emptyRecipName = 'Recipes need names, they get upset otherwise';
 
 class AddRecipe extends Component {
   constructor() {
@@ -36,8 +39,6 @@ class AddRecipe extends Component {
       pendingIngredient: '',
       addingRecipe: false,
       updated: false,
-      error: false,
-      emptyTitleError: false,
     };
   }
 
@@ -69,8 +70,6 @@ class AddRecipe extends Component {
       errorMessage: '',
       pendingIngredient: '',
       pendingInstruction: '',
-      error: false,
-      emptyTitleError: false,
     });
   }
 
@@ -202,15 +201,18 @@ class AddRecipe extends Component {
     e.preventDefault();
     let accessString = localStorage.getItem('JWT');
 
+    this.setState({
+      errorMessage: '',
+    });
+
     if (accessString === null) {
       this.setState({
-        addingRecipe: false,
-        error: true,
+        errorMessage: emptyRecipName,
       });
     } else if(this.state.recipeTitle === '') {
       console.log('empty recipeTitle');
       this.setState({
-        emptyTitleError: true
+        errorMessage: emptyRecipName,
       });
     } else {
       this.setState({
@@ -233,13 +235,11 @@ class AddRecipe extends Component {
           this.setState({
             addingRecipe: false,
             updated: true,
-            error: false,
           });
         } else {
           this.setState({
             errorMessage: response.data.message,
             addingRecipe: false,
-            error: true,
           });
         }
       })
@@ -256,7 +256,6 @@ class AddRecipe extends Component {
         }
         this.setState({
           addingRecipe: false,
-          error: true,
         });
       });
     }
@@ -267,33 +266,26 @@ class AddRecipe extends Component {
       recipeTitle,
       sourceurl,
       updated,
-      error,
       errorMessage,
       addingRecipe,
-      emptyTitleError,
     } = this.state;
 
-    if (addingRecipe) {
+    if (updated) {
       return (
-        <div>
+        <div className="background">
           <HeaderBar title={title} />
-          <p>Adding your recipe...</p>
-        </div>
-      );
-    } else if (updated) {
-      return (
-        <div>
-          <HeaderBar title={title} />
-          <p>Hoorah! Your recipe has been added, do you want to add another one?</p>
-          <Button
-            style={updateButton}
-            variant="contained"
-            onClick={() => { this.reset(); }}
-          >Add another</Button>
-          <LinkButtons
-            buttonStyle={updateButton}
-            buttonText={'Back Recipes'}
-            link={`/myRecipes/${this.props.match.params.username}`}/>
+          <div classname="wrapper">
+            <p><h2>Hoorah! {this.state.recipeTitle} has been added to your recipes!</h2></p>
+             <p>What would you like to do now?</p>
+            <LinkButtons
+              buttonStyle={updateButton}
+              onClick={() => { this.reset(); }}
+              buttonText={'Add another'} />
+            <LinkButtons
+              buttonStyle={updateButton}
+              buttonText={'Back Recipes'}
+              link={`/myRecipes/${this.props.match.params.username}`}/>
+          </div>
         </div>
       );
     } else {
@@ -349,14 +341,12 @@ class AddRecipe extends Component {
             onChange={this.handleChange('sourceurl')}
             placeholder="Website link"
           />
-          {emptyTitleError && (
-            <div>
-              <p colour="#FF0000">Recipes need names, they will get upset otherwise</p>
-            </div>
-          )}
-          {error === true && (
+          <div>
+            {addingRecipe === true && (
+              <p><CircularProgress color="secondary"/></p>
+            )}
             <p>{errorMessage}</p>
-          )}
+          </div>
           <Button
             style={actionButton}
             size="medium"

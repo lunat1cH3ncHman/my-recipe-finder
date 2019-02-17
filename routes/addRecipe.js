@@ -5,11 +5,10 @@ module.exports = app => {
   app.post("/addRecipe", (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
       if(err) {
-        console.log(`finduser ${err}`);
+        res.status(400).send(err);
       }
       if (info != undefined){
-        console.log(info.message);
-        res.send(info.message);
+        res.status(400).send(info.message);
       } else {
         let recipe = new Recipe();
 
@@ -21,13 +20,6 @@ module.exports = app => {
           instructions,
           sourceurl } = req.body;
 
-        if (!recipeTitle) {
-          return res.json({
-            success: false,
-            message: 'Title not populated',
-          }).status(400).send();
-        }
-
         recipe.username = username;
         recipe.title = recipeTitle;
         recipe.image = image;
@@ -36,9 +28,10 @@ module.exports = app => {
         recipe.sourceurl = sourceurl;
         recipe.save(err => {
           if (err) {
-            return res.status(400).send({message: 'Error saving recipe'});
+            return res.status(400).send('Sorry something went wrong please try again');
           } else {
-            return res.status(200).send({message: 'Recipe added'});
+            console.log('User created');
+            return res.status(200).send('Recipe added');
           }
         });
       }
