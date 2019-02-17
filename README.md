@@ -1,8 +1,12 @@
 # my-recipe-finder
 
-MERN stack - Mongo, Express, React, Node
+MERN stack - Mongo (Mongoose), Express, React, Node
 
-Passport and JWT for auth
+Passport, Bcrypt and JWT for auth
+
+Material UI
+
+Responsive'ish
 
 Create a local .env file with:
 
