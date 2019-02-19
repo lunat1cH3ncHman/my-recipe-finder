@@ -111,7 +111,7 @@ class MyRecipes extends Component {
       return <Redirect to="/" />;
     } else {
       return (
-        <div>
+        <div className="background">
           <HeaderBar title={title} />
           <p></p>
           <LinkButtons
@@ -119,8 +119,8 @@ class MyRecipes extends Component {
             buttonText={'Add a Recipe'}
             link={`/addRecipe/${this.props.match.params.username}`}
           />
-          <div>
-            <List>
+          <div className="wrapper">
+            <List >
               { recipes.map(({ _id, title}) =>
                 <ListItem key={_id}>
                     <ListItemText
