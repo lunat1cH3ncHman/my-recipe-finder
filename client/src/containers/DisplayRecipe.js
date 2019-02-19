@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RecipeLayout from './RecipeLayout.js'
 
 import {
   HeaderBar,
   loadingStyle,
+  RecipeLayout,
 } from '../components';
 
 const title = {
