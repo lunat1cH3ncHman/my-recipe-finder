@@ -175,8 +175,8 @@ class Register extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <h3>Welcome to SatsumaSpoon!</h3>
-          <p>The place to keep all your most loved recipes safe</p>
+          <h3>Welcome to SatsumaSpoon {this.registerUser}!</h3>
+          <p>Start adding your favourite recipes today</p>
           <p></p>
           <LinkButtons
             buttonText={`Go Login`}
