@@ -26,13 +26,14 @@
 }
 
 .todoInput {
-  justify-content: start;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 35px;
 }
 
 input {
+  width: 75%;
   font-size: 1rem;
   padding: 15px 0 15px 15px;
   border-radius: 4px;
