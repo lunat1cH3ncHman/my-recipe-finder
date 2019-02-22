@@ -221,11 +221,14 @@ class AddRecipe extends Component {
 
       axios.post('/addRecipe',
       {
+//         var ingredients = items.map(function(item) {
+//   return item['name'];
+// });
         username: this.props.match.params.username,
         recipeTitle: this.state.recipeTitle,
         image: this.state.image,
-        ingredients: this.state.ingredients,
-        instructions: this.state.instructions,
+        ingredients: this.state.ingredients.map((item) => {return item['name']}),
+        instructions: this.state.instructions.map((item) => {return item['name']}),
         sourceurl: this.state.sourceurl,},
       {
         headers: { Authorization: `JWT ${accessString}` },
