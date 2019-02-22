@@ -23,6 +23,7 @@ module.exports = app => {
         recipe.username = username;
         recipe.title = recipeTitle;
         recipe.image = image;
+        recipe.version = 1;
         recipe.ingredients = ingredients;
         recipe.instructions = instructions;
         recipe.sourceurl = sourceurl;
