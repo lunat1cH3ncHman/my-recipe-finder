@@ -66,6 +66,16 @@ const styles = theme => ({
   },
   contentSpace: {
     padding: theme.spacing.unit * 3,
+    container: true,
+    display: 'inline-flex',
+    wrap: 'wrap',
+    alignContent: 'space-between',
+  },
+  ingredients: {
+    padding: theme.spacing.unit * 2,
+  },
+  instructions: {
+    padding: theme.spacing.unit * 2,
   },
   sidebarAboutBox: {
     padding: theme.spacing.unit * 2,
@@ -99,25 +109,29 @@ function RecipeLayout(props) {
                         {props.recipetitle}
                       </Typography>
                     </div>
-                    <div className={classes.contentSpace}>
                       <Typography variant="subtitle1" color="textSecondary">
                         {props.date}
                       </Typography>
+                    <div className={classes.contentSpace}>
+                      <div className={classes.ingredients}>
+                        <Typography component="h2" variant="h5" align="left" paragraph >
+                          Ingredients
+                        </Typography>
+                        <Typography variant="subtitle1" align="left" paragraph >
+                          {props.ingredients.map(text => <p>{text}</p>)}
+                        </Typography>
+                      </div>
+                      <div className={classes.instructions}>
+                        <Typography component="h2" variant="h5" align="left" paragraph >
+                          Instructions
+                        </Typography>
+                        <Typography variant="subtitle1" align="left" paragraph>
+                          {props.instructions.map(text => <p>{text}</p>)}
+                        </Typography>
+                      </div>
                     </div>
-                    <Typography component="h2" variant="h5" align="left" paragraph >
-                      Ingredients
-                    </Typography>
-                    <Typography variant="subtitle1" align="left" paragraph >
-                      {props.ingredients}
-                    </Typography>
-                    <Typography component="h2" variant="h5" align="left" paragraph >
-                      Instructions
-                    </Typography>
-                    <Typography variant="subtitle1" align="left" paragraph>
-                      {props.instructions}
-                    </Typography>
                     <Typography variant="subtitle1" color="primary">
-                      Continue reading...
+                      Edit
                     </Typography>
                   </CardContent>
                 </div>
