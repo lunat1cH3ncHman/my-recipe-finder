@@ -8,6 +8,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 // https://material-ui.com/getting-started/page-layout-examples/
+// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+// https://material-ui.com/api/grid/
 
 const styles = theme => ({
   layout: {

@@ -101,6 +101,8 @@ class Login extends Component {
       loggedIn,
       showNullError,
     } = this.state;
+
+    var testShowError = true;
     if (!loggedIn) {
       return (
         <div>
@@ -139,14 +141,14 @@ class Login extends Component {
               buttonStyle={loginButton}
               buttonText={'Login'} />
           </form>
-          {showError && (
+          {testShowError && (
             <div>
               <p><LinkButtons
                 buttonStyle={secondOptionButton}
                 buttonText={'Register'}
                 link={'/register'}/>
               <LinkButtons
-                buttonStyle={forgotButton}
+                buttonStyle={secondOptionButton}
                 buttonText={'Forgot Password?'}
                 link={'/forgotPassword'}/></p>
             </div>

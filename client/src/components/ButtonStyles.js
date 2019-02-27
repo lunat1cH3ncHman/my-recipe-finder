@@ -64,7 +64,10 @@ export const forgotButton = {
 };
 
 export const secondOptionButton = {
-  background: 'primary',
+  background: 'lightgrey',
+  // variant: 'outlined',
+  size: 'small',
+  // color: 'orange',
   padding: '1em',
   margin: '1em',
 };
