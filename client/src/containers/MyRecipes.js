@@ -126,7 +126,7 @@ class MyRecipes extends Component {
             link={`/addRecipe/${this.props.match.params.username}`}
           />
           <div className="wrapper">
-            <div>
+            <div className="listTitle">
               <Typography variant="h5" align="center" component="p">
                 My Recipes
               </Typography>

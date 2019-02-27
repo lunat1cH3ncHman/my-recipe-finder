@@ -140,7 +140,7 @@ class Login extends Component {
               buttonStyle={loginButton}
               buttonText={'Login'} />
           </form>
-          {testShowError && (
+          {showError && (
             <div>
               <p><LinkButtons
                 buttonStyle={secondOptionButton}
