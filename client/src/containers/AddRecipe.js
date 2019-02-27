@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import "./AddRecipe.css";
+import "./MyRecipe.css";
 
 import {
   HeaderBar,
