@@ -116,7 +116,7 @@ function RecipeLayout(props) {
                       </Typography>
                     <div className={classes.contentSpace}>
                       <div className={classes.ingredients}>
-                        <Typography component="h2" variant="h5" align="left" paragraph >
+                        <Typography component="h2" variant="h4" align="left" paragraph >
                           Ingredients
                         </Typography>
                         <Typography variant="subtitle1" align="left" paragraph >
@@ -124,7 +124,7 @@ function RecipeLayout(props) {
                         </Typography>
                       </div>
                       <div className={classes.instructions}>
-                        <Typography component="h2" variant="h5" align="left" paragraph >
+                        <Typography component="h2" variant="h4" align="left" paragraph >
                           Instructions
                         </Typography>
                         <Typography variant="subtitle1" align="left" paragraph>

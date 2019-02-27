@@ -7,7 +7,6 @@ import {
   LinkButtons,
   SubmitButtons,
   loginButton,
-  forgotButton,
   secondOptionButton,
   inputStyle,
   HeaderBar,

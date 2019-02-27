@@ -21,8 +21,7 @@ const title = {
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
-const accessMessage = 'Sorry, something went wrong please try logging in again';
-const emptyRecipName = 'Recipes need names, they get upset otherwise';
+const emptyRecipeName = 'Recipes need names, they get upset otherwise';
 
 class AddRecipe extends Component {
   constructor() {
@@ -207,12 +206,12 @@ class AddRecipe extends Component {
 
     if (accessString === null) {
       this.setState({
-        errorMessage: emptyRecipName,
+        errorMessage: emptyRecipeName,
       });
     } else if(this.state.recipeTitle === '') {
       console.log('empty recipeTitle');
       this.setState({
-        errorMessage: emptyRecipName,
+        errorMessage: emptyRecipeName,
       });
     } else {
       this.setState({
