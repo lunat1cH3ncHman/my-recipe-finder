@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core'
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 import {
   LinkButtons,
@@ -12,9 +14,13 @@ import {
 } from '../components';
 
 const list = {
-  marginLeft: '20%',
-  marginRight: '20%',
-  fontSize: '18px',
+  marginLeft: '0%',
+  marginRight: '0%',
+  fontSize: '40px',
+};
+
+const listTitle = {
+  marginBottom: '40%',
 };
 
 const title = {
@@ -120,7 +126,13 @@ class MyRecipes extends Component {
             link={`/addRecipe/${this.props.match.params.username}`}
           />
           <div className="wrapper">
-            <List >
+            <div>
+              <Typography variant="h5" align="center" component="p">
+                My Recipes
+              </Typography>
+            </div>
+            <Divider padding="40px"/>
+            <List className="list">
               { recipes.map(({ _id, title}) =>
                 <ListItem key={_id}>
                     <ListItemText

@@ -277,7 +277,7 @@ class AddRecipe extends Component {
       return (
         <div className="background">
           <HeaderBar title={title} />
-          <div classname="wrapper">
+          <div classname="addRecipeWrapper">
             <p><h2>Hoorah! {this.state.recipeTitle} has been added to your recipes!</h2></p>
              <p>What would you like to do now?</p>
             <LinkButtons
@@ -295,7 +295,7 @@ class AddRecipe extends Component {
       return (
        <div className="background">
         <HeaderBar title={title} />
-        <div className="wrapper">
+        <div className="addRecipeWrapper">
           <h3 className="title">Recipe Name</h3>
           <TextField
             id="recipeTitle"

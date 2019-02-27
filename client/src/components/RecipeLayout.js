@@ -144,7 +144,7 @@ function RecipeLayout(props) {
       </div>
       {/* Footer */}
       <footer className={classes.footer} >
-        <Typography colour="orange" variant="h6" gutterBottom>
+        <Typography color="orange" variant="h6" gutterBottom>
           Love SatsumaSpoon? Please help us keep the service Advert Free
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
