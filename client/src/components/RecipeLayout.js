@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Divider from '@material-ui/core/Divider';
 
 // https://material-ui.com/getting-started/page-layout-examples/
 // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
@@ -47,7 +48,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
   card: {
-    maxWidth: 1000,
+    maxWidth: 800,
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     marginTop: theme.spacing.unit * 3,
@@ -72,6 +73,11 @@ const styles = theme => ({
     display: 'inline-flex',
     wrap: 'wrap',
     alignContent: 'space-between',
+  },
+  cardTitleDivider: {
+    marginTop: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 10,
+    marginLeft: theme.spacing.unit * 10,
   },
   ingredients: {
     padding: theme.spacing.unit * 2,
@@ -107,16 +113,17 @@ function RecipeLayout(props) {
                 <div className={classes.cardDetails} >
                   <CardContent>
                     <div>
-                      <Typography component="h1" variant="h3" color='orange'>
+                      <Typography variant="h4">
                         {props.recipetitle}
                       </Typography>
+                      <Divider className={classes.cardTitleDivider} variant="middle"/>
                     </div>
                       <Typography variant="subtitle1" color="textSecondary">
                         {props.date}
                       </Typography>
                     <div className={classes.contentSpace}>
                       <div className={classes.ingredients}>
-                        <Typography component="h2" variant="h4" align="left" paragraph >
+                        <Typography variant="h5" align="left">
                           Ingredients
                         </Typography>
                         <Typography variant="subtitle1" align="left" paragraph >
@@ -124,7 +131,7 @@ function RecipeLayout(props) {
                         </Typography>
                       </div>
                       <div className={classes.instructions}>
-                        <Typography component="h2" variant="h4" align="left" paragraph >
+                        <Typography variant="h5" align="left">
                           Instructions
                         </Typography>
                         <Typography variant="subtitle1" align="left" paragraph>

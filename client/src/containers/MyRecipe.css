@@ -21,6 +21,10 @@
   margin-bottom: 200px;
 }
 
+.listTitle {
+  margin-bottom: 20px;  
+}
+
 .addRecipeWrapper {
   display: flex;
   border-radius: 10px;

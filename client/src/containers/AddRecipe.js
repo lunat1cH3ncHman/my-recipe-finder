@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 import "./MyRecipe.css";
 
 import {
@@ -11,6 +12,7 @@ import {
   updateButton,
   cancelButton,
   actionButton,
+  secondOptionButton,
   recipeInputStyle,
   AddItem,
   EditableList,
@@ -296,14 +298,19 @@ class AddRecipe extends Component {
        <div className="background">
         <HeaderBar title={title} />
         <div className="addRecipeWrapper">
-          <h3 className="title">Recipe Name</h3>
+          <Typography variant="h5" align="left">
+            Recipe Name
+          </Typography>
           <TextField
             id="recipeTitle"
             value={recipeTitle}
             onChange={this.handleChange('recipeTitle')}
             placeholder="Title"
+            marginBottom="200px"
           />
-          <h3 className="title">Ingredients</h3>
+          <Typography variant="h5" align="left">
+            Ingredients
+          </Typography>
           <EditableList
             list={this.state.ingredients}
             handleRemove={this.handleRemoveIngredient}
@@ -319,7 +326,9 @@ class AddRecipe extends Component {
             placeHolder="Add an ingredient"
             pendingItem={this.state.pendingIngredient}
           />
-          <h3 className="title">Instructions</h3>
+          <Typography variant="h5" align="left">
+            Instructions
+          </Typography>
           <EditableList
             list={this.state.instructions}
             handleRemove={this.handleRemoveInstructions}
@@ -335,7 +344,9 @@ class AddRecipe extends Component {
             placeHolder="Add a step"
             pendingItem={this.state.pendingInstruction}
           />
-          <h3 className="title">Website Link</h3>
+          <Typography variant="h5" align="left">
+            Website Link
+          </Typography>
           <TextField
             style={recipeInputStyle}
             id="sourceurl"
@@ -350,17 +361,19 @@ class AddRecipe extends Component {
             )}
             <p>{errorMessage}</p>
           </div>
-          <Button
-            style={actionButton}
-            size="medium"
-            onClick={this.addRecipe}>
-            Save Recipe
-          </Button>
-          <LinkButtons
-            buttonStyle={cancelButton}
-            buttonText={'Cancel'}
-            link={`/myRecipes/${this.props.match.params.username}`}
-          />
+          <div>
+            <Button
+              style={actionButton}
+              size="medium"
+              onClick={this.addRecipe}>
+              Save Recipe
+            </Button>
+            <LinkButtons
+              buttonStyle={secondOptionButton}
+              buttonText={'Cancel'}
+              link={`/myRecipes/${this.props.match.params.username}`}
+            />
+          </div>
         </div>
       </div>
     );
