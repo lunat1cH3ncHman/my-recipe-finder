@@ -101,6 +101,12 @@ const styles = theme => ({
 
 function RecipeLayout(props) {
   const { classes } = props;
+  var linkBase = "http://";
+  var webLink = props.sourceurl;
+
+  if (!webLink.includes(linkBase)){
+    webLink = linkBase.concat(webLink);
+  }
 
   return (
     <React.Fragment>
@@ -112,6 +118,7 @@ function RecipeLayout(props) {
               <Card className={classes.card} >
                 <div className={classes.cardDetails} >
                   <CardContent>
+                    {/* Title */}
                     <div>
                       <Typography variant="h4">
                         {props.recipetitle}
@@ -122,6 +129,7 @@ function RecipeLayout(props) {
                         {props.date}
                       </Typography>
                     <div className={classes.contentSpace}>
+                      {/* Ingredients */}
                       <div className={classes.ingredients}>
                         <Typography variant="h5" align="left">
                           Ingredients
@@ -130,6 +138,7 @@ function RecipeLayout(props) {
                           {props.ingredients.map(text => <p>{text}</p>)}
                         </Typography>
                       </div>
+                      {/* Instructions */}
                       <div className={classes.instructions}>
                         <Typography variant="h5" align="left">
                           Instructions
@@ -139,8 +148,9 @@ function RecipeLayout(props) {
                         </Typography>
                       </div>
                     </div>
+                    {/* Website link */}
                     <Typography variant="subtitle1" color="primary">
-                      Edit
+                      <a href={webLink}>{props.sourceurl}</a>
                     </Typography>
                   </CardContent>
                 </div>
