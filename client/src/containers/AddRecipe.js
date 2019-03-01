@@ -279,7 +279,7 @@ class AddRecipe extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div className="addRecipeCongratsWrapper">
+          <div className="congratsWrapper">
             <Typography variant="h5" align="center">
               Hooray!
             </Typography>
