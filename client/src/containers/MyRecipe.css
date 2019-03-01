@@ -9,7 +9,7 @@
 .wrapper {
   display: flex;
   border-radius: 10px;
-  max-width: 40%;
+  max-width: 500px;
   margin: auto;
   background: #fff;
   margin-top: 2px;
@@ -21,19 +21,24 @@
   margin-bottom: 200px;
 }
 
-.listTitle {
-  margin-bottom: 20px;  
+.recipeTitle{
+  align-self: flex-start;
+  margin-bottom: 40px;
 }
 
 .addRecipeWrapper {
   display: flex;
   border-radius: 10px;
-  max-width: 80%;
+  max-width: 500px;
   margin: auto;
   background: #fff;
   margin-top: 20px;
   flex-direction: column;
   padding: 40px;
+}
+
+.congratsWrapper {
+  margin-top: 40px;
 }
 
 .title {
@@ -78,7 +83,7 @@ ul {
 li {
   font-weight: 300;
   padding: 20px 0 20px 0;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
   display: flex;
   justify-content: space-between;
 }
