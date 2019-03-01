@@ -277,17 +277,24 @@ class AddRecipe extends Component {
 
     if (updated) {
       return (
-        <div className="background">
+        <div>
           <HeaderBar title={title} />
-          <div classname="addRecipeWrapper">
-            <p><h2>Hoorah! {this.state.recipeTitle} has been added to your recipes!</h2></p>
-             <p>What would you like to do now?</p>
+          <div className="addRecipeCongratsWrapper">
+            <Typography variant="h5" align="center">
+              Hooray!
+            </Typography>
+            <p>
+              <Typography variant="h5" align="center">
+                {this.state.recipeTitle} has been added to your recipes
+              </Typography>
+            </p>
+            <p>What would you like to do now?</p>
             <LinkButtons
               buttonStyle={updateButton}
               onClick={() => { this.reset(); }}
               buttonText={'Add another'} />
             <LinkButtons
-              buttonStyle={updateButton}
+              buttonStyle={secondOptionButton}
               buttonText={'Back Recipes'}
               link={`/myRecipes/${this.props.match.params.username}`}/>
           </div>
@@ -298,16 +305,17 @@ class AddRecipe extends Component {
        <div className="background">
         <HeaderBar title={title} />
         <div className="addRecipeWrapper">
-          <Typography variant="h5" align="left">
-            Recipe Name
-          </Typography>
-          <TextField
-            id="recipeTitle"
-            value={recipeTitle}
-            onChange={this.handleChange('recipeTitle')}
-            placeholder="Title"
-            marginBottom="200px"
-          />
+          <div className="recipeTitle">
+            <Typography variant="h5" align="left">
+              Recipe Name
+            </Typography>
+            <TextField
+              id="recipeTitle"
+              value={recipeTitle}
+              onChange={this.handleChange('recipeTitle')}
+              placeholder="Title"
+            />
+          </div>
           <Typography variant="h5" align="left">
             Ingredients
           </Typography>
