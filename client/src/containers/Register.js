@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 import {
   LinkButtons,
@@ -175,14 +176,18 @@ class Register extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <h3>Welcome to SatsumaSpoon {this.registerUser}!</h3>
-          <p>Start adding your favourite recipes today</p>
-          <p></p>
-          <LinkButtons
-            buttonText={`Go Login`}
-            buttonStyle={loginButton}
-            link={`/login`}
-          />
+            <div className="congratsWrapper">
+            <Typography variant="h5" align="center">
+              Welcome to SatsumaSpoon {username}!
+            </Typography>
+            <p>Login to start adding your favourite recipes today</p>
+            <p></p>
+            <LinkButtons
+              buttonText={`Go Login`}
+              buttonStyle={loginButton}
+              link={`/login`}
+            />
+          </div>
         </div>
       );
     }
