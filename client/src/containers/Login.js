@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   LinkButtons,
@@ -29,6 +30,7 @@ class Login extends Component {
       loggedIn: false,
       showError: false,
       showNullError: false,
+      loggingIn: false,
     };
   }
 
@@ -52,6 +54,7 @@ class Login extends Component {
         showError: false,
         showNullError: false,
         loggedIn: false,
+        loggingIn: true,
       });
 
       axios.post('/loginUser', {
@@ -65,11 +68,13 @@ class Login extends Component {
               loggedIn: true,
               showError: false,
               showNullError: false,
+              loggingIn: false,
             });
         } else {
           this.setState({
             errorMessage: response.data.message,
             showError: true,
+            loggingIn: false,
           });
         }
       })
@@ -77,15 +82,18 @@ class Login extends Component {
         if (typeof(error.response) == 'undefined' ||
             typeof(error.response.data) == 'undefined') {
           this.setState({
-            errorMessage: genericErrorMessage
+            errorMessage: genericErrorMessage,
+            loggingIn: false,
           });
         } else {
           this.setState({
             errorMessage: error.response.data,
+            loggingIn: false,
           });
         }
         this.setState({
           showError: true,
+          loggingIn: false,
         });
       });
     }
@@ -99,6 +107,7 @@ class Login extends Component {
       errorMessage,
       loggedIn,
       showNullError,
+      loggingIn,
     } = this.state;
 
     var testShowError = true;
@@ -136,9 +145,14 @@ class Login extends Component {
                 <p>{errorMessage}</p>
               </div>
             )}
-            <p></p><SubmitButtons
-              buttonStyle={loginButton}
-              buttonText={'Login'} />
+            {loggingIn === true && (
+              <p><CircularProgress color="secondary"/></p>
+            )}
+            {loggingIn !== true && (
+              <p><SubmitButtons
+                buttonStyle={loginButton}
+                buttonText={'Login'} /></p>
+            )}
           </form>
           {showError && (
             <div>
