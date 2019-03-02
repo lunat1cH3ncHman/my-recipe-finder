@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   LinkButtons,
@@ -110,7 +111,10 @@ class MyRecipes extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loadingStyle}>Loading Recipes...</div>
+          <div style={loadingStyle}>
+            Loading Recipes...
+            <p><CircularProgress color="secondary"/></p>
+          </div>
         </div>
       );
     } else if (deleted) {
@@ -131,7 +135,6 @@ class MyRecipes extends Component {
                 My Recipes
               </Typography>
             </div>
-            <Divider padding="40px"/>
             <List className="list">
               { recipes.map(({ _id, title}) =>
                 <ListItem key={_id}>
