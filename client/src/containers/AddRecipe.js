@@ -295,7 +295,7 @@ class AddRecipe extends Component {
               buttonText={'Add another'} />
             <LinkButtons
               buttonStyle={secondOptionButton}
-              buttonText={'Back Recipes'}
+              buttonText={'Recipes'}
               link={`/myRecipes/${this.props.match.params.username}`}/>
           </div>
         </div>
@@ -367,20 +367,21 @@ class AddRecipe extends Component {
             {addingRecipe === true && (
               <p><CircularProgress color="secondary"/></p>
             )}
-            <p>{errorMessage}</p>
-          </div>
-          <div>
-            <Button
-              style={actionButton}
-              size="medium"
-              onClick={this.addRecipe}>
-              Save Recipe
-            </Button>
-            <LinkButtons
-              buttonStyle={secondOptionButton}
-              buttonText={'Cancel'}
-              link={`/myRecipes/${this.props.match.params.username}`}
-            />
+            {addingRecipe !== true && (
+              <div>
+                <Button
+                  style={actionButton}
+                  size="medium"
+                  onClick={this.addRecipe}>
+                  Save Recipe
+                </Button>
+                <LinkButtons
+                  buttonStyle={secondOptionButton}
+                  buttonText={'Cancel'}
+                  link={`/myRecipes/${this.props.match.params.username}`}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
