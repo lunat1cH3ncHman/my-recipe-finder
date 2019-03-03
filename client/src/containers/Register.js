@@ -4,6 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   LinkButtons,
@@ -34,6 +35,7 @@ class Register extends Component {
       registered: false,
       registerError: false,
       loginError: false,
+      registering: false,
     };
   }
 
@@ -108,6 +110,7 @@ class Register extends Component {
       loginError,
       registered,
       registerError,
+      registering,
     } = this.state;
 
     if (!registered) {
@@ -143,33 +146,38 @@ class Register extends Component {
               placeholder="Password"
               type="password"
             />
-            <div>
-            <font colour="#FF0000">
-              {showError === true && registerError === true && (
-                <p>Username, password and email are required fields.</p>
-              )}
-              {showError === true && loginError === true && (
-                <p>{errorMessage}</p>
-              )}
-            </font>
-            </div>
-            <p><SubmitButtons
-              buttonStyle={registerButton}
-              buttonText={'Register'}
-            /></p>
-            By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
+            {registering === true && (
+              <p><CircularProgress color="primary"/></p>
+            )}
+            {registering !== true && (
+              <div>
+                {showError === true && registerError === true && (
+                  <p>Username, password and email are required fields.</p>
+                )}
+                {showError === true && loginError === true && (
+                  <p>{errorMessage}</p>
+                )}
+                <p><SubmitButtons
+                  buttonStyle={registerButton}
+                  buttonText={'Register'}
+                /></p>
+                By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
+              </div>
+            )}
           </form>
           <div>
             <p><Divider variant="middle"/></p>
           </div>
-          <div>
-            Aleady registered?
-            <LinkButtons
-              buttonText={`Login`}
-              buttonStyle={secondOptionButton}
-              link={'/login'}
-            />
-          </div>
+          {registering !== true && (
+            <div>
+              Aleady registered?
+              <LinkButtons
+                buttonText={`Login`}
+                buttonStyle={secondOptionButton}
+                link={'/login'}
+              />
+            </div>
+          )}
         </div>
       );
     } else {
