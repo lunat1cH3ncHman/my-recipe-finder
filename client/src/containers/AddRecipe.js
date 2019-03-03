@@ -64,8 +64,8 @@ class AddRecipe extends Component {
       username: '',
       recipeTitle: '',
       image: '',
-      ingredients: '',
-      instructions: '',
+      ingredients: [],
+      instructions: [],
       sourceurl: '',
       addingRecipe: false,
       updated: false,
@@ -289,10 +289,12 @@ class AddRecipe extends Component {
               </Typography>
             </p>
             <p>What would you like to do now?</p>
-            <LinkButtons
-              buttonStyle={updateButton}
-              onClick={() => { this.reset(); }}
-              buttonText={'Add another'} />
+            <Button
+              style={updateButton}
+              variant="contained"
+              onClick={() => { this.reset(); }}>
+              Add another
+            </Button>
             <LinkButtons
               buttonStyle={secondOptionButton}
               buttonText={'Recipes'}
@@ -369,6 +371,7 @@ class AddRecipe extends Component {
             )}
             {addingRecipe !== true && (
               <div>
+                <p>{errorMessage}</p>
                 <Button
                   style={actionButton}
                   size="medium"
