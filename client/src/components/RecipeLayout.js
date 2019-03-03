@@ -162,14 +162,12 @@ function RecipeLayout(props) {
       {/* Footer */}
       <footer className={classes.footer} >
         <Typography color="orange" variant="h6" gutterBottom>
-          Love SatsumaSpoon? Please help us keep the service Advert Free
+          Love SatsumaSpoon?
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          We've never passed your data to third parties and we never want to
+          Tell us how we can make it even better
         </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-           Please help us keep it that way by upgrading or donating
-        </Typography>
+        <a href="mailto:support@satsumaspoon.com">Feedback</a>
       </footer>
       {/* End footer */}
     </React.Fragment>
