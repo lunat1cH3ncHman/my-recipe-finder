@@ -146,7 +146,7 @@ class Login extends Component {
               </div>
             )}
             {loggingIn === true && (
-              <p><CircularProgress color="secondary"/></p>
+              <p><CircularProgress color="primary"/></p>
             )}
             {loggingIn !== true && (
               <p><SubmitButtons

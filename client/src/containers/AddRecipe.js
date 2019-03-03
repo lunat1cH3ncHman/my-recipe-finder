@@ -365,7 +365,7 @@ class AddRecipe extends Component {
           />
           <div>
             {addingRecipe === true && (
-              <p><CircularProgress color="secondary"/></p>
+              <p><CircularProgress color="primary"/></p>
             )}
             {addingRecipe !== true && (
               <div>

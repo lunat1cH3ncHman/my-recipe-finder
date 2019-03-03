@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   HeaderBar,
@@ -116,6 +117,7 @@ class Recipe extends Component {
         <div>
           <HeaderBar title={title} />
           <div style={loadingStyle}>Loading your recipe...</div>
+          <p><CircularProgress color="primary"/></p>
         </div>
       );
     } else {
