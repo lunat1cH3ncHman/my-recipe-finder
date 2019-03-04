@@ -11,17 +11,18 @@ import Divider from '@material-ui/core/Divider';
 // https://material-ui.com/getting-started/page-layout-examples/
 // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // https://material-ui.com/api/grid/
+// https://material-ui.com/system/flexbox/
 
 const styles = theme => ({
   layout: {
-    width: 'auto',
+    // width: 'auto',
     // marginLeft: theme.spacing.unit * 3,
     // marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-      width: 1100,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+    // [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+    //   width: 1100,
+      // marginLeft: 'auto',
+      // marginRight: 'auto',
+    // },
   },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
@@ -49,9 +50,9 @@ const styles = theme => ({
   },
   card: {
     maxWidth: 800,
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 3,
+    // marginLeft: theme.spacing.unit * 3,
+    // marginRight: theme.spacing.unit * 3,
+    // marginTop: theme.spacing.unit * 3,
     display: 'flex',
   },
   cardDetails: {
@@ -67,23 +68,30 @@ const styles = theme => ({
   markdown: {
     padding: `${theme.spacing.unit * 3}px 0`,
   },
-  contentSpace: {
-    padding: theme.spacing.unit * 3,
-    container: true,
-    display: 'inline-flex',
-    wrap: 'wrap',
-    alignContent: 'space-between',
-  },
   cardTitleDivider: {
     marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 10,
     marginLeft: theme.spacing.unit * 10,
   },
+  contentSpace: {
+    padding: theme.spacing.unit * 3,
+    container: true,
+    // display: 'inline-flex',
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    // wrap: 'wrap',
+  },
   ingredients: {
+    flex: 1,
     padding: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 6,
   },
   instructions: {
+    flex: 1,
     padding: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 6,
+    marginRight: theme.spacing.unit * 6,
   },
   sidebarAboutBox: {
     padding: theme.spacing.unit * 2,
@@ -165,9 +173,9 @@ function RecipeLayout(props) {
           Love SatsumaSpoon?
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Tell us how we can make it even better
+          Help us make it even better
         </Typography>
-        <a href="mailto:support@satsumaspoon.com">Feedback</a>
+        <p><a href="mailto:support@satsumaspoon.com">Feedback</a></p>
       </footer>
       {/* End footer */}
     </React.Fragment>
