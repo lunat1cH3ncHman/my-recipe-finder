@@ -119,7 +119,25 @@ class MyRecipes extends Component {
       );
     } else if (deleted) {
       return <Redirect to="/" />;
-    } else {
+    } else if (recipes.length == 0) {
+      return(
+        <div>
+          <HeaderBar title={title} />
+          <p><Typography variant="h6" align="center" component="p">
+            It doesn't look like you've added any recipes yet
+          </Typography></p>
+          <p><Typography variant="h6" align="center" component="p">
+            Why not try adding some today!
+          </Typography></p>
+          <LinkButtons
+            buttonStyle={updateButton}
+            buttonText={'Add a Recipe'}
+            link={`/addRecipe/${this.props.match.params.username}`}
+          />
+        </div>
+      )
+    }
+    else {
       return (
         <div className="background">
           <HeaderBar title={title} />
