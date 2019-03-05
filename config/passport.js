@@ -41,7 +41,13 @@ passport.use(
                 user.save(err => {
                   if (err){
                     console.log(`User creation error ${err}`);
-                    return done(null, false, {message: 'User creation failed'});
+
+                    if(err.toString() === "ValidationError: email: isinvalid"){
+                      return done(null, false, {message: 'Email is not valid'});
+                    }else{
+                      return done(null, false,
+                        {message: 'Sorry, something went wrong, please try again later'});
+                    }
                   }
                   console.log('User created');
                   return done(null, user);
