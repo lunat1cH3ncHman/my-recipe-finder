@@ -153,10 +153,11 @@ class MyRecipes extends Component {
           <div className="wrapper">
             <Paper elevation={1}>
               <div className="listTitle">
-              <p></p>
-                <Typography variant="h5" align="center" component="p">
-                  My Recipes
-                </Typography>
+                <p></p>
+                  <Typography variant="h5" align="center" component="p">
+                    My Recipes
+                  </Typography>
+                <p></p>
               </div>
               <List className="list">
                 { recipes.map(({ _id, title}) =>
