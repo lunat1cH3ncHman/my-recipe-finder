@@ -16,7 +16,7 @@ import {
 } from '../components';
 
 const list = {
-  marginLeft: '0%',
+  marginLeft: '6%',
   marginRight: '0%',
   fontSize: '40px',
 };

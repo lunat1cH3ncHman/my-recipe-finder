@@ -25,10 +25,7 @@
 
 .addRecipeWrapper {
   display: flex;
-  border-radius: 10px;
   max-width: 500px;
-  margin: auto;
-  background: #fff;
   margin-top: 20px;
   flex-direction: column;
   padding: 40px;
