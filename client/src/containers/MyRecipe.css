@@ -3,18 +3,15 @@
 }
 
 .background {
-  background: #F8F8F8;
+   background: #F5F5F5;
 }
 
 .wrapper {
   display: flex;
-  border-radius: 10px;
   max-width: 500px;
   margin: auto;
-  background: #fff;
-  margin-top: 2px;
   flex-direction: column;
-  padding: 20px;
+  padding-bottom: 40px;
 }
 
 .list {

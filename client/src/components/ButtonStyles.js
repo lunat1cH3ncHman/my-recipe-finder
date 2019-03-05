@@ -6,6 +6,7 @@ export const deleteButton = {
 
 export const updateButton = {
   background: 'orange',
+  color: 'white',
   padding: '1em',
   margin: '1em',
 };

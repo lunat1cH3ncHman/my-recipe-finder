@@ -5,6 +5,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
 
 import {
   LinkButtons,
@@ -22,6 +23,8 @@ const list = {
 
 const listTitle = {
   marginBottom: '40%',
+  marginTop: '40%',
+  padding: '40px',
 };
 
 const title = {
@@ -148,23 +151,26 @@ class MyRecipes extends Component {
             link={`/addRecipe/${this.props.match.params.username}`}
           />
           <div className="wrapper">
-            <div className="listTitle">
-              <Typography variant="h5" align="center" component="p">
-                My Recipes
-              </Typography>
-            </div>
-            <List className="list">
-              { recipes.map(({ _id, title}) =>
-                <ListItem key={_id}>
-                    <ListItemText
-                      style={list}
-                      primary={title}
-                      button
-                      onClick={this.handleClick.bind(this, _id)}
-                    />
-                </ListItem>
-              )}
-            </List>
+            <Paper elevation={1}>
+              <div className="listTitle">
+              <p></p>
+                <Typography variant="h5" align="center" component="p">
+                  My Recipes
+                </Typography>
+              </div>
+              <List className="list">
+                { recipes.map(({ _id, title}) =>
+                  <ListItem key={_id}>
+                      <ListItemText
+                        style={list}
+                        primary={title}
+                        button
+                        onClick={this.handleClick.bind(this, _id)}
+                      />
+                  </ListItem>
+                )}
+              </List>
+            </Paper>
           </div>
         </div>
       );
