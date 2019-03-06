@@ -116,8 +116,10 @@ class Recipe extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loadingStyle}>Loading your recipe...</div>
-          <p><CircularProgress color="primary"/></p>
+          <div style={loadingStyle}>
+            Loading Your Recipe...
+            <p><CircularProgress color="primary"/></p>
+          </div>
         </div>
       );
     } else {
