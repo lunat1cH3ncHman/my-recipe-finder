@@ -5,8 +5,12 @@ export const recipeInputStyle = {
 };
 
 export const loadingStyle = {
-  margin: '1em',
+  margin: '4em',
+  paddingTop: '4%',
+  paddingBottom: '4%',
   fontSize: '18px',
+  maxWidth: '60%',
+  margin: 'auto',
 };
 
 export const siteHeaderStyle = {
