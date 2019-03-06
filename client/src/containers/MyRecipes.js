@@ -31,6 +31,8 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const genericErrorMessage = 'Sorry, something went wrong. Please check your network connection and try logging in again';
+
 class MyRecipes extends Component {
   constructor() {
     super();
@@ -41,6 +43,7 @@ class MyRecipes extends Component {
       idToUpdate: null,
       isLoading: true,
       error: false,
+      errorMessage: '',
     };
   }
 
@@ -48,6 +51,7 @@ class MyRecipes extends Component {
     let accessString = localStorage.getItem('JWT');
     if (accessString == null) {
       this.setState({
+        errorMessage: genericErrorMessage,
         isLoading: false,
         error: true,
       });
@@ -67,13 +71,25 @@ class MyRecipes extends Component {
           });
         }else{
           this.setState({
+            errorMessage: response.data.message,
             isLoading: false,
             error: true,
           });
         }
       })
       .catch(error => {
-        console.log(error.data);
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage,
+            error: true,
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+            error: true,
+          });
+        }
       });
     }
   }
@@ -94,6 +110,7 @@ class MyRecipes extends Component {
       error,
       isLoading,
       deleted,
+      errorMessage,
     } = this.state;
 
     if (error) {
@@ -101,7 +118,7 @@ class MyRecipes extends Component {
         <div>
           <HeaderBar title={title} />
           <div style={loadingStyle}>
-            Problem fetching your recipes. Please try logging in again.
+            {errorMessage}
           </div>
           <LinkButtons
             buttonText={`Login`}
@@ -130,7 +147,7 @@ class MyRecipes extends Component {
             It doesn't look like you've added any recipes yet
           </Typography></p>
           <p><Typography variant="h6" align="center" component="p">
-            Why not try adding some today!
+            Why not add some today!
           </Typography></p>
           <LinkButtons
             buttonStyle={updateButton}
