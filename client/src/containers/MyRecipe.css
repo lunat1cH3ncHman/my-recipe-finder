@@ -23,28 +23,21 @@
   flex-direction: column;
   align-self: flex-start;
   /* margin-bottom: 6%; */
-  margin: 6%;
+  padding-left: 6%;
+  padding-right: 6%;
+  padding-top: 4%;
 }
 
 .addRecipeTitle{
-  display: flex;
-  align-self: flex-start;
-  width: 60%;
   margin-top: 4%;
 }
 
 .addRecipeIngredients{
-  width: 100%;
   display: inline-flex;
-  align-self: flex-start;
-  background: #000000;
 }
 
 .addRecipeInstructions{
-  width: 100%;
   display: inline-flex;
-  align-self: flex-start;
-  background: #000000;
 }
 
 .addInputBox{
@@ -55,14 +48,18 @@
 }
 
 .addRecipeWebsite{
-  display: flex;
-  align-self: flex-start;
   margin-top: 4%;
 }
 
 .addRecipeWrapper {
-  display: flex;
-  max-width: 800px;
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  padding-bottom: 2%;
+}
+
+.addRecipeWrapper {
+  max-width: 500px;
   margin: auto;
   flex-direction: column;
   padding-top: 2%;
@@ -90,6 +87,7 @@
 
 input {
   font-size: 1rem;
+  flex-basis: 100%;
   padding: 10px 0 10px 10px;
   border-radius: 2px;
   border: 1px solid rgb(238, 238, 238);

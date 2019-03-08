@@ -271,6 +271,8 @@ class AddRecipe extends Component {
       updated,
       errorMessage,
       addingRecipe,
+      ingredients,
+      instructions,
     } = this.state;
 
     if (updated) {
@@ -283,7 +285,7 @@ class AddRecipe extends Component {
             </Typography>
             <p>
               <Typography variant="h5" align="center">
-                {this.state.recipeTitle} has been added to your recipes
+                {recipeTitle} has been added to your recipes
               </Typography>
             </p>
             <p>
@@ -317,6 +319,8 @@ class AddRecipe extends Component {
               <div className="addRecipeTitle">
                 <TextField
                   id="recipeTitle"
+                  fullWidth="true"
+                  autoFocus="true"
                   value={recipeTitle}
                   onChange={this.handleChange('recipeTitle')}
                   placeholder="Title"
@@ -327,12 +331,14 @@ class AddRecipe extends Component {
               <Typography variant="h5" align="left">
                 Ingredients
               </Typography>
-              <EditableList
-                list={this.state.ingredients}
-                handleRemove={this.handleRemoveIngredient}
-                toggleIsEditingAt={this.toggleIsEditingIngredientAt}
-                setNameAt={this.setIngredientAt}
-              />
+              {ingredients.length > 0 &&(
+                <EditableList
+                  list={ingredients}
+                  handleRemove={this.handleRemoveIngredient}
+                  toggleIsEditingAt={this.toggleIsEditingIngredientAt}
+                  setNameAt={this.setIngredientAt}
+                />
+              )}
               <div className="addRecipeIngredients">
                 <AddItem
                   className="input"
@@ -349,12 +355,14 @@ class AddRecipe extends Component {
               <Typography variant="h5" align="left">
                 Instructions
               </Typography>
-              <EditableList
-                list={this.state.instructions}
-                handleRemove={this.handleRemoveInstructions}
-                toggleIsEditingAt={this.toggleIsEditingInstructionAt}
-                setNameAt={this.setInstructionAt}
-              />
+              {instructions.length > 0 &&(
+                <EditableList
+                  list={instructions}
+                  handleRemove={this.handleRemoveInstructions}
+                  toggleIsEditingAt={this.toggleIsEditingInstructionAt}
+                  setNameAt={this.setInstructionAt}
+                />
+              )}
               <div className="addRecipeInstructions">
                 <AddItem
                   className="input"
@@ -374,6 +382,7 @@ class AddRecipe extends Component {
               <div className="addRecipeWebsite">
                 <TextField
                   id="sourceurl"
+                  fullWidth="true"
                   value={sourceurl}
                   onChange={this.handleChange('sourceurl')}
                   placeholder="Website link"
