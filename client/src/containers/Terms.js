@@ -23,6 +23,25 @@ class Terms extends Component {
           <p styles={siteHeaderStyle}>Terms of Service</p>
           <p>Your relationship with SatsumaSpoon
 Your use of SatsumaSpoon’s products, software, services and web sites (referred to collectively as the “Services” in this document and excluding any services provided to you by SatsumaSpoon under a separate written agreement) is subject to the terms of a legal agreement between you and SatsumaSpoon. This document explains how the agreement is made up, and sets out some of the terms of that agreement.
+Data controller
+For the purposes of data collection the data controller is SatsumaSpoon. To contact the data controller email support@satsumaspoon.com. We collect personal data including your email address under the legal basis that by singing up you have given consent to collect this data.  Storage times will be indefinite in the case that you do not use your right to be forgotten (deletion). Under GDPR legislation you have the following rights
+
+1) The Right to Access your Data
+
+2) The Right to have your data Rectified i.e. corrected
+
+3) The Right to be forgotten i.e. deletion of your data
+
+4) The Right to restrict processing
+
+5) The Right to Data Portability
+
+6) The Right to Object to your data being used
+
+7) The Right to make a Complaint to a Data Protection Authority
+
+8) The Right to know if your data is being used for profiling (only if the data will be used for profiling i.e. automatic decision making)
+
 Accepting the Terms
 In order to use the Services, you must first agree to the Terms. You may not use the Services if you do not accept the Terms. You can accept the Terms by: clicking to accept or agree to the Terms, where this option is made available to you by SatsumaSpoon in the user interface for any Service; or by actually using the Services. In this case, you understand and agree that SatsumaSpoon will treat your use of the Services as acceptance of the Terms from that point onwards. You may not use the Services and may not accept the Terms if (a) you are not of legal age to form a binding contract with SatsumaSpoon, or (b) you are a person barred from receiving the Services under the laws of the United States or other countries including the country in which you are resident or from which you use the Services.
 Provision of the Services by SatsumaSpoon
@@ -113,7 +132,7 @@ How SatsumaSpoon Uses Personal Information
 Personal Information is used to enhance and custom-tailor each user's experience on the website. Such information may be used to determine what site content is of interest to which users, what types of email newsletters and other communications are appropriate for individual users, and to identify user-generated content such as message board postings, votes in online polls and participation in online games. Such information will also be used, for example, to process your orders, respond to your requests and inquiries and provide you with the services and features offered on or through our Website.
 
 Right to Opt-Out
-At any time, you may opt-out of receiving notifications and other messages from SatsumaSpoon by going to the profile tab on SatsumaSpoon.com (https://www.SatsumaSpoon.com/profile.aspx) and deselect the “Receive SatsumaSpoon News” option. This option is deselected by default.
+At any time, you may opt-out of receiving notifications and other messages from SatsumaSpoon by emailing support@satsumaspoon.com.
 
 You can also choose to disable or selectively turn off cookies or third-party cookies in your web browser settings. It is important to note that different devices (i.e. mobile, tablet and desktop) use different identifiers and different technologies, so that you must opt out separately from each web browser and each device that you would like to be opted out. If you opt-out of targeted advertising, we will no longer collect User Information described within this policy.
 
