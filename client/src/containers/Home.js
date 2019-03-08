@@ -28,7 +28,7 @@ class Home extends Component {
         <p></p>
         <div style={welcome}>
           <p>Welcome to SatsumaSpoon</p>
-          <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books or notebooks!</p>
+          <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books and notebooks!</p>
         </div>
         <LinkButtons
           buttonText={`Register`}
