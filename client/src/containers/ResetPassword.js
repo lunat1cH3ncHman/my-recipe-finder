@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
+import ReactGA from 'react-ga';
 
 import {
   LinkButtons,
@@ -32,6 +33,9 @@ export default class ResetPassword extends Component {
   }
 
   async componentDidMount() {
+
+    ReactGA.pageview("/ResetPassword");
+
     await axios
       .get('/reset', {
         params: {

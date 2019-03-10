@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReactGA from 'react-ga';
 
 import {
   LinkButtons,
@@ -34,6 +35,10 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    ReactGA.pageview("/Login");
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -62,6 +67,10 @@ class Login extends Component {
         password: this.state.password,
       })
       .then(response => {
+        ReactGA.event({
+          category: 'User',
+          action: 'Logged in'
+        });
         if (response.status === 200) {
           localStorage.setItem('JWT', response.data.token);
             this.setState({

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
+
 import {
   HeaderBar,
   LinkButtons,
@@ -21,6 +23,9 @@ const intro = {
 };
 
 class Home extends Component {
+  componentDidMount() {
+    ReactGA.pageview("/Home");
+  }
   render() {
     return (
       <div className="home-page">

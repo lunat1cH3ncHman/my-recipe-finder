@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReactGA from 'react-ga';
 
 import {
   LinkButtons,
@@ -65,6 +66,10 @@ class Register extends Component {
       })
       .then(response => {
         if (response.status === 200) {
+          ReactGA.event({
+            category: 'User',
+            action: 'Registered'
+          });
           this.setState({
             registered: true,
             showError: false,
@@ -99,6 +104,10 @@ class Register extends Component {
       });
     }
   };
+
+  componentDidMount() {
+    ReactGA.pageview("/Register");
+  }
 
   render() {
     const {

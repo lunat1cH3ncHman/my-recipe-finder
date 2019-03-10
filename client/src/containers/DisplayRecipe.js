@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReactGA from 'react-ga';
 
 import {
   HeaderBar,
@@ -32,6 +33,9 @@ class Recipe extends Component {
 
   async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
+
+    ReactGA.pageview("/DisplayRecipe");
+
     if (accessString == null) {
       this.setState({
         isLoading: false,

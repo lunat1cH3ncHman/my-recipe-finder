@@ -13,7 +13,7 @@ import AddRecipe from './containers/AddRecipe';
 import DisplayRecipe from './containers/DisplayRecipe';
 import Terms from './containers/Terms';
 
-class Routes extends Component {
+class Routes extends Component {  
   render() {
     return (
       <div>

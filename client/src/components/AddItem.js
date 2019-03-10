@@ -5,10 +5,9 @@ import { loginButton } from './ButtonStyles';
 
 const AddItem = props => {
   return (
-    <form className="ingredientInput" onSubmit={props.newItemSubmitHandler}>
+    <form onSubmit={props.newItemSubmitHandler}>
       <div>
         <input
-          className="input"
           type="text"
           onChange={props.handleItemInput}
           value={props.pendingItem}

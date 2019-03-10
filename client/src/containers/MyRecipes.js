@@ -6,6 +6,9 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
+import AddIcon from '@material-ui/icons/Add';
+import { withStyles } from '@material-ui/core/styles';
+import ReactGA from 'react-ga';
 
 import {
   LinkButtons,
@@ -49,6 +52,9 @@ class MyRecipes extends Component {
 
   async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
+
+    ReactGA.pageview("/MyRecipes");
+
     if (accessString == null) {
       this.setState({
         errorMessage: genericErrorMessage,

@@ -6,6 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import "./MyRecipe.css";
+import ReactGA from 'react-ga';
 
 import {
   HeaderBar,
@@ -46,6 +47,8 @@ class AddRecipe extends Component {
   }
 
   componentDidMount() {
+    ReactGA.pageview("/AddRecipe");
+
     let accessString = localStorage.getItem('JWT');
     if (accessString === null) {
       this.setState({
@@ -235,6 +238,10 @@ class AddRecipe extends Component {
       })
       .then(response => {
         if (response.status === 200) {
+          ReactGA.event({
+            category: 'Recipe',
+            action: 'Added'
+          });
           this.setState({
             addingRecipe: false,
             updated: true,

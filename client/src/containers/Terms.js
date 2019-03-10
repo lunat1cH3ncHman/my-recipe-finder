@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
+
 import {
   HeaderBar,
 } from '../components';
@@ -14,6 +16,11 @@ export const siteHeaderStyle = {
 };
 
 class Terms extends Component {
+
+  componentDidMount() {
+    ReactGA.pageview("/Terms");
+  }
+
   render() {
     return (
       <div className="Terms">
