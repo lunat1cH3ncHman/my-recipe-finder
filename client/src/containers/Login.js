@@ -119,7 +119,6 @@ class Login extends Component {
       loggingIn,
     } = this.state;
 
-    var testShowError = true;
     if (!loggedIn) {
       return (
         <div>

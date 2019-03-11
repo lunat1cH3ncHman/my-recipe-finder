@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
+import ReactGA from 'react-ga';
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import "./MyRecipe.css";
 
 import {
   LinkButtons,
@@ -15,6 +19,9 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
+const nullEmailErrorMessage = 'Please provide your registered email address';
+
 class ForgotPassword extends Component {
   constructor() {
     super();
@@ -22,8 +29,9 @@ class ForgotPassword extends Component {
     this.state = {
       email: '',
       showError: false,
-      messageFromServer: '',
-      showNullError: false,
+      errorMessage: '',
+      passwordResetSent: false,
+      resetting: false,
     };
   }
 
@@ -35,85 +43,115 @@ class ForgotPassword extends Component {
 
   sendEmail = e => {
     e.preventDefault();
+    this.setState({
+      showError: false,
+      resetting: true,
+    });
+
     if (this.state.email === '') {
       this.setState({
-        showError: false,
-        messageFromServer: '',
-        showNullError: true,
+        showError: true,
+        errorMessage: nullEmailErrorMessage,
+        resetting: false,
       });
     } else {
-      axios
-        .post('/forgotPassword', {
+      axios.post('/forgotPassword', {
           email: this.state.email,
         })
         .then(response => {
-          console.log(response.data);
-          if (response.data === 'email not in db') {
-            this.setState({
-              showError: true,
-              messageFromServer: '',
-              showNullError: false,
+          if (response.status === 200) {
+            ReactGA.event({
+              category: 'User',
+              action: 'Forgot Password',
             });
-          } else if (response.data === 'recovery email sent') {
             this.setState({
+              passwordResetSent: true,
               showError: false,
-              messageFromServer: 'recovery email sent',
-              showNullError: false,
+              resetting: false,
+            });
+          } else {
+            this.setState({
+              errorMessage: response.data.message,
+              passwordResetSent: false,
+              showError: true,
+              resetting: false,
             });
           }
         })
         .catch(error => {
-          console.log(error.data);
+          if (typeof(error.response) == 'undefined' ||
+              typeof(error.response.data) == 'undefined') {
+            this.setState({
+              errorMessage: genericErrorMessage
+            });
+          } else {
+            this.setState({
+              errorMessage: error.response.data,
+            });
+          }
+          this.setState({
+            passwordResetSent: false,
+            showError: true,
+            resetting: false,
+          });
         });
     }
   };
 
   render() {
-    const { email, messageFromServer, showNullError, showError } = this.state;
+    const {
+      email,
+      showError,
+      errorMessage,
+      passwordResetSent,
+      resetting,
+     } = this.state;
 
-    return (
-      <div>
-        <HeaderBar title={title} />
-        <form className="profile-form" onSubmit={this.sendEmail}>
-          <p></p>
-          <TextField
-            style={inputStyle}
-            id="email"
-            label="email"
-            value={email}
-            onChange={this.handleChange('email')}
-            placeholder="Email Address"
-          />
-          <SubmitButtons
-            buttonStyle={forgotButton}
-            buttonText={'Reset Password'}
-          />
-        </form>
-        {showNullError && (
-          <div>
-            <p>The email address cannot be null.</p>
+    if(passwordResetSent){
+      return (
+        <div>
+          <HeaderBar title={title}/>
+          <div className="congratsWrapper">
+            <Typography variant="h5" align="center">
+              Password recovery email sent, please check your email
+            </Typography>
           </div>
-        )}
-        {showError && (
-          <div>
-            <p>
-              That email address isn't recognized. Please try again or register
-              for a new account.
-            </p>
-            <LinkButtons
-              buttonText={`Register`}
-              buttonStyle={registerButton}
-              link={'/register'}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <form className="profile-form" onSubmit={this.sendEmail}>
+            <p></p>
+            <TextField
+              style={inputStyle}
+              id="email"
+              label="email"
+              value={email}
+              onChange={this.handleChange('email')}
+              placeholder="Email Address"
             />
-          </div>
-        )}
-        {messageFromServer === 'recovery email sent' && (
-          <div>
-            <h3>Email Sent!</h3>
-          </div>
-        )}
-      </div>
-    );
+            {showError && (
+              <div>
+                <p>
+                  {errorMessage}
+                </p>
+              </div>
+            )}
+            {resetting === true && (
+              <p><CircularProgress color="primary"/></p>
+            )}
+            {resetting !== true && (
+              <p><SubmitButtons
+                buttonStyle={forgotButton}
+                buttonText={'Reset Password'}
+              /></p>
+            )}
+          </form>
+        </div>
+      );
+    }
   }
 }
 

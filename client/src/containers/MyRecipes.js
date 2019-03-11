@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core'
-import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
-import { withStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 
 import {
@@ -22,12 +19,6 @@ const list = {
   marginLeft: '6%',
   marginRight: '0%',
   fontSize: '40px',
-};
-
-const listTitle = {
-  marginBottom: '40%',
-  marginTop: '40%',
-  padding: '40px',
 };
 
 const title = {
@@ -145,7 +136,7 @@ class MyRecipes extends Component {
       );
     } else if (deleted) {
       return <Redirect to="/" />;
-    } else if (recipes.length == 0) {
+    } else if (recipes.length === 0) {
       return(
         <div>
           <HeaderBar title={title} />

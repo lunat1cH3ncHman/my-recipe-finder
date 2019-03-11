@@ -18,6 +18,8 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
+
 export default class ResetPassword extends Component {
   constructor() {
     super();
@@ -29,6 +31,7 @@ export default class ResetPassword extends Component {
       update: false,
       isLoading: true,
       error: false,
+      errorMessage: '',
     };
   }
 
@@ -78,26 +81,49 @@ export default class ResetPassword extends Component {
         password: this.state.password,
       })
       .then(response => {
-        console.log(response.data);
-        if (response.data.message === 'password updated') {
+        if (response.status === 200) {
+          ReactGA.event({
+            category: 'User',
+            action: 'Password Reset'
+          });
           this.setState({
             updated: true,
             error: false,
           });
         } else {
           this.setState({
+            errorMessage: response.data.message,
             updated: false,
             error: true,
           });
         }
       })
       .catch(error => {
-        console.log(error.data);
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        }
+        this.setState({
+          updated: false,
+          error: true,
+        });
       });
   };
 
   render() {
-    const { password, error, isLoading, updated } = this.state;
+    const {
+      password,
+      error,
+      isLoading,
+      updated,
+      errorMessage,
+    } = this.state;
 
     if (error) {
       return (
@@ -105,6 +131,8 @@ export default class ResetPassword extends Component {
           <HeaderBar title={title} />
           <div style={loadingStyle}>
             <h4>Problem resetting password. Please send another reset link.</h4>
+            <h4>{errorMessage}</h4>
+
             <LinkButtons
               buttonStyle={forgotButton}
               buttonText={'Forgot Password?'}
@@ -117,7 +145,7 @@ export default class ResetPassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loadingStyle}>Loading User Data...</div>
+          <div style={loadingStyle}>Loading Your Data...</div>
         </div>
       );
     } else {
