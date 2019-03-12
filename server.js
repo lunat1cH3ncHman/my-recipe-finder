@@ -83,6 +83,7 @@ require('./routes/getRecipes')(app);
 require('./routes/updateRecipe')(app);
 require('./routes/deleteRecipe')(app);
 require('./routes/forgotPassword')(app);
+require('./routes/resetPassword')(app);
 
 // Setup server
 const port = process.env.PORT || process.argv[2] || API_PORT;

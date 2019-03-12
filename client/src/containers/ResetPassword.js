@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import ReactGA from 'react-ga';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   LinkButtons,
@@ -47,7 +48,11 @@ export default class ResetPassword extends Component {
       })
       .then(response => {
         console.log(response);
-        if (response.data.message === 'password reset link a-ok') {
+        if (response.status === 200) {
+          ReactGA.event({
+            category: 'User',
+            action: 'Valid password reset link'
+          });
           this.setState({
             username: response.data.username,
             update: false,
@@ -56,6 +61,7 @@ export default class ResetPassword extends Component {
           });
         } else {
           this.setState({
+            errorMessage: response.data.message,
             update: false,
             isLoading: false,
             error: true,
@@ -64,6 +70,11 @@ export default class ResetPassword extends Component {
       })
       .catch(error => {
         console.log(error.data);
+        this.setState({
+          update: false,
+          isLoading: false,
+          error: true,
+        });
       });
   }
 
@@ -145,7 +156,10 @@ export default class ResetPassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <div style={loadingStyle}>Loading Your Data...</div>
+          <div style={loadingStyle}>
+            Loading Your Data...
+            <p><CircularProgress color="primary"/></p>
+          </div>
         </div>
       );
     } else {

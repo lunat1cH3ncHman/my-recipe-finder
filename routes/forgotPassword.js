@@ -12,15 +12,19 @@ module.exports = app => {
     }
     console.log(req.body.email);
     try {
-      User.findOne({email: req.body.email}).then(user => {
+      User.findOne({email: req.body.email}).then(async user => {
         if (user === null) {
             res.status(400).send('That email is not registered, please try again or register');
         } else {
-          const token = crypto.randomBytes(20).toString('hex');
-          user.update({
-            resetPasswordToken: token,
-            resetPasswordExpires: Date.now() + 360000,
-          });
+          try{
+            const token = crypto.randomBytes(20).toString('hex');
+            user.resetPasswordToken = token;
+            user.resetPasswordExpires = Date.now() + 360000;
+            await user.save();
+          } catch (err) {
+            console.error('there was an error: ', err);
+            res.status(400).send('Sorry something went wrong, please try again later');
+          }
 
           const transporter = nodemailer.createTransport({
             service: 'gmail',
