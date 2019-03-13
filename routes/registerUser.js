@@ -1,5 +1,8 @@
 const passport = require('passport');
-var User = require("../models/user");
+const jwt = require('jsonwebtoken');
+const User = require("../models/user");
+const jstSecret = process.env.PASSPORT_SECRET;
+
 
 // https://itnext.io/implementing-json-web-tokens-passport-js-in-a-javascript-application-with-react-b86b1f313436
 
@@ -20,7 +23,12 @@ module.exports = app => {
             return res.status(400).send('Sorry something went wrong please try again');
           } else {
             console.log('User created');
-            return res.status(200).send('User created');
+            const token = jwt.sign({ id: user.username }, jstSecret);
+            res.status(200).send({
+              auth: true,
+              token: token,
+              message: 'User found and logged in',
+            });
           }
         });
       }

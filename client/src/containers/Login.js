@@ -73,12 +73,12 @@ class Login extends Component {
         });
         if (response.status === 200) {
           localStorage.setItem('JWT', response.data.token);
-            this.setState({
-              loggedIn: true,
-              showError: false,
-              showNullError: false,
-              loggingIn: false,
-            });
+          this.setState({
+            loggedIn: true,
+            showError: false,
+            showNullError: false,
+            loggingIn: false,
+          });
         } else {
           this.setState({
             errorMessage: response.data.message,

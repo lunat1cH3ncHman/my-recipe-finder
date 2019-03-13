@@ -11,9 +11,9 @@ import {
   LinkButtons,
   SubmitButtons,
   registerButton,
-  loginButton,
   secondOptionButton,
   inputStyle,
+  updateButton,
   HeaderBar,
 } from '../components';
 
@@ -70,6 +70,7 @@ class Register extends Component {
             category: 'User',
             action: 'Registered'
           });
+          localStorage.setItem('JWT', response.data.token);
           this.setState({
             registered: true,
             showError: false,
@@ -195,14 +196,14 @@ class Register extends Component {
           <HeaderBar title={title} />
             <div className="congratsWrapper">
             <Typography variant="h5" align="center">
-              Welcome to SatsumaSpoon {username}!
+              Welcome to SatsumaSpoon {username}
             </Typography>
-            <p>Login to start adding your favourite recipes today</p>
+            <p>Start adding your favourite recipes today!</p>
             <p></p>
             <LinkButtons
-              buttonText={`Go Login`}
-              buttonStyle={loginButton}
-              link={`/login`}
+              buttonText={`Add Recipe`}
+              buttonStyle={updateButton}
+              link={`/addRecipe/${username}`}
             />
           </div>
         </div>
