@@ -20,13 +20,11 @@ module.exports = app => {
             console.log('Could not login user');
             return res.status(400).send('Sorry something went wrong please try again');
           } else {
-            User.findOne({username: user.username}).then (user => {
-              const token = jwt.sign({ id: user.username }, jstSecret);
-              res.status(200).send({
-                auth: true,
-                token: token,
-                message: 'User found and logged in',
-              });
+            const token = jwt.sign({ id: user.username }, jstSecret);
+            res.status(200).send({
+              auth: true,
+              token: token,
+              message: 'User found and logged in',
             });
           }
         });
