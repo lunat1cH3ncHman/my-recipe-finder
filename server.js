@@ -23,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //-----------------------------------------
-//Handle decoding JWT's
+//TODO: Is this still needed ? Handle decoding JWT's
 //-----------------------------------------
 
 function getTokenFromHeaders(req){
@@ -84,6 +84,7 @@ require('./routes/updateRecipe')(app);
 require('./routes/deleteRecipe')(app);
 require('./routes/forgotPassword')(app);
 require('./routes/resetPassword')(app);
+require('./routes/updatePasswordReset')(app);
 
 // Setup server
 const port = process.env.PORT || process.argv[2] || API_PORT;

@@ -140,10 +140,10 @@ class MyRecipes extends Component {
       return(
         <div>
           <HeaderBar title={title} />
-          <p><Typography variant="h6" align="center" component="p">
+          <p><Typography variant="h6" align="center">
             It doesn't look like you've added any recipes yet
           </Typography></p>
-          <p><Typography variant="h6" align="center" component="p">
+          <p><Typography variant="h6" align="center">
             Why not add some today!
           </Typography></p>
           <LinkButtons

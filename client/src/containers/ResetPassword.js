@@ -3,6 +3,8 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import ReactGA from 'react-ga';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import "./MyRecipe.css";
 
 import {
   LinkButtons,
@@ -12,6 +14,7 @@ import {
   forgotButton,
   inputStyle,
   SubmitButtons,
+  secondOptionButton,
   loadingStyle,
 } from '../components';
 
@@ -37,9 +40,7 @@ export default class ResetPassword extends Component {
   }
 
   async componentDidMount() {
-
     ReactGA.pageview("/ResetPassword");
-
     await axios
       .get('/reset', {
         params: {
@@ -69,10 +70,18 @@ export default class ResetPassword extends Component {
         }
       })
       .catch(error => {
-        console.log(error.data);
+        if (typeof(error.response) == 'undefined' ||
+            typeof(error.response.data) == 'undefined') {
+          this.setState({
+            errorMessage: genericErrorMessage
+          });
+        } else {
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        }
         this.setState({
-          update: false,
-          isLoading: false,
+          updated: false,
           error: true,
         });
       });
@@ -87,8 +96,8 @@ export default class ResetPassword extends Component {
   updatePassword = e => {
     e.preventDefault();
     axios
-      .put('/updatePasswordViaEmail', {
-        username: this.state.username,
+      .put('/updatePasswordReset', {
+        resetPasswordToken: this.props.match.params.token,
         password: this.state.password,
       })
       .then(response => {
@@ -141,11 +150,10 @@ export default class ResetPassword extends Component {
         <div>
           <HeaderBar title={title} />
           <div style={loadingStyle}>
-            <h4>Problem resetting password. Please send another reset link.</h4>
-            <h4>{errorMessage}</h4>
+            <p>{errorMessage}</p>
 
             <LinkButtons
-              buttonStyle={forgotButton}
+              buttonStyle={secondOptionButton}
               buttonText={'Forgot Password?'}
               link={'/forgotPassword'}
             />
@@ -166,32 +174,32 @@ export default class ResetPassword extends Component {
       return (
         <div>
           <HeaderBar title={title} />
-          <form className="password-form" onSubmit={this.updatePassword}>
-            <TextField
-              style={inputStyle}
-              id="password"
-              label="password"
-              onChange={this.handleChange('password')}
-              value={password}
-              type="password"
-            />
-            <SubmitButtons
-              buttonStyle={updateButton}
-              buttonText={'Update Password'}
-            />
-          </form>
-
-          {updated && (
-            <div>
-              <p>
-                Your password has been successfully reset, please try logging in
-                again.
-              </p>
-              <LinkButtons
+          {!updated && (
+            <form className="password-form" onSubmit={this.updatePassword}>
+              <p><TextField
+                style={inputStyle}
+                id="password"
+                label="password"
+                onChange={this.handleChange('password')}
+                value={password}
+                type="password"
+              /></p>
+              <p><SubmitButtons
+                buttonStyle={updateButton}
+                buttonText={'Update Password'}
+              /></p>
+            </form>
+          )}
+           {updated && (
+            <div className="congratsWrapper">
+              <Typography variant="h6" align="center">
+                Your password has been reset
+              </Typography>
+              <p><LinkButtons
                 buttonStyle={loginButton}
                 buttonText={'Login'}
                 link={`/login`}
-              />
+              /></p>
             </div>
           )}
         </div>

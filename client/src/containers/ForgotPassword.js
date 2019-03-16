@@ -112,7 +112,7 @@ class ForgotPassword extends Component {
         <div>
           <HeaderBar title={title}/>
           <div className="congratsWrapper">
-            <Typography variant="h5" align="center">
+            <Typography variant="h6" align="center">
               Password recovery email sent, please check your email
             </Typography>
           </div>
