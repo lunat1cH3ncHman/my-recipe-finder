@@ -167,17 +167,6 @@ function RecipeLayout(props) {
           </Grid>
         </main>
       </div>
-      {/* Footer */}
-      <footer className={classes.footer} >
-        <Typography color="orange" variant="h6" gutterBottom>
-          Love SatsumaSpoon?
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Help us make it even better
-        </Typography>
-        <p><a href="mailto:support@satsumaspoon.com">Feedback</a></p>
-      </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }
