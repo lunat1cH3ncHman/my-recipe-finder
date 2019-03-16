@@ -5,7 +5,6 @@ export const recipeInputStyle = {
 };
 
 export const loadingStyle = {
-  margin: '4em',
   paddingTop: '4%',
   paddingBottom: '4%',
   fontSize: '18px',

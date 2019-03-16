@@ -286,13 +286,8 @@ class AddRecipe extends Component {
           <HeaderBar title={title} />
           <div className="congratsWrapper">
             <Typography variant="h5" align="center">
-              Hooray!
+              {recipeTitle} has been added to your recipes
             </Typography>
-            <p>
-              <Typography variant="h5" align="center">
-                {recipeTitle} has been added to your recipes
-              </Typography>
-            </p>
             <p>
               <Typography variant="h6" align="center">
                 What would you like to do now?

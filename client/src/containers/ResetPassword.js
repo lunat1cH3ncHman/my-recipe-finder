@@ -11,7 +11,6 @@ import {
   updateButton,
   loginButton,
   HeaderBar,
-  forgotButton,
   inputStyle,
   SubmitButtons,
   secondOptionButton,

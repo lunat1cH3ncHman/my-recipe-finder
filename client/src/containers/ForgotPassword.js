@@ -7,9 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import "./MyRecipe.css";
 
 import {
-  LinkButtons,
   SubmitButtons,
-  registerButton,
   forgotButton,
   inputStyle,
   HeaderBar,
