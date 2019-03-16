@@ -312,7 +312,7 @@ class AddRecipe extends Component {
         <HeaderBar title={title} />
         <div className="addRecipeWrapper">
           <Paper elevation={1}>
-            <div className="addRecipeItem">
+            <div className="addRecipeFirstItem">
               <Typography variant="h5" align="left">
                 Recipe Name
               </Typography>
@@ -394,7 +394,7 @@ class AddRecipe extends Component {
                 <p><CircularProgress color="primary"/></p>
               )}
               {addingRecipe !== true && (
-                <div>
+                <div className="addRecipeButtons">
                   <p>{errorMessage}</p>
                   <Button
                     style={actionButton}

@@ -18,11 +18,19 @@
   margin-bottom: 200px;
 }
 
+.addRecipeFirstItem{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding-left: 6%;
+  padding-right: 6%;
+  padding-top: 8%;
+}
+
 .addRecipeItem{
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  /* margin-bottom: 6%; */
   padding-left: 6%;
   padding-right: 6%;
   padding-top: 4%;
@@ -30,6 +38,7 @@
 
 .addRecipeTitle{
   margin-top: 4%;
+  margin-bottom: 4%;
 }
 
 .addRecipeIngredients{
@@ -64,6 +73,11 @@
   flex-direction: column;
   padding-top: 2%;
   padding-bottom: 2%;
+}
+
+.addRecipeButtons {
+  padding-top: 2%;
+  padding-bottom: 4%;
 }
 
 .congratsWrapper {
