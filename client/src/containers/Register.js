@@ -143,7 +143,7 @@ class Register extends Component {
           <HeaderBar title={title} />
           <div style={welcome}>
             <p>Welcome to SatsumaSpoon</p>
-            <p style={intro}>Collect your favourite recipes from websites, recipe books and scraps of paper!</p>
+            <p style={intro}>Gather your favourite recipes from websites, recipe books and scraps of paper!</p>
           </div>
           <form className="profile-form" onSubmit={this.registerUser}>
             <p></p>
@@ -189,7 +189,9 @@ class Register extends Component {
                   buttonStyle={registerButton}
                   buttonText={'Register'}
                 /></p>
-                Aleady registered? <Link to="/login">Login</Link>
+                <div style={intro}>
+                  Aleady registered? <Link to="/login">Login</Link>
+                </div>
               </div>
             )}
           </form>
@@ -198,7 +200,7 @@ class Register extends Component {
           </div>
           {registering !== true && (
             <div style={terms}>
-              By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
+              <p>By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link></p>
             </div>
           )}
         </div>
