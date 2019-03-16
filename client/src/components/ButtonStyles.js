@@ -65,12 +65,12 @@ export const forgotButton = {
 };
 
 export const secondOptionButton = {
-  background: 'lightgrey',
+  background: 'grey',
   // variant: 'outlined',
   size: 'small',
   // color: 'orange',
   padding: '1em',
-  margin: '1em',
+  margin: '1em', 
 };
 
 export const inputStyle = {
