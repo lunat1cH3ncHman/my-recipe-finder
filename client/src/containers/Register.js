@@ -21,6 +21,16 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const welcome = {
+  margin: '1em',
+  fontSize: '24px',
+};
+
+const intro = {
+  margin: '1em',
+  fontSize: '18px',
+};
+
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 
 class Register extends Component {
@@ -127,6 +137,10 @@ class Register extends Component {
       return (
         <div>
           <HeaderBar title={title} />
+          <div style={welcome}>
+            <p>Welcome to SatsumaSpoon</p>
+            <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books and notebooks!</p>
+          </div>
           <form className="profile-form" onSubmit={this.registerUser}>
             <p></p>
             <TextField
