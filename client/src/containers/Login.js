@@ -7,20 +7,14 @@ import ReactGA from 'react-ga';
 import { Link } from 'react-router-dom';
 
 import {
-  LinkButtons,
   SubmitButtons,
   loginButton,
-  secondOptionButton,
   inputStyle,
   HeaderBar,
 } from '../components';
 
 const title = {
   pageTitle: 'SatsumaSpoon',
-};
-
-const links = {
-  padding: '5dp',
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';

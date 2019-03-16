@@ -11,7 +11,6 @@ import {
   LinkButtons,
   SubmitButtons,
   registerButton,
-  secondOptionButton,
   inputStyle,
   updateButton,
   HeaderBar,
@@ -144,7 +143,7 @@ class Register extends Component {
           <HeaderBar title={title} />
           <div style={welcome}>
             <p>Welcome to SatsumaSpoon</p>
-            <p style={intro}>The best place to store all your recipes from your favourite websites, recipe books and notebooks!</p>
+            <p style={intro}>Collect your favourite recipes from websites, recipe books and scraps of paper!</p>
           </div>
           <form className="profile-form" onSubmit={this.registerUser}>
             <p></p>
