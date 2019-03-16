@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ReactGA from 'react-ga';
+import { Link } from 'react-router-dom';
 
 import {
   LinkButtons,
@@ -16,6 +17,10 @@ import {
 
 const title = {
   pageTitle: 'SatsumaSpoon',
+};
+
+const links = {
+  padding: '5dp',
 };
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
@@ -164,14 +169,8 @@ class Login extends Component {
           </form>
           {showError && (
             <div>
-              <p><LinkButtons
-                buttonStyle={secondOptionButton}
-                buttonText={'Register'}
-                link={'/register'}/>
-              <LinkButtons
-                buttonStyle={secondOptionButton}
-                buttonText={'Forgot Password?'}
-                link={'/forgotPassword'}/></p>
+              <p><Link to="/register">Not registered?</Link></p>
+              <p><Link to="/forgotPassword">Forgot Password?</Link></p>
             </div>
           )}
         </div>

@@ -31,6 +31,11 @@ const intro = {
   fontSize: '18px',
 };
 
+const terms = {
+  margin: '1em'
+};
+
+
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 
 class Register extends Component {
@@ -185,7 +190,7 @@ class Register extends Component {
                   buttonStyle={registerButton}
                   buttonText={'Register'}
                 /></p>
-                By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
+                Aleady registered? <Link to="/login">Login</Link>
               </div>
             )}
           </form>
@@ -193,13 +198,8 @@ class Register extends Component {
             <p><Divider variant="middle"/></p>
           </div>
           {registering !== true && (
-            <div>
-              Aleady registered?
-              <LinkButtons
-                buttonText={`Login`}
-                buttonStyle={secondOptionButton}
-                link={'/login'}
-              />
+            <div style={terms}>
+              By signing up, you agree to our <Link to="/terms">Terms</Link>, <Link to="/terms">Privacy Policy</Link> and <Link to="/terms">Cookie Use</Link>
             </div>
           )}
         </div>
