@@ -142,7 +142,7 @@ img {
 button.action {
   color: #333;
   background: none;
-  padding: 0;
+  padding: 5px;
 }
 
 button.action:focus {

@@ -28,7 +28,8 @@ const AddItem = props => {
       <form onSubmit={props.newItemSubmitHandler}>
         <div className={classes.itemEntry}>
           <TextField
-            required
+            multiline="Controlled"
+            rowsMax="10"
             id="item"
             fullWidth
             margin="normal"

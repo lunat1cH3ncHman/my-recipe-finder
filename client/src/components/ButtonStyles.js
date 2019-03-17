@@ -20,6 +20,7 @@ export const loginButton = {
 export const addButton = {
   background: 'orange',
   padding: '.6em',
+  marginBottom: '1em',
 };
 
 export const logoutButton = {
