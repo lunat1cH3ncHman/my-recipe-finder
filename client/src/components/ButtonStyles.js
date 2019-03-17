@@ -17,6 +17,11 @@ export const loginButton = {
   margin: '1em',
 };
 
+export const addButton = {
+  background: 'orange',
+  padding: '.6em',
+};
+
 export const logoutButton = {
   padding: '1em',
   margin: '1em',
@@ -70,7 +75,7 @@ export const secondOptionButton = {
   size: 'small',
   // color: 'orange',
   padding: '1em',
-  margin: '1em', 
+  margin: '1em',
 };
 
 export const inputStyle = {
