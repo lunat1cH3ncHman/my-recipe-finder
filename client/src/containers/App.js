@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import '../MyRecipe.css';
+// import '../MyRecipe.css';
 import Routes from '../Routes';
 import ReactGA from 'react-ga';
 
