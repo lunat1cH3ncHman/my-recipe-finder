@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ReactGA from 'react-ga';
-// import "../MyRecipe.css";
 
 import {
   LinkButtons,
