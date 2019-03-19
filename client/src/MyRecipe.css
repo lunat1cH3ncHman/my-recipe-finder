@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+}
+
+.background {
+   background: #F5F5F5;
+   height:100vh;
+}
+
+.wrapper {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  padding-bottom: 2%;
+}
+
+.list {
+  margin-bottom: 200px;
+}
+
+.addRecipeFirstItem{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding-left: 6%;
+  padding-right: 6%;
+  padding-top: 8%;
+}
+
+.addRecipeItem{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding-left: 6%;
+  padding-right: 6%;
+  padding-top: 4%;
+}
+
+.addRecipeTitle{
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.addRecipeIngredients{
+}
+
+.addRecipeInstructions{
+}
+
+.addInputBox{
+  flex: 100%;
+  display: inline-flex;
+  align-self: flex-start;
+  background: #FF0000;
+}
+
+.addRecipeWebsite{
+  margin-top: 4%;
+}
+
+.addRecipeWrapper {
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  padding-bottom: 2%;
+}
+
+.addRecipeWrapper {
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.addRecipeButtons {
+  padding-top: 2%;
+  padding-bottom: 4%;
+}
+
+.congratsWrapper {
+  margin-top: 30px;
+  padding: 5%;
+}
+
+.title {
+  align-self: flex-start;
+  font-size: 2rem;
+  font-weight: 520;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.todoInput {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+input {
+  font-size: 1rem;
+  flex-basis: 100%;
+  padding: 10px 0 10px 10px;
+  border-radius: 2px;
+  border: 1px solid rgb(238, 238, 238);
+}
+
+button {
+  background: #62c7ff;
+  border: none;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+  padding: 15px 25px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+li {
+  font-weight: 300;
+  padding: 20px 0 20px 0;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-container {
+  margin-bottom: 25px;
+}
+
+img {
+  height: 25px;
+}
+
+button.action {
+  color: #333;
+  background: none;
+  padding: 5px;
+}
+
+button.action:focus {
+  outline: none;
+}
