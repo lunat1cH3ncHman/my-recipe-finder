@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import ReactGA from 'react-ga';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
-import "./MyRecipe.css";
+import "../MyRecipe.css";
 
 import {
   LinkButtons,
