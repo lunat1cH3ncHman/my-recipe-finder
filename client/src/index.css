@@ -10,7 +10,21 @@ body {
 
 .background {
    background: #F5F5F5;
-   height:100vh;
+   /*To support older browsers*/
+   height: 100%;
+   width: 100%;
+
+   /* Set the height to match that of the viewport. */
+   height: 100vh;
+
+   /* Set the width to match that of the viewport. */
+   width: 100vw;
+   background-size: 100%;
+}
+
+/* TODO: Dirty as all hell, remove this and the corresponding div, convert the whole thing to a component */
+.backgroundWrapper {
+  background: #F5F5F5;
 }
 
 .wrapper {
