@@ -86,14 +86,6 @@ require('./routes/forgotPassword')(app);
 require('./routes/resetPassword')(app);
 require('./routes/updatePasswordReset')(app);
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
-
 // Setup server
 const port = process.env.PORT || process.argv[2] || API_PORT;
 const host = "localhost";

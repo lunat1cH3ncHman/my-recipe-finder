@@ -158,7 +158,7 @@ function RecipeLayout(props) {
                     </div>
                     {/* Website link */}
                     <Typography variant="subtitle1" color="primary">
-                      <a href={webLink}>{props.sourceurl}</a>
+                      <a href={webLink} target="_blank">{props.sourceurl}</a>
                     </Typography>
                   </CardContent>
                 </div>
