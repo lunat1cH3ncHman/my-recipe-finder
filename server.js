@@ -19,8 +19,6 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => res.sendFile(path.resolve('client/build', 'index.html')));
 
-app.listen(process.env.PORT, () => console.log('listening for connections'));
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
