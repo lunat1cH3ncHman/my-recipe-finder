@@ -16,7 +16,18 @@ const router = express.Router();
 const path = require('path');
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
+if (process.env.NODE_ENV === 'production') {
+  console.log("********SHOULDNT GET HERE **************");
+	app.use(express.static('client/build'));
+
+  app.get('*', (request, response) => {
+  	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
@@ -46,13 +57,6 @@ var auth = {
     getToken: getTokenFromHeaders
   })
 };
-
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 
 //-----------------------------------------
 //Mongoose Settings
