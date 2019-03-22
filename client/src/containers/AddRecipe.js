@@ -307,109 +307,111 @@ class AddRecipe extends Component {
       );
     } else {
       return (
-       <div className="background">
-        <HeaderBar title={title} />
-        <div className="addRecipeWrapper">
-          <Paper elevation={1}>
-            <div className="addRecipeFirstItem">
-              <Typography variant="h5" align="left">
-                Recipe Name
-              </Typography>
-              <div className="addRecipeTitle">
-                <TextField
-                  id="recipeTitle"
-                  fullWidth="true"
-                  autoFocus="true"
-                  value={recipeTitle}
-                  onChange={this.handleChange('recipeTitle')}
-                  placeholder="Title"
-                />
-              </div>
-            </div>
-            <div className="addRecipeItem">
-              <Typography variant="h5" align="left">
-                Ingredients
-              </Typography>
-              {ingredients.length > 0 &&(
-                <EditableList
-                  list={ingredients}
-                  handleRemove={this.handleRemoveIngredient}
-                  toggleIsEditingAt={this.toggleIsEditingIngredientAt}
-                  setNameAt={this.setIngredientAt}
-                />
-              )}
-              <div className="addRecipeIngredients">
-                <AddItem
-                  className="input"
-                  type="text"
-                  handleItemInput={this.handleIngredientInput}
-                  newItemSubmitHandler={this.newIngredientSubmitHandler}
-                  value={this.state.pendingIngredient}
-                  placeHolder="Add an ingredient"
-                  pendingItem={this.state.pendingIngredient}
-                />
-              </div>
-            </div>
-            <div className="addRecipeItem">
-              <Typography variant="h5" align="left">
-                Instructions
-              </Typography>
-              {instructions.length > 0 &&(
-                <EditableList
-                  list={instructions}
-                  handleRemove={this.handleRemoveInstructions}
-                  toggleIsEditingAt={this.toggleIsEditingInstructionAt}
-                  setNameAt={this.setInstructionAt}
-                />
-              )}
-              <div className="addRecipeInstructions">
-                <AddItem
-                  className="input"
-                  type="text"
-                  handleItemInput={this.handleInstructionInput}
-                  newItemSubmitHandler={this.newInstructionSubmitHandler}
-                  value={this.state.pendingInstruction}
-                  placeHolder="Add a step"
-                  pendingItem={this.state.pendingInstruction}
-                />
-              </div>
-            </div>
-            <div className="addRecipeItem">
-              <Typography variant="h5" align="left">
-                Website Link
-              </Typography>
-              <div className="addRecipeWebsite">
-                <TextField
-                  id="sourceurl"
-                  fullWidth="true"
-                  value={sourceurl}
-                  onChange={this.handleChange('sourceurl')}
-                  placeholder="Website link"
-                />
-              </div>
-            </div>
-            <div>
-              {addingRecipe === true && (
-                <p><CircularProgress color="primary"/></p>
-              )}
-              {addingRecipe !== true && (
-                <div className="addRecipeButtons">
-                  <p>{errorMessage}</p>
-                  <Button
-                    style={actionButton}
-                    size="medium"
-                    onClick={this.addRecipe}>
-                    Save Recipe
-                  </Button>
-                  <LinkButtons
-                    buttonStyle={secondOptionButton}
-                    buttonText={'Cancel'}
-                    link={`/myRecipes/${this.props.match.params.username}`}
+        <div className="backgroundWrapper">
+         <div className="background">
+          <HeaderBar title={title} />
+          <div className="addRecipeWrapper">
+            <Paper elevation={1}>
+              <div className="addRecipeFirstItem">
+                <Typography variant="h5" align="left">
+                  Recipe Name
+                </Typography>
+                <div className="addRecipeTitle">
+                  <TextField
+                    id="recipeTitle"
+                    fullWidth="true"
+                    autoFocus="true"
+                    value={recipeTitle}
+                    onChange={this.handleChange('recipeTitle')}
+                    placeholder="Title"
                   />
                 </div>
-              )}
-            </div>
-          </Paper>
+              </div>
+              <div className="addRecipeItem">
+                <Typography variant="h5" align="left">
+                  Ingredients
+                </Typography>
+                {ingredients.length > 0 &&(
+                  <EditableList
+                    list={ingredients}
+                    handleRemove={this.handleRemoveIngredient}
+                    toggleIsEditingAt={this.toggleIsEditingIngredientAt}
+                    setNameAt={this.setIngredientAt}
+                  />
+                )}
+                <div className="addRecipeIngredients">
+                  <AddItem
+                    className="input"
+                    type="text"
+                    handleItemInput={this.handleIngredientInput}
+                    newItemSubmitHandler={this.newIngredientSubmitHandler}
+                    value={this.state.pendingIngredient}
+                    placeHolder="Add an ingredient"
+                    pendingItem={this.state.pendingIngredient}
+                  />
+                </div>
+              </div>
+              <div className="addRecipeItem">
+                <Typography variant="h5" align="left">
+                  Instructions
+                </Typography>
+                {instructions.length > 0 &&(
+                  <EditableList
+                    list={instructions}
+                    handleRemove={this.handleRemoveInstructions}
+                    toggleIsEditingAt={this.toggleIsEditingInstructionAt}
+                    setNameAt={this.setInstructionAt}
+                  />
+                )}
+                <div className="addRecipeInstructions">
+                  <AddItem
+                    className="input"
+                    type="text"
+                    handleItemInput={this.handleInstructionInput}
+                    newItemSubmitHandler={this.newInstructionSubmitHandler}
+                    value={this.state.pendingInstruction}
+                    placeHolder="Add a step"
+                    pendingItem={this.state.pendingInstruction}
+                  />
+                </div>
+              </div>
+              <div className="addRecipeItem">
+                <Typography variant="h5" align="left">
+                  Website Link
+                </Typography>
+                <div className="addRecipeWebsite">
+                  <TextField
+                    id="sourceurl"
+                    fullWidth="true"
+                    value={sourceurl}
+                    onChange={this.handleChange('sourceurl')}
+                    placeholder="Website link"
+                  />
+                </div>
+              </div>
+              <div>
+                {addingRecipe === true && (
+                  <p><CircularProgress color="primary"/></p>
+                )}
+                {addingRecipe !== true && (
+                  <div className="addRecipeButtons">
+                    <p>{errorMessage}</p>
+                    <Button
+                      style={actionButton}
+                      size="medium"
+                      onClick={this.addRecipe}>
+                      Save Recipe
+                    </Button>
+                    <LinkButtons
+                      buttonStyle={secondOptionButton}
+                      buttonText={'Cancel'}
+                      link={`/myRecipes/${this.props.match.params.username}`}
+                    />
+                  </div>
+                )}
+              </div>
+            </Paper>
+          </div>
         </div>
       </div>
     );
