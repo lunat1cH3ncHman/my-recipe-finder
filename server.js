@@ -17,7 +17,6 @@ const path = require('path');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => res.sendFile(path.resolve('client/build', 'index.html')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -87,6 +86,8 @@ require('./routes/deleteRecipe')(app);
 require('./routes/forgotPassword')(app);
 require('./routes/resetPassword')(app);
 require('./routes/updatePasswordReset')(app);
+app.get('*', (req, res) => res.sendFile(path.resolve('client/build', 'index.html')));
+
 
 // Setup server
 const port = process.env.PORT || process.argv[2] || API_PORT;
