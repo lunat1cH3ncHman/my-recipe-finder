@@ -143,7 +143,7 @@ class Register extends Component {
           <HeaderBar title={title} />
           <div style={welcome}>
             <p>Welcome to SatsumaSpoon</p>
-            <p style={intro}>Collect your favourite recipes from websites, recipe books and scraps of paper!</p>
+            <p style={intro}>One place to collect your favourite recipes from websites, recipe books and scraps of paper!</p>
           </div>
           <form className="profile-form" onSubmit={this.registerUser}>
             <p></p>
