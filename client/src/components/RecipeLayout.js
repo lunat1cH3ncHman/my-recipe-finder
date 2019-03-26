@@ -142,7 +142,7 @@ function RecipeLayout(props) {
                         <Typography variant="h5" align="left">
                           Ingredients
                         </Typography>
-                        <Typography variant="subtitle1" align="left" paragraph >
+                        <Typography variant="subtitle1" align="left">
                           {props.ingredients.map(text => <p>{text}</p>)}
                         </Typography>
                       </div>
@@ -151,7 +151,7 @@ function RecipeLayout(props) {
                         <Typography variant="h5" align="left">
                           Instructions
                         </Typography>
-                        <Typography variant="subtitle1" align="left" paragraph>
+                        <Typography variant="subtitle1" align="left">
                           {props.instructions.map(text => <p>{text}</p>)}
                         </Typography>
                       </div>

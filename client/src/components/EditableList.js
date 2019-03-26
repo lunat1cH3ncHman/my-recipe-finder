@@ -8,8 +8,6 @@ const EditableList = props => {
       {props.list.map((item, index) => (
         <ListItem
           key={index}
-          multiline
-          rowsMax="10"
           item={item.name}
           isEditing={item.isEditing}
           handleRemove={() => props.handleRemove(item.id)}

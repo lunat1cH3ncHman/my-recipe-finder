@@ -327,7 +327,7 @@ class AddRecipe extends Component {
                   />
                 </div>
               </div>
-              <div className="addRecipeItem">
+            <div className="addRecipeItem">
                 <Typography variant="h5" align="left">
                   Ingredients
                 </Typography>
@@ -363,7 +363,7 @@ class AddRecipe extends Component {
                     setNameAt={this.setInstructionAt}
                   />
                 )}
-                <div className="addRecipeInstructions">
+              <div className="addRecipeInstructions">
                   <AddItem
                     className="input"
                     type="text"
