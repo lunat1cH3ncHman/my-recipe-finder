@@ -130,7 +130,9 @@ class MyRecipes extends Component {
           <HeaderBar title={title} />
           <div style={loadingStyle}>
             Loading Recipes...
-            <p><CircularProgress color="primary"/></p>
+            <div className="loadingAnimation">
+              <CircularProgress color="primary"/>
+            </div>
           </div>
         </div>
       );

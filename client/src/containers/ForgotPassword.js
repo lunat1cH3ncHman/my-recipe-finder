@@ -137,7 +137,9 @@ class ForgotPassword extends Component {
               </div>
             )}
             {resetting === true && (
-              <p><CircularProgress color="primary"/></p>
+              <div className="loadingAnimation">
+                <CircularProgress color="primary"/>
+              </div>
             )}
             {resetting !== true && (
               <p><SubmitButtons

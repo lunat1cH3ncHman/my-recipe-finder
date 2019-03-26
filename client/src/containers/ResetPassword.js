@@ -164,7 +164,9 @@ export default class ResetPassword extends Component {
           <HeaderBar title={title} />
           <div style={loadingStyle}>
             Loading Your Data...
-            <p><CircularProgress color="primary"/></p>
+            <div className="loadingAnimation">
+              <CircularProgress color="primary"/>
+            </div>
           </div>
         </div>
       );

@@ -175,7 +175,9 @@ class Register extends Component {
               type="password"
             />
             {registering === true && (
-              <p><CircularProgress color="primary"/></p>
+              <div className="loadingAnimation">
+                <CircularProgress color="primary"/>
+              </div>
             )}
             {registering !== true && (
               <div>
