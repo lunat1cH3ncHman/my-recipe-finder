@@ -172,3 +172,13 @@ button.action {
 button.action:focus {
   outline: none;
 }
+
+.termswrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+}
+
+.termsHeaderFont {
+  fontSize: '2px';
+}
