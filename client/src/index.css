@@ -36,6 +36,11 @@ body {
   padding-bottom: 2%;
 }
 
+.mobileWrapper {
+  background: #FFFFFF;
+  padding: 4%;
+}
+
 .list {
   margin-bottom: 200px;
 }

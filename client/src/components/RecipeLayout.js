@@ -7,11 +7,15 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
+import Responsive from 'react-responsive'
 
 // https://material-ui.com/getting-started/page-layout-examples/
 // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // https://material-ui.com/api/grid/
 // https://material-ui.com/system/flexbox/
+
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
+const Default = props => <Responsive {...props} minWidth={768} />;
 
 const styles = theme => ({
   layout: {
@@ -46,7 +50,7 @@ const styles = theme => ({
   },
   cardGrid: {
     alignContent: 'center',
-    marginTop: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
   },
   card: {
     maxWidth: 800,
@@ -82,6 +86,9 @@ const styles = theme => ({
     flexWrap: 'wrap',
     // wrap: 'wrap',
   },
+  mobileContentSpace: {
+
+  },
   ingredients: {
     flex: 1,
     padding: theme.spacing.unit * 2,
@@ -92,6 +99,18 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 6,
     marginRight: theme.spacing.unit * 6,
+  },
+  mobileIngredients: {
+    marginTop: theme.spacing.unit * 2,
+    paddingLeft: "10%",
+    paddingRight: "10%",
+    paddingTop: "5%",
+  },
+  mobileInstructions: {
+    paddingLeft: "10%",
+    paddingRight: "10%",
+    paddingTop: "5%",
+    paddingBottom: theme.spacing.unit * 2,
   },
   sidebarAboutBox: {
     padding: theme.spacing.unit * 2,
@@ -119,54 +138,94 @@ function RecipeLayout(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <div className={classes.layout}>
-        <main>
-          <Grid align="center" className={classes.cardGrid}>
-            <Grid item key={props.recipetitle} >
-              <Card className={classes.card} >
-                <div className={classes.cardDetails} >
-                  <CardContent>
-                    {/* Title */}
-                    <div>
-                      <Typography variant="h4">
-                        {props.recipetitle}
-                      </Typography>
-                      <Divider className={classes.cardTitleDivider} variant="middle"/>
-                    </div>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        {props.date}
-                      </Typography>
-                    <div className={classes.contentSpace}>
-                      {/* Ingredients */}
-                      <div className={classes.ingredients}>
-                        <Typography variant="h5" align="left">
-                          Ingredients
+       <Mobile>
+         <div className="mobileWrapper">
+           {/* Title */}
+           <div>
+             <Typography variant="h4">
+               {props.recipetitle}
+             </Typography>
+             <Divider className={classes.cardTitleDivider} variant="middle"/>
+           </div>
+             <Typography variant="subtitle1" color="textSecondary">
+               {props.date}
+             </Typography>
+           <div className={classes.mobileContentSpace}>
+             {/* Ingredients */}
+             <div className={classes.mobileIngredients}>
+               <Typography variant="h5" align="left">
+                 Ingredients
+               </Typography>
+               <Typography variant="subtitle1" align="left">
+                 {props.ingredients.map(text => <p>{text}</p>)}
+               </Typography>
+             </div>
+             {/* Instructions */}
+             <div className={classes.mobileInstructions}>
+               <Typography variant="h5" align="left">
+                 Instructions
+               </Typography>
+               <Typography variant="subtitle1" align="left">
+                 {props.instructions.map(text => <p>{text}</p>)}
+               </Typography>
+             </div>
+           </div>
+           {/* Website link */}
+           <Typography variant="subtitle1" color="primary">
+             <a href={webLink}>{props.sourceurl}</a>
+           </Typography>
+         </div>
+        </Mobile>
+       <Default>
+        <div className={classes.layout}>
+          <main>
+            <Grid align="center" className={classes.cardGrid}>
+              <Grid item key={props.recipetitle} >
+                <Card className={classes.card} >
+                  <div className={classes.cardDetails} >
+                    <CardContent>
+                      {/* Title */}
+                      <div>
+                        <Typography variant="h4">
+                          {props.recipetitle}
                         </Typography>
-                        <Typography variant="subtitle1" align="left">
-                          {props.ingredients.map(text => <p>{text}</p>)}
-                        </Typography>
+                        <Divider className={classes.cardTitleDivider} variant="middle"/>
                       </div>
-                      {/* Instructions */}
-                      <div className={classes.instructions}>
-                        <Typography variant="h5" align="left">
-                          Instructions
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {props.date}
                         </Typography>
-                        <Typography variant="subtitle1" align="left">
-                          {props.instructions.map(text => <p>{text}</p>)}
-                        </Typography>
+                      <div className={classes.contentSpace}>
+                        {/* Ingredients */}
+                        <div className={classes.ingredients}>
+                          <Typography variant="h5" align="left">
+                            Ingredients
+                          </Typography>
+                          <Typography variant="subtitle1" align="left">
+                            {props.ingredients.map(text => <p>{text}</p>)}
+                          </Typography>
+                        </div>
+                        {/* Instructions */}
+                        <div className={classes.instructions}>
+                          <Typography variant="h5" align="left">
+                            Instructions
+                          </Typography>
+                          <Typography variant="subtitle1" align="left">
+                            {props.instructions.map(text => <p>{text}</p>)}
+                          </Typography>
+                        </div>
                       </div>
-                    </div>
-                    {/* Website link */}
-                    <Typography variant="subtitle1" color="primary">
-                      <a href={webLink}>{props.sourceurl}</a>
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
+                      {/* Website link */}
+                      <Typography variant="subtitle1" color="primary">
+                        <a href={webLink}>{props.sourceurl}</a>
+                      </Typography>
+                    </CardContent>
+                  </div>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-        </main>
-      </div>
+          </main>
+        </div>
+      </Default>
     </React.Fragment>
   );
 }
