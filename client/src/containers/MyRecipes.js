@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import ReactGA from 'react-ga';
+import Responsive from 'react-responsive'
 
 import {
   LinkButtons,
@@ -24,6 +25,9 @@ const list = {
 const title = {
   pageTitle: 'SatsumaSpoon',
 };
+
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
+const Default = props => <Responsive {...props} minWidth={768} />;
 
 const genericErrorMessage = 'Sorry, something went wrong. Please check your network connection and try logging in again';
 
@@ -106,7 +110,6 @@ class MyRecipes extends Component {
       recipes,
       error,
       isLoading,
-      deleted,
       errorMessage,
     } = this.state;
 
@@ -136,8 +139,6 @@ class MyRecipes extends Component {
           </div>
         </div>
       );
-    } else if (deleted) {
-      return <Redirect to="/" />;
     } else if (recipes.length === 0) {
       return(
         <div>
@@ -158,39 +159,70 @@ class MyRecipes extends Component {
     }
     else {
       return (
-        <div className="background">
-          <HeaderBar title={title} />
-          <p></p>
-          <LinkButtons
-            buttonStyle={updateButton}
-            buttonText={'Add a Recipe'}
-            link={`/addRecipe/${this.props.match.params.username}`}
-          />
-          <div className="backgroundWrapper">
-            <div className="wrapper">
-              <Paper elevation={1}>
-                <div className="listTitle">
-                  <p></p>
-                    <Typography variant="h5" align="center" component="p">
-                      My Recipes
-                    </Typography>
-                  <p></p>
-                </div>
-                <List className="list">
-                  { recipes.map(({ _id, title}) =>
-                    <ListItem key={_id}>
-                        <ListItemText
-                          style={list}
-                          primary={title}
-                          button
-                          onClick={this.handleClick.bind(this, _id)}
-                        />
-                    </ListItem>
-                  )}
-                </List>
-              </Paper>
+        <div>
+          <Mobile>
+            <HeaderBar title={title} />
+            <div className="mobileRecipeListHeader">
+              <div className="mobileRecipeListTitle">
+                <Typography variant="h5" align="center" component="p">
+                  My Recipes
+                </Typography>
+              </div>
+              <LinkButtons
+                buttonStyle={updateButton}
+                buttonText={'Add'}
+                link={`/addRecipe/${this.props.match.params.username}`}
+              />
             </div>
-          </div>
+            <List className="list">
+              { recipes.map(({ _id, title}) =>
+                <ListItem key={_id}>
+                    <ListItemText
+                      style={list}
+                      primary={title}
+                      button
+                      onClick={this.handleClick.bind(this, _id)}
+                    />
+                </ListItem>
+              )}
+            </List>
+          </Mobile>
+          <Default>
+            <div className="background">
+              <HeaderBar title={title} />
+              <p></p>
+              <LinkButtons
+                buttonStyle={updateButton}
+                buttonText={'Add a Recipe'}
+                link={`/addRecipe/${this.props.match.params.username}`}
+              />
+              <div className="backgroundWrapper">
+                <div className="wrapper">
+                  <Paper elevation={1}>
+                    <div>
+                      <p></p>
+                        <Typography variant="h5" align="center" component="p">
+                          My Recipes
+                        </Typography>
+                      <p></p>
+                    </div>
+                    <List className="list">
+                      { recipes.map(({ _id, title}) =>
+                        <ListItem key={_id}>
+                            <ListItemText
+                              style={list}
+                              primary={title}
+                              button
+                              onClick={this.handleClick.bind(this, _id)}
+                            />
+                        </ListItem>
+                      )}
+                    </List>
+                  </Paper>
+                </div>
+              </div>
+            </div>
+          </Default>
         </div>
       );
     }

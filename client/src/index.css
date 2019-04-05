@@ -143,6 +143,16 @@ button {
   color: #fff;
 }
 
+.mobileRecipeListHeader{
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.mobileRecipeListTitle{
+  margin-top: 30px;
+}
+
 ul {
   list-style: none;
   margin-bottom: 10px;
