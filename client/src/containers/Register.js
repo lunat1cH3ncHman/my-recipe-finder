@@ -73,6 +73,12 @@ class Register extends Component {
         registerError: true,
       });
     } else {
+      this.setState({
+        showError: false,
+        loginError: false,
+        registerError: false,
+        registering: true,
+      });
       axios.post('/registerUser', {
         email: this.state.email,
         username: this.state.username,
@@ -90,6 +96,7 @@ class Register extends Component {
             showError: false,
             loginError: false,
             registerError: false,
+            registering: false,
           });
         } else {
           this.setState({
@@ -97,6 +104,7 @@ class Register extends Component {
             showError: true,
             loginError: true,
             registerError: false,
+            registering: false,
           });
         }
       })
@@ -115,6 +123,7 @@ class Register extends Component {
           showError: true,
           loginError: true,
           registerError: false,
+          registering: false,
         });
       });
     }
