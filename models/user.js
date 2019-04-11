@@ -7,10 +7,10 @@ var secret = process.env.PASSPORT_SECRET;
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
 var UserSchema = new mongoose.Schema({
-  username: {type: String, lowercase: true, unique: true, required: [true,"can't be blank"], match:[/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+  username: {type: String, unique: true, required: [true,"can't be blank"], match:[/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
   // TODO: can work this so it's compulsory in passport required: [true,"can't be blank"] and unique:true
   // email: {type: String, lowercase: true, unique: true, index: true, required: [true, "can't be blank"], match: [/\S+@+\.\S+/, 'isinvalid'], index: true},
-  email: {type: String, lowercase: true, match: [/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/, 'isinvalid']},
+  email: {type: String, match: [/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/, 'isinvalid']},
   password: String,
   bio: String,
   image: String,

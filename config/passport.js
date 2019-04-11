@@ -22,12 +22,20 @@ passport.use(
     },
     (req, username, password, done)=>{
       try {
-        User.findOne({username: username}).then(user => {
+
+        // User.find().sort({ name: 1 }).collation({ locale: 'en_US', numericOrdering: true }).
+        // then(docs => console.log(docs));
+
+        User.findOne({username: username})
+        .collation({ locale: 'en', strength: 1 })
+        .then(user => {
           if(user != null) {
             console.log('Username already registered');
             return done(null, false, {message: 'Username already registered'});
           }
-          User.findOne({email: req.body.email}).then(user => {
+          User.findOne({email: req.body.email})
+          .collation({ locale: 'en', strength: 1 })
+          .then(user => {
             if(user != null) {
               console.log('Email already registered');
               return done(null, false, {message: 'Email already registered'});
@@ -73,7 +81,9 @@ passport.use(
     },
     (username, password, done) => {
       try{
-        User.findOne({username: username}).then(user =>{
+        User.findOne({username: username})
+        .collation({ locale: 'en', strength: 1 })
+        .then(user =>{
           if(user === null){
             console.log('Username does not exist');
             return done(null, false, {message: 'Username does not exist'});
