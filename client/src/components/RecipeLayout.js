@@ -19,6 +19,7 @@ const Default = props => <Responsive {...props} minWidth={768} />;
 
 const styles = theme => ({
   layout: {
+    marginTop: '4%'
     // width: 'auto',
     // marginLeft: theme.spacing.unit * 3,
     // marginRight: theme.spacing.unit * 3,
