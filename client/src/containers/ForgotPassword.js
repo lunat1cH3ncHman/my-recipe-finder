@@ -16,6 +16,10 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const errorMessageStyle = {
+  color:'red'
+}
+
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 const nullEmailErrorMessage = 'Please provide your registered email address';
 
@@ -131,9 +135,7 @@ class ForgotPassword extends Component {
             />
             {showError && (
               <div>
-                <p>
-                  {errorMessage}
-                </p>
+                <p style={errorMessageStyle}>{errorMessage}</p>
               </div>
             )}
             {resetting === true && (
