@@ -17,6 +17,10 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const errorMessageStyle = {
+  color:'red'
+}
+
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 
 class Login extends Component {
@@ -144,12 +148,14 @@ class Login extends Component {
             />
             {showNullError && (
               <div>
-                <p>Username and password cannot be empty</p>
+                <p style={errorMessageStyle}>
+                  Username and password cannot be empty
+                </p>
               </div>
             )}
             {showError && (
               <div>
-                <p>{errorMessage}</p>
+                <p style={errorMessageStyle}>{errorMessage}</p>
               </div>
             )}
             {loggingIn === true && (

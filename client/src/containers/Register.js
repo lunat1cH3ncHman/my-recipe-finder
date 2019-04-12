@@ -34,6 +34,9 @@ const terms = {
   margin: '1em'
 };
 
+const errorMessageStyle = {
+  color:'red'
+}
 
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 
@@ -191,10 +194,10 @@ class Register extends Component {
             {registering !== true && (
               <div>
                 {showError === true && registerError === true && (
-                  <p>Username, password and email are required fields.</p>
+                  <p style={errorMessageStyle}>Username, password and email are required fields.</p>
                 )}
                 {showError === true && loginError === true && (
-                  <p>{errorMessage}</p>
+                  <p style={errorMessageStyle}>{errorMessage}</p>
                 )}
                 <p><SubmitButtons
                   buttonStyle={registerButton}
