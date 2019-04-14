@@ -161,7 +161,7 @@ class MyRecipes extends Component {
       return (
         <div>
           <Mobile>
-            <HeaderBar title={title} />
+            <HeaderBar title={title}/>
             <div className="mobileRecipeListHeader">
               <div className="mobileRecipeListTitle">
                 <Typography variant="h5" align="center" component="p">

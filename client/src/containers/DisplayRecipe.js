@@ -110,7 +110,7 @@ class Recipe extends Component {
     if (loadingError) {
       return (
         <div>
-          <HeaderBar title={title} />
+          <HeaderBar title={title} username={this.props.match.params.username}/>
           <div style={loadingStyle}>
             {errormessage}
           </div>
@@ -119,7 +119,7 @@ class Recipe extends Component {
     } else if (isLoading) {
       return (
         <div>
-          <HeaderBar title={title} />
+          <HeaderBar title={title}/>
           <div style={loadingStyle}>
             Loading Your Recipe...
             <div className="loadingAnimation">
@@ -131,7 +131,7 @@ class Recipe extends Component {
     } else {
       return (
         <div>
-          <HeaderBar title={title} />
+          <HeaderBar title={title} username={this.props.match.params.username}/>
           <RecipeLayout {...props}/>
         </div>
       );

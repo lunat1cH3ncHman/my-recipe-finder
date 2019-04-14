@@ -286,7 +286,7 @@ class AddRecipe extends Component {
     if (updated) {
       return (
         <div>
-          <HeaderBar title={title} />
+          <HeaderBar title={title} username={this.props.match.params.username}/>
           <div className="congratsWrapper">
             <Typography variant="h5" align="center">
               {recipeTitle} has been added to your recipes
@@ -313,7 +313,7 @@ class AddRecipe extends Component {
       return (
         <div>
         <Mobile>
-          <HeaderBar title={title} />
+          <HeaderBar title={title} username={this.props.match.params.username}/>
           <div className="addRecipeWrapper">
             <div className="addRecipeFirstItem">
               <Typography variant="h5" align="left">
@@ -420,7 +420,7 @@ class AddRecipe extends Component {
         <Default>
         <div className="backgroundWrapper">
          <div className="background">
-          <HeaderBar title={title} />
+          <HeaderBar title={title} username={this.props.match.params.username}/>
           <div className="addRecipeWrapper">
             <Paper elevation={1}>
               <div className="addRecipeFirstItem">
