@@ -130,9 +130,10 @@ const styles = theme => ({
 function RecipeLayout(props) {
   const { classes } = props;
   var linkBase = "http://";
+  var linkSecureBase = "https://";
   var webLink = props.sourceurl;
 
-  if (!webLink.includes(linkBase)){
+  if (!webLink.includes(linkBase) && !webLink.includes(linkSecureBase)){
     webLink = linkBase.concat(webLink);
   }
 
