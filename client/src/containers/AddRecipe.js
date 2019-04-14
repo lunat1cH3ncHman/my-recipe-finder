@@ -22,6 +22,10 @@ const title = {
   pageTitle: 'SatsumaSpoon',
 };
 
+const errorMessageStyle = {
+  color:'red'
+}
+
 const genericErrorMessage = 'Sorry, something went wrong please check your network connection and try again';
 const accessMessage = 'Sorry, something went wrong please try logging in again';
 const emptyRecipeName = 'Recipes need names, they get upset otherwise';
@@ -400,7 +404,7 @@ class AddRecipe extends Component {
                 )}
                 {addingRecipe !== true && (
                   <div className="addRecipeButtons">
-                    <p>{errorMessage}</p>
+                    <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
                       style={actionButton}
                       size="medium"
@@ -508,7 +512,7 @@ class AddRecipe extends Component {
                 )}
                 {addingRecipe !== true && (
                   <div className="addRecipeButtons">
-                    <p>{errorMessage}</p>
+                    <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
                       style={actionButton}
                       size="medium"
