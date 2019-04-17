@@ -27,7 +27,7 @@ const style = {
     margin: 0,
     top: 'auto',
     right: 30,
-    bottom: 30,
+    bottom: 40,
     background: 'orange',
     color: 'white',
     left: 'auto',
