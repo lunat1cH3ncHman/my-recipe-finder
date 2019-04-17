@@ -13,9 +13,11 @@ import {
   LinkButtons,
   updateButton,
   actionButton,
+  loginButton,
   secondOptionButton,
   AddItem,
   EditableList,
+  loadingStyle,
 } from '../components';
 
 const title = {
@@ -48,18 +50,94 @@ class AddRecipe extends Component {
       pendingIngredient: '',
       addingRecipe: false,
       updated: false,
+      isLoading: true,
+      loadError: false,
+      editing: false,
     };
   }
 
-  componentDidMount() {
-    ReactGA.pageview("/AddRecipe");
-
+  async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
-    if (accessString === null) {
+
+    ReactGA.pageview("/DisplayRecipe");
+
+    if (accessString == null) {
       this.setState({
-        error: true,
+        isLoading: false,
+        loadingError: true,
+        errorMessage: "Sorry, please login again",
+        loadError: true
       });
-    }
+    } else {
+      let recipeUserName = this.props.match.params.username;
+      let recipeID = this.props.match.params.recipeid;
+
+      if (recipeUserName && recipeID){
+        await axios
+          .get('/getRecipe', {
+            params: {
+              username: recipeUserName,
+              recipeid: recipeID,
+            },
+            headers: { Authorization: `JWT ${accessString}` },
+          })
+          .then(response => {
+            if (response.status === 200) {
+              let responseIngredients = response.data.ingredients.map(item => {
+                const container = {};
+                container.name = item;
+                container.isEditing = false;
+                container.id = this.newItemId();
+                return container;
+              });
+
+              let responseInstructions = response.data.instructions.map(item => {
+                const container = {};
+                container.name = item;
+                container.isEditing = false;
+                container.id = this.newItemId();
+                return container;
+              });
+
+              this.setState({
+                recipeTitle: response.data.title,
+                ingredients: [...responseIngredients],
+                instructions: responseInstructions,
+                sourceurl: response.data.sourceurl,
+                isLoading: false,
+                loadingError: false,
+                editing: true,
+              });
+            } else {
+              this.setState({
+                errorMessage: response.data.message,
+                isLoading: false,
+                loadingError: true,
+              });
+            }
+          })
+          .catch(error => {
+            if (typeof(error.response) == 'undefined' ||
+                typeof(error.response.data) == 'undefined') {
+              this.setState({
+                errorMessage: genericErrorMessage
+              });
+            } else {
+              this.setState({
+                errorMessage: error.response.data,
+              });
+            }
+            this.setState({
+                isLoading: false,
+                loadingError: true,
+            });
+          });
+        } else {
+          this.setState({
+              isLoading: false,
+          });
+        }
+      }
   }
 
   handleChange = name => event => {
@@ -208,7 +286,14 @@ class AddRecipe extends Component {
     });
   };
 
-  addRecipe = e => {
+  saveRecipe = e => {
+    var action;
+    if(this.editing){
+      action = '/editRecipe';
+    }else {
+      action = '/addRecipe';
+    }
+
     e.preventDefault();
     let accessString = localStorage.getItem('JWT');
 
@@ -230,8 +315,9 @@ class AddRecipe extends Component {
         addingRecipe: true
       });
 
-      axios.post('/addRecipe',
+      axios.post(action,
       {
+        recipeid: this.props.match.params.recipeid,
         username: this.props.match.params.username,
         recipeTitle: this.state.recipeTitle,
         image: this.state.image,
@@ -285,9 +371,37 @@ class AddRecipe extends Component {
       addingRecipe,
       ingredients,
       instructions,
+      isLoading,
+      loadError,
     } = this.state;
 
-    if (updated) {
+    if (loadError) {
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <div style={loadingStyle}>
+            {errorMessage}
+          </div>
+          <LinkButtons
+            buttonText={`Login`}
+            buttonStyle={loginButton}
+            link={'/login'}
+          />
+        </div>
+      );
+    } else if (isLoading) {
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <div style={loadingStyle}>
+            Loading Recipe...
+            <div className="loadingAnimation">
+              <CircularProgress color="primary"/>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (updated) {
       return (
         <div>
           <HeaderBar title={title} username={this.props.match.params.username}/>
@@ -408,7 +522,7 @@ class AddRecipe extends Component {
                     <Button
                       style={actionButton}
                       size="medium"
-                      onClick={this.addRecipe}>
+                      onClick={this.saveRecipe}>
                       Save Recipe
                     </Button>
                     <LinkButtons
@@ -516,7 +630,7 @@ class AddRecipe extends Component {
                     <Button
                       style={actionButton}
                       size="medium"
-                      onClick={this.addRecipe}>
+                      onClick={this.saveRecipe}>
                       Save Recipe
                     </Button>
                     <LinkButtons

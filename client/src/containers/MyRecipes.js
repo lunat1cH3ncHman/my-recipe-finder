@@ -6,6 +6,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import ReactGA from 'react-ga';
 import Responsive from 'react-responsive'
+import EditIcon from '@material-ui/icons/Edit';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
 
 import {
   LinkButtons,
@@ -18,7 +21,7 @@ import {
 const list = {
   marginLeft: '6%',
   marginRight: '0%',
-  fontSize: '40px',
+  fontSize: '60px',
 };
 
 const title = {
@@ -104,6 +107,11 @@ class MyRecipes extends Component {
     this.props.history.push(`/DisplayRecipe/${this.props.match.params.username}/${e}`);
   };
 
+  handleEdit = (e) => {
+    console.log(e);
+    this.props.history.push(`/AddRecipe/${this.props.match.params.username}/${e}`);
+  };
+
   render() {
     const {
       recipes,
@@ -182,6 +190,11 @@ class MyRecipes extends Component {
                       button
                       onClick={this.handleClick.bind(this, _id)}
                     />
+                    <ListItemSecondaryAction>
+                      <IconButton aria-label="Edit">
+                        <EditIcon onClick={this.handleEdit.bind(this, _id)}/>
+                      </IconButton>
+                    </ListItemSecondaryAction>
                 </ListItem>
               )}
             </List>
@@ -214,6 +227,11 @@ class MyRecipes extends Component {
                               button
                               onClick={this.handleClick.bind(this, _id)}
                             />
+                            <ListItemSecondaryAction>
+                              <IconButton aria-label="Edit">
+                                <EditIcon onClick={this.handleEdit.bind(this, _id)}/>
+                              </IconButton>
+                            </ListItemSecondaryAction>
                         </ListItem>
                       )}
                     </List>

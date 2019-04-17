@@ -90,6 +90,7 @@ require('./routes/findUser')(app);
 require('./routes/addRecipe')(app);
 require('./routes/getRecipe')(app);
 require('./routes/getRecipes')(app);
+require('./routes/editRecipe')(app);
 require('./routes/updateRecipe')(app);
 require('./routes/deleteRecipe')(app);
 require('./routes/forgotPassword')(app);
