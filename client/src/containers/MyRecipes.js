@@ -6,6 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import ReactGA from 'react-ga';
 import Responsive from 'react-responsive'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   LinkButtons,
@@ -19,6 +21,17 @@ const list = {
   marginLeft: '6%',
   marginRight: '0%',
   fontSize: '40px',
+};
+
+const style = {
+    margin: 0,
+    top: 'auto',
+    right: 30,
+    bottom: 40,
+    background: 'orange',
+    color: 'white',
+    left: 'auto',
+    position: 'fixed',
 };
 
 const title = {
@@ -104,6 +117,10 @@ class MyRecipes extends Component {
     this.props.history.push(`/DisplayRecipe/${this.props.match.params.username}/${e}`);
   };
 
+  handleAddRecipeClick = () => {
+    this.props.history.push(`/addRecipe/${this.props.match.params.username}`);
+  }
+
   render() {
     const {
       recipes,
@@ -161,17 +178,10 @@ class MyRecipes extends Component {
         <div>
           <Mobile>
             <HeaderBar title={title}/>
-            <div className="mobileRecipeListHeader">
-              <div className="mobileRecipeListTitle">
-                <Typography variant="h5" align="center" component="p">
-                  My Recipes
-                </Typography>
-              </div>
-              <LinkButtons
-                buttonStyle={updateButton}
-                buttonText={'Add'}
-                link={`/addRecipe/${this.props.match.params.username}`}
-              />
+            <div className="mobileRecipeListTitle">
+              <Typography variant="h5" align="center" component="p">
+                My Recipes
+              </Typography>
             </div>
             <List className="list">
               { recipes.map(({ _id, title}) =>
@@ -185,6 +195,13 @@ class MyRecipes extends Component {
                 </ListItem>
               )}
             </List>
+            <Fab
+              aria-label="Add"
+              className="classes.fab"
+              style={style}
+              onClick={this.handleAddRecipeClick}>
+              <AddIcon />
+            </Fab>
           </Mobile>
           <Default>
             <div className="background">
