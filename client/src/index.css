@@ -138,12 +138,11 @@ button {
 
 .mobileRecipeListHeader{
   display: flex;
-  justify-content: space-between;
-  padding: 30px;
 }
 
 .mobileRecipeListTitle{
-  margin-top: 30px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 ul {
