@@ -10,31 +10,34 @@ module.exports = app => {
       if (info != undefined){
         res.status(400).send(info.message);
       } else {
-        let recipe = new Recipe();
-
-        const {
-          username,
-          recipeTitle,
-          image,
-          ingredients,
-          instructions,
-          sourceurl } = req.body;
-
-        recipe.username = username;
-        recipe.title = recipeTitle;
-        recipe.image = image;
-        recipe.ingredients = ingredients;
-        recipe.instructions = instructions;
-        recipe.sourceurl = sourceurl;
-
-        recipe.save(err => {
-          if (err) {
-            return res.status(400).send('Sorry something went wrong please try again');
+        Recipe.findById(req.body.recipeid).then( recipe => {
+          if (recipe == null) {
+            console.log('Recipe not found');
+            res.status(400).send('Something went wrong or recipe not found');
           } else {
-            console.log('User created');
-            return res.status(200).send('Recipe added');
+            const {
+              recipeTitle,
+              image,
+              ingredients,
+              instructions,
+              sourceurl } = req.body;
+
+            recipe.title = recipeTitle;
+            recipe.image = image;
+            recipe.ingredients = ingredients;
+            recipe.instructions = instructions;
+            recipe.sourceurl = sourceurl;
+
+            recipe.save(err => {
+              if (err) {
+                return res.status(400).send('Sorry something went wrong please try again');
+              } else {
+                console.log('Recipe updated');
+                return res.status(200).send('Recipe updated');
+              }
+            });
           }
-        });
+        })
       }
     })(req, res, next);
   });

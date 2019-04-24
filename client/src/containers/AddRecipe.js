@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ReactGA from 'react-ga';
 import Responsive from 'react-responsive'
+import { Redirect } from 'react-router-dom';
 
 import {
   HeaderBar,
@@ -48,11 +49,12 @@ class AddRecipe extends Component {
       sourceurl: '',
       errorMessage: '',
       pendingIngredient: '',
-      addingRecipe: false,
-      updated: false,
+      savingRecipe: false,
+      recipeAdded: false,
       isLoading: true,
       loadError: false,
-      editing: false,
+      editingRecipe: false,
+      recipeUpdated: false,
     };
   }
 
@@ -106,7 +108,7 @@ class AddRecipe extends Component {
                 sourceurl: response.data.sourceurl,
                 isLoading: false,
                 loadingError: false,
-                editing: true,
+                editingRecipe: true,
               });
             } else {
               this.setState({
@@ -154,11 +156,12 @@ class AddRecipe extends Component {
       ingredients: [],
       instructions: [],
       sourceurl: '',
-      addingRecipe: false,
-      updated: false,
+      savingRecipe: false,
+      recipeAdded: false,
       errorMessage: '',
       pendingIngredient: '',
       pendingInstruction: '',
+      recipeUpdated: false,
     });
   }
 
@@ -288,7 +291,7 @@ class AddRecipe extends Component {
 
   saveRecipe = e => {
     var action;
-    if(this.editing){
+    if(this.state.editingRecipe){
       action = '/editRecipe';
     }else {
       action = '/addRecipe';
@@ -312,7 +315,7 @@ class AddRecipe extends Component {
       });
     } else {
       this.setState({
-        addingRecipe: true
+        savingRecipe: true
       });
 
       axios.post(action,
@@ -333,14 +336,21 @@ class AddRecipe extends Component {
             category: 'Recipe',
             action: 'Added'
           });
-          this.setState({
-            addingRecipe: false,
-            updated: true,
-          });
+          if(this.state.editingRecipe){
+            this.setState({
+              savingRecipe: false,
+              recipeUpdated: true,
+            });
+          } else {
+            this.setState({
+              savingRecipe: false,
+              recipeAdded: true,
+            });
+          }
         } else {
           this.setState({
             errorMessage: response.data.message,
-            addingRecipe: false,
+            savingRecipe: false,
           });
         }
       })
@@ -356,7 +366,7 @@ class AddRecipe extends Component {
           });
         }
         this.setState({
-          addingRecipe: false,
+          savingRecipe: false,
         });
       });
     }
@@ -366,16 +376,19 @@ class AddRecipe extends Component {
     const {
       recipeTitle,
       sourceurl,
-      updated,
+      recipeAdded,
       errorMessage,
-      addingRecipe,
+      savingRecipe,
       ingredients,
       instructions,
       isLoading,
       loadError,
+      recipeUpdated,
     } = this.state;
 
-    if (loadError) {
+   if (recipeUpdated){
+     return <Redirect to={`/myRecipes/${this.props.match.params.username}`} />;
+   } else if (loadError) {
       return (
         <div>
           <HeaderBar title={title} />
@@ -401,7 +414,7 @@ class AddRecipe extends Component {
           </div>
         </div>
       );
-    } else if (updated) {
+    } else if (recipeAdded) {
       return (
         <div>
           <HeaderBar title={title} username={this.props.match.params.username}/>
@@ -511,12 +524,12 @@ class AddRecipe extends Component {
                 </div>
               </div>
               <div>
-                {addingRecipe === true && (
+                {savingRecipe === true && (
                   <div className="loadingAnimation">
                     <CircularProgress color="primary"/>
                   </div>
                 )}
-                {addingRecipe !== true && (
+                {savingRecipe !== true && (
                   <div className="addRecipeButtons">
                     <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
@@ -619,12 +632,12 @@ class AddRecipe extends Component {
                 </div>
               </div>
               <div>
-                {addingRecipe === true && (
+                {savingRecipe === true && (
                   <div className="loadingAnimation">
                     <CircularProgress color="primary"/>
                   </div>
                 )}
-                {addingRecipe !== true && (
+                {savingRecipe !== true && (
                   <div className="addRecipeButtons">
                     <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
