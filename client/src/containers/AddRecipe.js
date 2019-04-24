@@ -7,15 +7,18 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ReactGA from 'react-ga';
 import Responsive from 'react-responsive'
+import { Redirect } from 'react-router-dom';
 
 import {
   HeaderBar,
   LinkButtons,
   updateButton,
   actionButton,
+  loginButton,
   secondOptionButton,
   AddItem,
   EditableList,
+  loadingStyle,
 } from '../components';
 
 const title = {
@@ -46,20 +49,97 @@ class AddRecipe extends Component {
       sourceurl: '',
       errorMessage: '',
       pendingIngredient: '',
-      addingRecipe: false,
-      updated: false,
+      savingRecipe: false,
+      recipeAdded: false,
+      isLoading: true,
+      loadError: false,
+      editingRecipe: false,
+      recipeUpdated: false,
     };
   }
 
-  componentDidMount() {
-    ReactGA.pageview("/AddRecipe");
-
+  async componentDidMount() {
     let accessString = localStorage.getItem('JWT');
-    if (accessString === null) {
+
+    ReactGA.pageview("/DisplayRecipe");
+
+    if (accessString == null) {
       this.setState({
-        error: true,
+        isLoading: false,
+        loadingError: true,
+        errorMessage: "Sorry, please login again",
+        loadError: true
       });
-    }
+    } else {
+      let recipeUserName = this.props.match.params.username;
+      let recipeID = this.props.match.params.recipeid;
+
+      if (recipeUserName && recipeID){
+        await axios
+          .get('/getRecipe', {
+            params: {
+              username: recipeUserName,
+              recipeid: recipeID,
+            },
+            headers: { Authorization: `JWT ${accessString}` },
+          })
+          .then(response => {
+            if (response.status === 200) {
+              let responseIngredients = response.data.ingredients.map(item => {
+                const container = {};
+                container.name = item;
+                container.isEditing = false;
+                container.id = this.newItemId();
+                return container;
+              });
+
+              let responseInstructions = response.data.instructions.map(item => {
+                const container = {};
+                container.name = item;
+                container.isEditing = false;
+                container.id = this.newItemId();
+                return container;
+              });
+
+              this.setState({
+                recipeTitle: response.data.title,
+                ingredients: [...responseIngredients],
+                instructions: responseInstructions,
+                sourceurl: response.data.sourceurl,
+                isLoading: false,
+                loadingError: false,
+                editingRecipe: true,
+              });
+            } else {
+              this.setState({
+                errorMessage: response.data.message,
+                isLoading: false,
+                loadingError: true,
+              });
+            }
+          })
+          .catch(error => {
+            if (typeof(error.response) == 'undefined' ||
+                typeof(error.response.data) == 'undefined') {
+              this.setState({
+                errorMessage: genericErrorMessage
+              });
+            } else {
+              this.setState({
+                errorMessage: error.response.data,
+              });
+            }
+            this.setState({
+                isLoading: false,
+                loadingError: true,
+            });
+          });
+        } else {
+          this.setState({
+              isLoading: false,
+          });
+        }
+      }
   }
 
   handleChange = name => event => {
@@ -76,11 +156,12 @@ class AddRecipe extends Component {
       ingredients: [],
       instructions: [],
       sourceurl: '',
-      addingRecipe: false,
-      updated: false,
+      savingRecipe: false,
+      recipeAdded: false,
       errorMessage: '',
       pendingIngredient: '',
       pendingInstruction: '',
+      recipeUpdated: false,
     });
   }
 
@@ -208,7 +289,14 @@ class AddRecipe extends Component {
     });
   };
 
-  addRecipe = e => {
+  saveRecipe = e => {
+    var action;
+    if(this.state.editingRecipe){
+      action = '/editRecipe';
+    }else {
+      action = '/addRecipe';
+    }
+
     e.preventDefault();
     let accessString = localStorage.getItem('JWT');
 
@@ -227,11 +315,12 @@ class AddRecipe extends Component {
       });
     } else {
       this.setState({
-        addingRecipe: true
+        savingRecipe: true
       });
 
-      axios.post('/addRecipe',
+      axios.post(action,
       {
+        recipeid: this.props.match.params.recipeid,
         username: this.props.match.params.username,
         recipeTitle: this.state.recipeTitle,
         image: this.state.image,
@@ -247,14 +336,21 @@ class AddRecipe extends Component {
             category: 'Recipe',
             action: 'Added'
           });
-          this.setState({
-            addingRecipe: false,
-            updated: true,
-          });
+          if(this.state.editingRecipe){
+            this.setState({
+              savingRecipe: false,
+              recipeUpdated: true,
+            });
+          } else {
+            this.setState({
+              savingRecipe: false,
+              recipeAdded: true,
+            });
+          }
         } else {
           this.setState({
             errorMessage: response.data.message,
-            addingRecipe: false,
+            savingRecipe: false,
           });
         }
       })
@@ -270,7 +366,7 @@ class AddRecipe extends Component {
           });
         }
         this.setState({
-          addingRecipe: false,
+          savingRecipe: false,
         });
       });
     }
@@ -280,14 +376,45 @@ class AddRecipe extends Component {
     const {
       recipeTitle,
       sourceurl,
-      updated,
+      recipeAdded,
       errorMessage,
-      addingRecipe,
+      savingRecipe,
       ingredients,
       instructions,
+      isLoading,
+      loadError,
+      recipeUpdated,
     } = this.state;
 
-    if (updated) {
+   if (recipeUpdated){
+     return <Redirect to={`/myRecipes/${this.props.match.params.username}`} />;
+   } else if (loadError) {
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <div style={loadingStyle}>
+            {errorMessage}
+          </div>
+          <LinkButtons
+            buttonText={`Login`}
+            buttonStyle={loginButton}
+            link={'/login'}
+          />
+        </div>
+      );
+    } else if (isLoading) {
+      return (
+        <div>
+          <HeaderBar title={title} />
+          <div style={loadingStyle}>
+            Loading Recipe...
+            <div className="loadingAnimation">
+              <CircularProgress color="primary"/>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (recipeAdded) {
       return (
         <div>
           <HeaderBar title={title} username={this.props.match.params.username}/>
@@ -397,18 +524,18 @@ class AddRecipe extends Component {
                 </div>
               </div>
               <div>
-                {addingRecipe === true && (
+                {savingRecipe === true && (
                   <div className="loadingAnimation">
                     <CircularProgress color="primary"/>
                   </div>
                 )}
-                {addingRecipe !== true && (
+                {savingRecipe !== true && (
                   <div className="addRecipeButtons">
                     <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
                       style={actionButton}
                       size="medium"
-                      onClick={this.addRecipe}>
+                      onClick={this.saveRecipe}>
                       Save Recipe
                     </Button>
                     <LinkButtons
@@ -505,18 +632,18 @@ class AddRecipe extends Component {
                 </div>
               </div>
               <div>
-                {addingRecipe === true && (
+                {savingRecipe === true && (
                   <div className="loadingAnimation">
                     <CircularProgress color="primary"/>
                   </div>
                 )}
-                {addingRecipe !== true && (
+                {savingRecipe !== true && (
                   <div className="addRecipeButtons">
                     <p style={errorMessageStyle}>{errorMessage}</p>
                     <Button
                       style={actionButton}
                       size="medium"
-                      onClick={this.addRecipe}>
+                      onClick={this.saveRecipe}>
                       Save Recipe
                     </Button>
                     <LinkButtons
