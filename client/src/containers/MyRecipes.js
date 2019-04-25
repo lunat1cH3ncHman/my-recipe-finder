@@ -154,6 +154,19 @@ class MyRecipes extends Component {
     } else if (isLoading) {
       return (
         <div>
+        <Mobile>
+          <div>
+            <HeaderBar title={title} />
+            <div style={loadingStyle}>
+              Loading Recipes...
+              <div className="loadingAnimation">
+                <CircularProgress color="primary"/>
+              </div>
+            </div>
+          </div>
+        </Mobile>
+        <Default>
+        <div className="background">
           <HeaderBar title={title} />
           <div style={loadingStyle}>
             Loading Recipes...
@@ -161,6 +174,8 @@ class MyRecipes extends Component {
               <CircularProgress color="primary"/>
             </div>
           </div>
+        </div>
+        </Default>
         </div>
       );
     } else if (recipes.length === 0) {
