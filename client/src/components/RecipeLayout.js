@@ -154,23 +154,27 @@ function RecipeLayout(props) {
              </Typography>
            <div className={classes.mobileContentSpace}>
              {/* Ingredients */}
-             <div className={classes.mobileIngredients}>
-               <Typography variant="h5" align="left">
-                 Ingredients
-               </Typography>
-               <Typography variant="subtitle1" align="left">
-                 {props.ingredients.map(text => <p>{text}</p>)}
-               </Typography>
-             </div>
+             {props.ingredients.length > 0 &&
+               <div className={classes.mobileIngredients}>
+                 <Typography variant="h5" align="left">
+                   Ingredients
+                 </Typography>
+                 <Typography variant="subtitle1" align="left">
+                   {props.ingredients.map(text => <p>{text}</p>)}
+                 </Typography>
+               </div>
+             }
              {/* Instructions */}
-             <div className={classes.mobileInstructions}>
-               <Typography variant="h5" align="left">
-                 Instructions
-               </Typography>
-               <Typography variant="subtitle1" align="left">
-                 {props.instructions.map(text => <p>{text}</p>)}
-               </Typography>
-             </div>
+             {props.instructions.length > 0 &&
+               <div className={classes.mobileInstructions}>
+                 <Typography variant="h5" align="left">
+                   Instructions
+                 </Typography>
+                 <Typography variant="subtitle1" align="left">
+                   {props.instructions.map(text => <p>{text}</p>)}
+                 </Typography>
+               </div>
+             }
            </div>
            {/* Website link */}
            <Typography variant="subtitle1" color="primary">
@@ -198,23 +202,27 @@ function RecipeLayout(props) {
                         </Typography>
                       <div className={classes.contentSpace}>
                         {/* Ingredients */}
-                        <div className={classes.ingredients}>
-                          <Typography variant="h5" align="left">
-                            Ingredients
-                          </Typography>
-                          <Typography variant="subtitle1" align="left">
-                            {props.ingredients.map(text => <p>{text}</p>)}
-                          </Typography>
-                        </div>
+                        {props.ingredients.length > 0 &&
+                          <div className={classes.ingredients}>
+                            <Typography variant="h5" align="left">
+                              Ingredients
+                            </Typography>
+                            <Typography variant="subtitle1" align="left">
+                              {props.ingredients.map(text => <p>{text}</p>)}
+                            </Typography>
+                          </div>
+                        }
                         {/* Instructions */}
-                        <div className={classes.instructions}>
-                          <Typography variant="h5" align="left">
-                            Instructions
-                          </Typography>
-                          <Typography variant="subtitle1" align="left">
-                            {props.instructions.map(text => <p>{text}</p>)}
-                          </Typography>
-                        </div>
+                        {props.instructions.length > 0 &&
+                          <div className={classes.instructions}>
+                            <Typography variant="h5" align="left">
+                              Instructions
+                            </Typography>
+                            <Typography variant="subtitle1" align="left">
+                              {props.instructions.map(text => <p>{text}</p>)}
+                            </Typography>
+                          </div>
+                        }
                       </div>
                       {/* Website link */}
                       <Typography variant="subtitle1" color="primary">
