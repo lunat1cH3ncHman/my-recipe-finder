@@ -30,7 +30,7 @@ body {
 
 .wrapper {
   display: flex;
-  max-width: 500px;
+  max-width: 800px;
   margin: auto;
   flex-direction: column;
   padding-bottom: 2%;
@@ -86,7 +86,7 @@ body {
 }
 
 .addRecipeWrapper {
-  max-width: 500px;
+  max-width: 800px;
   margin: auto;
   flex-direction: column;
   padding-top: 4%;
